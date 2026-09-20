@@ -1,4 +1,6 @@
 import { type FormEvent, useState } from 'react';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowDownRight,
