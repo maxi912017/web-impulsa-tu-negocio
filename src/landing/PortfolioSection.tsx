@@ -727,16 +727,18 @@ export function PortfolioSection() {
                     <div className="neon-laptop-frame">
                       <div className="neon-laptop-camera" />
                       <div className="neon-laptop-screen">
-                        {/* Browser Top bar */}
-                        <div className="neon-mockup-bar">
-                          <div className="neon-mockup-dots">
-                            <span />
-                            <span />
-                            <span />
+                        {/* Browser Top bar (hidden on the video showcase card) */}
+                        {project.mockupType !== 'web-app-dashboard' && (
+                          <div className="neon-mockup-bar">
+                            <div className="neon-mockup-dots">
+                              <span />
+                              <span />
+                              <span />
+                            </div>
+                            <span className="neon-mockup-url">{project.laptopView.title}</span>
+                            <span className="neon-mockup-badge">{project.laptopView.badge}</span>
                           </div>
-                          <span className="neon-mockup-url">{project.laptopView.title}</span>
-                          <span className="neon-mockup-badge">{project.laptopView.badge}</span>
-                        </div>
+                        )}
 
                         {/* Render customized mockup body */}
                         {renderMockupContent(project.mockupType)}
