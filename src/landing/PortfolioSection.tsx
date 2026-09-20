@@ -432,7 +432,7 @@ function MockupElectricistaVideoViewer() {
         >
           <video
             ref={videoRef}
-            src="/assets/electricista-saas-demo.mp4"
+            src="/assets/electricista-saas-demo.webm"
             autoPlay
             loop
             muted={isMuted}
