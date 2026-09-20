@@ -289,12 +289,28 @@ function TestimonialsSection() {
 function ContactForm() {
   const [topic, setTopic] = useState('landing');
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!form.name || !form.phone || !form.message) return;
-    setSent(true);
+    if (!form.name || !form.phone || !form.message || sending) return;
+    setSending(true);
+    setError(null);
+    try {
+      const result = await sendContactMessage({ data: { ...form, topic } });
+      if (!result.ok) {
+        setError('No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+        return;
+      }
+      setSent(true);
+    } catch (err) {
+      console.error(err);
+      setError('No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
