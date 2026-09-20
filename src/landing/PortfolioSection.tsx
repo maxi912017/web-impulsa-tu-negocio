@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import electricistaVideo from '../assets/electricista-saas-demo.mp4.asset.json';
 import {
   Calendar,
   Smartphone,
@@ -372,8 +373,6 @@ function MockupElectricistaVideoViewer() {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const videoSrc = '/assets/video-electricista-showcase.mp4';
-
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
@@ -434,7 +433,7 @@ function MockupElectricistaVideoViewer() {
         >
           <video
             ref={videoRef}
-            src={videoSrc}
+            src={electricistaVideo.url}
             autoPlay
             loop
             muted={isMuted}
