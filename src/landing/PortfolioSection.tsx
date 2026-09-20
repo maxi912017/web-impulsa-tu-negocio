@@ -766,6 +766,7 @@ export function PortfolioSection() {
                         </div>
                       </div>
                     </div>
+                    )}
                   </div>
 
                   {/* Project Info Body */}
