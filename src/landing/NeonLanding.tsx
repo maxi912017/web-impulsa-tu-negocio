@@ -22,6 +22,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { PortfolioSection } from './PortfolioSection';
+import { sendContactMessage } from '@/lib/contact.functions';
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
 import './neon-landing.css';
 
@@ -289,12 +290,33 @@ function TestimonialsSection() {
 function ContactForm() {
   const [topic, setTopic] = useState('landing');
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!form.name || !form.phone || !form.message) return;
-    setSent(true);
+    if (!form.name || !form.phone || !form.message || sending) return;
+    setSending(true);
+    setError(null);
+    try {
+      const result = await sendContactMessage({ data: { ...form, topic } });
+      if (!result.ok) {
+        setError('No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+        return;
+      }
+      setSent(true);
+      const topicLabel = contactTopics.find((item) => item.id === topic)?.label ?? topic;
+      const waText = encodeURIComponent(
+        `Hola Maxi, soy ${form.name}. Te escribo desde el formulario web.\nBusco: ${topicLabel}\nMi teléfono: ${form.phone}${form.email ? `\nMi email: ${form.email}` : ''}\n\n${form.message}`,
+      );
+      window.open(`https://wa.me/5492664484918?text=${waText}`, '_blank', 'noopener');
+    } catch (err) {
+      console.error(err);
+      setError('No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -371,10 +393,14 @@ function ContactForm() {
                 value={form.message}
                 onChange={(event) => setForm({ ...form, message: event.target.value })}
               />
-              <button className="neon-submit" type="submit">
-                <span>Enviar mi consulta</span> <Send size={16} />
+              <button className="neon-submit" type="submit" disabled={sending} style={sending ? { opacity: 0.7 } : undefined}>
+                <span>{sending ? 'Enviando…' : 'Enviar mi consulta'}</span> <Send size={16} />
               </button>
-              <small className="neon-form-note">Sin spam. Te responderemos directamente por WhatsApp para coordinar.</small>
+              {error ? (
+                <small className="neon-form-note" style={{ color: '#fca5a5' }}>{error}</small>
+              ) : (
+                <small className="neon-form-note">Sin spam. Te responderemos directamente por WhatsApp para coordinar.</small>
+              )}
             </motion.form>
           ) : (
             <motion.div
