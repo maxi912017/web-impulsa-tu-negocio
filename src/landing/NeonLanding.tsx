@@ -22,6 +22,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { PortfolioSection } from './PortfolioSection';
+import { sendContactMessage } from '@/lib/contact.functions';
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
 import './neon-landing.css';
 
@@ -387,10 +388,14 @@ function ContactForm() {
                 value={form.message}
                 onChange={(event) => setForm({ ...form, message: event.target.value })}
               />
-              <button className="neon-submit" type="submit">
-                <span>Enviar mi consulta</span> <Send size={16} />
+              <button className="neon-submit" type="submit" disabled={sending} style={sending ? { opacity: 0.7 } : undefined}>
+                <span>{sending ? 'Enviando…' : 'Enviar mi consulta'}</span> <Send size={16} />
               </button>
-              <small className="neon-form-note">Sin spam. Te responderemos directamente por WhatsApp para coordinar.</small>
+              {error ? (
+                <small className="neon-form-note" style={{ color: '#fca5a5' }}>{error}</small>
+              ) : (
+                <small className="neon-form-note">Sin spam. Te responderemos directamente por WhatsApp para coordinar.</small>
+              )}
             </motion.form>
           ) : (
             <motion.div
