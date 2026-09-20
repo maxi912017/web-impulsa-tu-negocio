@@ -395,112 +395,95 @@ function MockupElectricistaVideoViewer() {
   };
 
   return (
-    <div className="neon-mockup-inner neon-mockup-webapp" style={{ padding: '0', overflow: 'hidden', borderRadius: '12px' }}>
-      <div className="neon-video-player-root" style={{ width: '100%', height: '100%', background: '#020617', display: 'flex', flexDirection: 'column' }}>
-        
-        {/* Top Header Bar */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '8px 12px', background: 'rgba(15, 23, 42, 0.95)', borderBottom: '1px solid rgba(56, 189, 248, 0.2)', zIndex: 10 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', boxShadow: '0 0 8px #22c55e', display: 'inline-block' }} />
-            <span style={{ fontFamily: 'Archivo, sans-serif', fontSize: '11px', fontWeight: 800, color: '#f8fafc', letterSpacing: '0.3px' }}>
-              INSTALACIONES ELÉCTRICAS PAMPA · DEMOSTRACIÓN EN VIDEO
-            </span>
-          </div>
-
-          <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-            <span style={{ fontSize: '9px', fontWeight: 700, color: '#38bdf8', background: 'rgba(56, 189, 248, 0.12)', border: '1px solid rgba(56, 189, 248, 0.3)', padding: '2px 8px', borderRadius: '4px' }}>
-              BUCLE INFINITO HD
-            </span>
-          </div>
-        </div>
-
-        {/* Video Canvas Container (Infinite Continuous Loop) */}
-        <div 
-          style={{ 
-            position: 'relative', 
-            width: '100%', 
-            minHeight: '260px', 
-            flex: 1, 
-            background: '#020617', 
-            display: 'flex', 
-            alignItems: 'center', 
-            justifyContent: 'center',
-            cursor: 'pointer',
-            overflow: 'hidden'
+    <div
+      className="neon-mockup-inner neon-mockup-webapp"
+      style={{ padding: '0', overflow: 'hidden', background: '#020617', display: 'block' }}
+    >
+      {/* Video Canvas Container (Infinite Continuous Loop) */}
+      <div
+        style={{
+          position: 'relative',
+          width: '100%',
+          aspectRatio: '16 / 9',
+          maxHeight: '420px',
+          background: '#020617',
+          cursor: 'pointer',
+          overflow: 'hidden'
+        }}
+        onClick={togglePlay}
+      >
+        <video
+          ref={videoRef}
+          src="/assets/electricista-saas-demo.webm"
+          autoPlay
+          loop
+          muted={isMuted}
+          playsInline
+          onPlay={() => setIsPlaying(true)}
+          onPause={() => setIsPlaying(false)}
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            display: 'block',
           }}
-          onClick={togglePlay}
+        />
+
+        {/* Minimal Floating Controls Overlay */}
+        <div
+          style={{
+            position: 'absolute',
+            bottom: '10px',
+            right: '12px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '8px',
+            zIndex: 10,
+            background: 'rgba(2, 6, 23, 0.75)',
+            backdropFilter: 'blur(8px)',
+            padding: '4px 8px',
+            borderRadius: '6px',
+            border: '1px solid rgba(255, 255, 255, 0.1)'
+          }}
+          onClick={(e) => e.stopPropagation()}
         >
-          <video
-            ref={videoRef}
-            src="/assets/electricista-saas-demo.webm"
-            autoPlay
-            loop
-            muted={isMuted}
-            playsInline
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
+          <button
+            type="button"
+            onClick={togglePlay}
             style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              display: 'block',
+              background: 'transparent',
+              border: 'none',
+              color: '#f8fafc',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '2px'
             }}
-          />
-
-          {/* Minimal Floating Controls Overlay */}
-          <div 
-            style={{ 
-              position: 'absolute', 
-              bottom: '10px', 
-              right: '12px', 
-              display: 'flex', 
-              alignItems: 'center', 
-              gap: '8px',
-              zIndex: 10,
-              background: 'rgba(2, 6, 23, 0.75)',
-              backdropFilter: 'blur(8px)',
-              padding: '4px 8px',
-              borderRadius: '6px',
-              border: '1px solid rgba(255, 255, 255, 0.1)'
-            }}
-            onClick={(e) => e.stopPropagation()}
+            title={isPlaying ? 'Pausar' : 'Reproducir'}
           >
-            <button
-              type="button"
-              onClick={togglePlay}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#f8fafc',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '2px'
-              }}
-              title={isPlaying ? 'Pausar' : 'Reproducir'}
-            >
-              {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-            </button>
+            {isPlaying ? <Pause size={13} /> : <Play size={13} />}
+          </button>
 
-            <button
-              type="button"
-              onClick={toggleSound}
-              style={{
-                background: 'transparent',
-                border: 'none',
-                color: '#38bdf8',
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                padding: '2px'
-              }}
-              title={isMuted ? 'Activar Sonido' : 'Silenciar'}
-            >
-              {isMuted ? <VolumeX size={13} /> : <Volume2 size={13} />}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={toggleSound}
+            style={{
+              background: 'transparent',
+              border: 'none',
+              color: '#38bdf8',
+              cursor: 'pointer',
+              display: 'flex',
+              alignItems: 'center',
+              padding: '2px'
+            }}
+            title={isMuted ? 'Activar Sonido' : 'Silenciar'}
+          >
+            {isMuted ? <VolumeX size={13} /> : <Volume2 size={13} />}
+          </button>
         </div>
-
       </div>
     </div>
   );
@@ -761,7 +744,8 @@ export function PortfolioSection() {
                       <div className="neon-laptop-base" />
                     </div>
 
-                    {/* Companion Smartphone Mockup Frame */}
+                    {/* Companion Smartphone Mockup Frame (hidden on the video showcase card) */}
+                    {project.mockupType !== 'web-app-dashboard' && (
                     <div className="neon-phone-frame">
                       <div className="neon-phone-notch" />
                       <div className="neon-phone-screen">
