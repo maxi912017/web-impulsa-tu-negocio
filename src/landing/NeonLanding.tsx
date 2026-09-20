@@ -306,8 +306,9 @@ function ContactForm() {
         return;
       }
       setSent(true);
+      const topicLabel = contactTopics.find((item) => item.id === topic)?.label ?? topic;
       const waText = encodeURIComponent(
-        `Hola Maxi, soy ${form.name}. Te escribo desde el formulario web.\nBusco: ${topicLabels[topic] ?? topic}\nMi teléfono: ${form.phone}${form.email ? `\nMi email: ${form.email}` : ''}\n\n${form.message}`,
+        `Hola Maxi, soy ${form.name}. Te escribo desde el formulario web.\nBusco: ${topicLabel}\nMi teléfono: ${form.phone}${form.email ? `\nMi email: ${form.email}` : ''}\n\n${form.message}`,
       );
       window.open(`https://wa.me/5492664484918?text=${waText}`, '_blank', 'noopener');
     } catch (err) {
