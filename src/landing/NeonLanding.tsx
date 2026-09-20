@@ -117,13 +117,12 @@ function Header() {
         <nav id="site-nav" className="neon-nav" aria-label="Navegación principal">
           <a id="nav-item-soluciones" href="#soluciones">Soluciones</a>
           <a id="nav-item-diferencia" href="#diferencia">Landing o sitio</a>
-          <a id="nav-item-visibilidad" href="#visibilidad">SEO & IA</a>
-          <a id="nav-item-sobre-mi" href="#sobre-mi">Sobre mí</a>
-          <a id="nav-item-testimonios" href="#testimonios">Reseñas</a>
           <a id="nav-item-portafolio" href="#portafolio" className="neon-nav-highlight">
             <span>Portfolio</span>
             <span className="neon-nav-badge">Casos</span>
           </a>
+          <a id="nav-item-visibilidad" href="#visibilidad">SEO & IA</a>
+          <a id="nav-item-testimonios" href="#testimonios">Reseñas</a>
           <a id="nav-item-preguntas" href="#preguntas">Preguntas</a>
         </nav>
         <div className="neon-header-actions-group">
@@ -158,12 +157,11 @@ function Header() {
         <nav id="site-mobile-nav" className="neon-mobile-nav" aria-label="Navegación móvil">
           <a href="#soluciones" onClick={close}>Soluciones</a>
           <a href="#diferencia" onClick={close}>Landing o sitio</a>
-          <a href="#visibilidad" onClick={close}>SEO & IA</a>
-          <a href="#sobre-mi" onClick={close}>Sobre mí</a>
-          <a href="#testimonios" onClick={close}>Reseñas</a>
           <a href="#portafolio" onClick={close} className="neon-mobile-highlight">
             Portfolio / Casos de Éxito <span className="neon-nav-badge">Casos</span>
           </a>
+          <a href="#visibilidad" onClick={close}>SEO & IA</a>
+          <a href="#testimonios" onClick={close}>Reseñas</a>
           <a href="#preguntas" onClick={close}>Preguntas</a>
           <a
             id="mobile-menu-whatsapp-btn"
@@ -250,68 +248,6 @@ function ContactChannels() {
   );
 }
 
-function AboutSection() {
-  return (
-    <section className="neon-about-section neon-container" id="sobre-mi">
-      <div className="neon-about-card">
-        <div className="neon-about-grid">
-          <div className="neon-about-avatar-col">
-            <div className="neon-about-avatar-box">
-              <span className="neon-about-badge-status">
-                <span className="neon-live-green-dot" /> Disponible para nuevos proyectos
-              </span>
-              <div className="neon-about-initials">M</div>
-              <div className="neon-about-meta">
-                <strong>Maximiliano</strong>
-                <span>Desarrollo & Diseño Web · Impulsa Tu Negocio</span>
-              </div>
-            </div>
-            <div className="neon-about-tagline">
-              <Sparkles size={14} /> Trato directo y personalizado de inicio a fin.
-            </div>
-          </div>
-
-          <div className="neon-about-copy">
-            <span className="neon-mono-label neon-accent-label">QUIÉN ESTÁ DETRÁS</span>
-            <h2 className="neon-section-title">
-              Trato directo. <span>Sin intermediarios ni tecnicismos innecesarios.</span>
-            </h2>
-            <p className="neon-about-text">
-              Detrás de Impulsa Tu Negocio está Maximiliano. Trabajo de forma personalizada con cada cliente para crear soluciones web y digitales que resuelvan problemas reales: conseguir presupuestos más rápido, llenar la agenda de turnos y proyectar una imagen sólida y profesional.
-            </p>
-            <p className="neon-about-subtext">
-              Hablás y coordinás directamente con quien diseña y programa tu web. Sin ejecutivos de cuentas, sin sorpresas y con foco 100% en que tu negocio venda más.
-            </p>
-
-            <div className="neon-about-pillars">
-              <div className="neon-pillar-item">
-                <span className="neon-pillar-num">01</span>
-                <div>
-                  <strong>Comunicación 1 a 1</strong>
-                  <span>Respuestas rápidas por WhatsApp y acompañamiento cercano en cada etapa.</span>
-                </div>
-              </div>
-              <div className="neon-pillar-item">
-                <span className="neon-pillar-num">02</span>
-                <div>
-                  <strong>Foco en Ventas y Consultas</strong>
-                  <span>Estructuras pensadas para que quien visite tu web te escriba o te contrate.</span>
-                </div>
-              </div>
-              <div className="neon-pillar-item">
-                <span className="neon-pillar-num">03</span>
-                <div>
-                  <strong>Sin Costos Ocultos</strong>
-                  <span>Proyectos claros con código propio, sin mensualidades obligatorias ni trampas.</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
 
 function TestimonialsSection() {
   return (
@@ -629,7 +565,10 @@ function Landing() {
           </div>
         </section>
 
-        {/* Resumed SEO / Visibility Section for Rapid Reading */}
+        {/* Portfolio / Casos de Éxito - Prueba de trabajo real */}
+        <PortfolioSection />
+
+        {/* SEO / Visibilidad */}
         <section className="neon-visibility neon-container" id="visibilidad">
           <div className="neon-search-card">
             <div className="neon-browser-bar"><i /><i /><i /><small>google.com/search</small></div>
@@ -653,14 +592,8 @@ function Landing() {
           </div>
         </section>
 
-        {/* About Me Section - Humanizing the Service */}
-        <AboutSection />
-
         {/* Testimonials / Client Reviews */}
         <TestimonialsSection />
-
-        {/* Portfolio / Casos de Éxito - Positioned just before final contact */}
-        <PortfolioSection />
 
         <section id="contacto-banner-section" className="neon-contact neon-container">
           <div id="contact-banner" className="neon-contact-banner">
@@ -681,7 +614,7 @@ function Landing() {
           </div>
         </section>
 
-        <section className="neon-contact-grid neon-container">
+        <section id="preguntas" className="neon-contact-grid neon-container">
           <div>
             <span className="neon-mono-label">PREGUNTAS FRECUENTES</span>
             <h2 className="neon-section-title">Antes de empezar, <span>hablemos claro.</span></h2>
@@ -697,10 +630,10 @@ function Landing() {
             <a href="#inicio">Inicio</a>
             <a href="#soluciones">Soluciones</a>
             <a href="#diferencia">Landing o sitio</a>
-            <a href="#visibilidad">SEO & IA</a>
-            <a href="#sobre-mi">Sobre mí</a>
-            <a href="#testimonios">Reseñas</a>
             <a href="#portafolio">Portfolio</a>
+            <a href="#visibilidad">SEO & IA</a>
+            <a href="#testimonios">Reseñas</a>
+            <a href="#preguntas">Preguntas</a>
             <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">Instagram</a>
             <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer">WhatsApp</a>
           </div>
