@@ -21,8 +21,8 @@ import {
   X,
   Zap,
 } from 'lucide-react';
-import { PortfolioSection } from './components/PortfolioSection';
-import { WhatsAppFloatingButton } from './components/WhatsAppFloatingButton';
+import { PortfolioSection } from './PortfolioSection';
+import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
 import './neon-landing.css';
 
 const WHATSAPP_LINK =
