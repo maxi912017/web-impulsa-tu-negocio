@@ -41,8 +41,6 @@ import {
   MapPin,
   Car,
   Download,
-  Play,
-  Pause,
   RotateCcw,
   Volume2,
   VolumeX,
@@ -368,20 +366,8 @@ function MockupSaludView() {
 /* -------------------------------------------------------------------------- */
 
 function MockupElectricistaVideoViewer() {
-  const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  const togglePlay = () => {
-    if (!videoRef.current) return;
-    if (videoRef.current.paused) {
-      videoRef.current.play().catch(() => {});
-      setIsPlaying(true);
-    } else {
-      videoRef.current.pause();
-      setIsPlaying(false);
-    }
-  };
 
   const toggleSound = () => {
     if (!videoRef.current) return;
@@ -393,6 +379,7 @@ function MockupElectricistaVideoViewer() {
       setIsMuted(true);
     }
   };
+
 
   return (
     <div
@@ -407,10 +394,8 @@ function MockupElectricistaVideoViewer() {
           aspectRatio: '16 / 9',
           maxHeight: '420px',
           background: '#020617',
-          cursor: 'pointer',
           overflow: 'hidden'
         }}
-        onClick={togglePlay}
       >
         <video
           ref={videoRef}
@@ -419,8 +404,6 @@ function MockupElectricistaVideoViewer() {
           loop
           muted={isMuted}
           playsInline
-          onPlay={() => setIsPlaying(true)}
-          onPause={() => setIsPlaying(false)}
           style={{
             position: 'absolute',
             top: 0,
@@ -450,22 +433,6 @@ function MockupElectricistaVideoViewer() {
           }}
           onClick={(e) => e.stopPropagation()}
         >
-          <button
-            type="button"
-            onClick={togglePlay}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#f8fafc',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '2px'
-            }}
-            title={isPlaying ? 'Pausar' : 'Reproducir'}
-          >
-            {isPlaying ? <Pause size={13} /> : <Play size={13} />}
-          </button>
 
           <button
             type="button"
