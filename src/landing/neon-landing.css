@@ -5268,3 +5268,108 @@ a.neon-whatsapp-hero-cta {
     transition-duration: 0.01ms !important;
   }
 }
+/* ===== Ajustes finos de tipografía y contención para móviles ===== */
+@media (max-width: 640px) {
+  .neon-landing h1,
+  .neon-landing h2,
+  .neon-landing h3,
+  .neon-landing p,
+  .neon-landing span,
+  .neon-landing strong,
+  .neon-landing small,
+  .neon-landing li {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .neon-display {
+    font-size: clamp(38px, 12.5vw, 56px);
+    line-height: 0.98;
+    letter-spacing: -0.02em;
+  }
+
+  .neon-section-title,
+  .neon-dark-title {
+    font-size: clamp(26px, 8.2vw, 34px);
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+  }
+
+  .neon-hero-intro,
+  .neon-visibility-summary,
+  .neon-portfolio-intro,
+  .neon-reviews-intro,
+  .neon-section-copy p,
+  .neon-dark-grid > div:first-child p,
+  .neon-contact-grid > div p,
+  .neon-about-text {
+    font-size: 14.5px;
+    line-height: 1.6;
+    max-width: 100%;
+  }
+
+  .neon-mono-label {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    line-height: 1.4;
+  }
+
+  .neon-solution-card small,
+  .neon-visibility-fast-list li span,
+  .neon-review-comment,
+  .neon-faq-answer p,
+  .neon-honesty,
+  .neon-form-note {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  .neon-faq-question span,
+  .neon-review-highlight {
+    font-size: 14.5px;
+    line-height: 1.35;
+  }
+
+  .neon-comparison div {
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .neon-comparison div span {
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  .neon-comparison div b,
+  .neon-comparison div strong {
+    font-size: 12.5px;
+  }
+
+  .neon-contact-banner h2,
+  #banner-title {
+    font-size: clamp(23px, 7.4vw, 30px);
+    line-height: 1.15;
+  }
+
+  .neon-search-input,
+  .neon-search-result span,
+  .neon-ai-badge {
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  .neon-proof-stats span {
+    font-size: 11.5px;
+    line-height: 1.3;
+  }
+
+  .neon-footer-links a {
+    font-size: 13px;
+  }
+
+  .neon-landing img,
+  .neon-landing video {
+    max-width: 100%;
+  }
+}
