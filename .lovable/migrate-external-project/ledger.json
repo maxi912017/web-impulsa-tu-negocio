@@ -1,0 +1,65 @@
+[
+  {
+    "capability": "Landing page (NeonLanding) con header, hero, soluciones, comparativa, SEO/IA, sobre mí, reseñas, portfolio, contacto, FAQ, footer",
+    "source": "artifacts/impulsatunegocio-landing/src/NeonLanding.tsx",
+    "outcome": "preserve",
+    "status": "implemented",
+    "next_action": "Verificación visual en la vista previa"
+  },
+  {
+    "capability": "Sección de portfolio con casos y video showcase",
+    "source": "artifacts/impulsatunegocio-landing/src/components/PortfolioSection.tsx",
+    "outcome": "preserve",
+    "status": "implemented",
+    "next_action": "Verificación visual"
+  },
+  {
+    "capability": "Botón flotante de WhatsApp con tooltip",
+    "source": "artifacts/impulsatunegocio-landing/src/components/WhatsAppFloatingButton.tsx",
+    "outcome": "preserve",
+    "status": "implemented",
+    "next_action": "Verificación visual"
+  },
+  {
+    "capability": "Recursos multimedia (imágenes, logos, video)",
+    "source": "public/assets/*",
+    "outcome": "preserve",
+    "status": "implemented",
+    "next_action": "Ninguna"
+  },
+  {
+    "capability": "Metadatos SEO/OG y favicon",
+    "source": "index.html del proyecto Replit",
+    "outcome": "preserve",
+    "status": "implemented",
+    "next_action": "Ninguna"
+  },
+  {
+    "capability": "Formulario de contacto por email",
+    "source": "NeonLanding ContactForm (sin backend; solo estado local)",
+    "outcome": "preserve",
+    "status": "implemented",
+    "next_action": "Opcional: conectar el formulario a un envío real"
+  },
+  {
+    "capability": "Base de datos (Drizzle/Postgres)",
+    "source": "lib/db sin tablas definidas (schema vacío)",
+    "outcome": "defer",
+    "status": "not_applicable",
+    "next_action": "El proyecto original no tiene tablas ni datos"
+  },
+  {
+    "capability": "API server Express",
+    "source": "artifacts/api-server (solo /healthz)",
+    "outcome": "defer",
+    "status": "not_applicable",
+    "next_action": "Solo era un health check, sin endpoints de negocio"
+  },
+  {
+    "capability": "Autenticación",
+    "source": "No detectada en el código",
+    "outcome": "defer",
+    "status": "not_applicable",
+    "next_action": "La landing no tiene login"
+  }
+]
