@@ -372,8 +372,6 @@ function MockupElectricistaVideoViewer() {
   const [isMuted, setIsMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
-  const videoSrc = '/assets/video-electricista-showcase.mp4';
-
   const togglePlay = () => {
     if (!videoRef.current) return;
     if (videoRef.current.paused) {
@@ -434,7 +432,7 @@ function MockupElectricistaVideoViewer() {
         >
           <video
             ref={videoRef}
-            src={videoSrc}
+            src="/assets/electricista-saas-demo.webm"
             autoPlay
             loop
             muted={isMuted}
