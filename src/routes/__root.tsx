@@ -111,11 +111,15 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "preload",
-        as: "style",
-        href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap",
+        as: "font",
+        type: "font/woff2",
+        href: "/fonts/archivo-latin-800.woff2",
+        crossOrigin: "anonymous",
       },
       {
         rel: "stylesheet",
+        id: "site-fonts",
+        media: "print",
         href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap",
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
@@ -143,6 +147,22 @@ function RootShell({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    const fontStylesheet = document.querySelector<HTMLLinkElement>("#site-fonts");
+    if (!fontStylesheet) return;
+
+    const enableFonts = () => {
+      fontStylesheet.media = "all";
+    };
+    const idleId = window.requestIdleCallback?.(enableFonts);
+    const timeoutId = window.setTimeout(enableFonts, 1200);
+
+    return () => {
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
+      window.clearTimeout(timeoutId);
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

@@ -1,5 +1,4 @@
 import { lazy, Suspense, useState } from 'react';
-import { motion } from 'framer-motion';
 import {
   ArrowUpRight,
   MessageCircle,
@@ -7,16 +6,17 @@ import {
   Zap,
 } from 'lucide-react';
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
-import './neon-landing.css';
+import { DeferredSection } from './DeferredSection';
+import './neon-critical.css';
 
 const PortfolioSection = lazy(() =>
   import('./PortfolioSection').then((m) => ({ default: m.PortfolioSection })),
 );
 const TestimonialsSection = lazy(() =>
-  import('./LazySections').then((m) => ({ default: m.TestimonialsSection })),
+  import('./TestimonialsSection').then((m) => ({ default: m.TestimonialsSection })),
 );
 const ContactForm = lazy(() =>
-  import('./LazySections').then((m) => ({ default: m.ContactForm })),
+  import('./ContactSection').then((m) => ({ default: m.ContactForm })),
 );
 
 const WHATSAPP_LINK =
@@ -94,33 +94,19 @@ function Landing() {
       <main>
         <section className="neon-hero neon-container" id="inicio">
           <div className="neon-hero-copy">
-            <motion.span
-              className="neon-mono-label neon-accent-label"
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
+            <span className="neon-mono-label neon-accent-label">
               DISEÑO WEB · DESARROLLO · VISIBILIDAD
-            </motion.span>
-            <motion.h1
-              className="neon-display"
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.05 }}
-            >
+            </span>
+            <h1 className="neon-display">
               Tu negocio
               <br />
               merece una
               <br />
               <span>web que trabaje.</span>
-            </motion.h1>
-            <motion.p
-              className="neon-hero-intro"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.16 }}
-            >
+            </h1>
+            <p className="neon-hero-intro">
               Una presencia digital profesional para que te entiendan rápido, confíen en vos y te encuentren cuando te buscan.
-            </motion.p>
+            </p>
             <div id="hero-actions" className="neon-hero-actions">
               <a
                 id="hero-primary-cta"
@@ -147,10 +133,16 @@ function Landing() {
           </div>
         </div>
 
-        <Suspense fallback={null}>
-          <PortfolioSection />
-          <TestimonialsSection />
-        </Suspense>
+        <DeferredSection id="portafolio">
+          <Suspense fallback={<div className="neon-deferred-section" aria-hidden="true" />}>
+            <PortfolioSection />
+          </Suspense>
+        </DeferredSection>
+        <DeferredSection compact id="testimonios">
+          <Suspense fallback={<div className="neon-deferred-section neon-deferred-section--compact" aria-hidden="true" />}>
+            <TestimonialsSection />
+          </Suspense>
+        </DeferredSection>
 
         <section id="contacto-banner-section" className="neon-contact neon-container">
           <div id="contact-banner" className="neon-contact-banner">
@@ -171,15 +163,18 @@ function Landing() {
           </div>
         </section>
 
+        <div id="contacto" className="neon-contact-anchor" aria-hidden="true" />
         <section id="preguntas" className="neon-contact-grid neon-container">
           <div>
             <span className="neon-mono-label">PREGUNTAS FRECUENTES</span>
             <h2 className="neon-section-title">Antes de empezar, <span>hablemos claro.</span></h2>
             <p>Una primera conversación también sirve para ordenar. No necesitás llegar con todo resuelto.</p>
           </div>
-          <Suspense fallback={null}>
-            <ContactForm />
-          </Suspense>
+          <DeferredSection compact>
+            <Suspense fallback={<div className="neon-deferred-section neon-deferred-section--compact" aria-hidden="true" />}>
+              <ContactForm />
+            </Suspense>
+          </DeferredSection>
         </section>
       </main>
       <footer className="neon-footer">

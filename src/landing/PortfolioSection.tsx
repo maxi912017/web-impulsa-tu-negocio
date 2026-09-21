@@ -1,50 +1,26 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Calendar,
   Smartphone,
   Laptop,
-  Monitor,
   CheckCircle2,
   ArrowUpRight,
   Sparkles,
   MessageCircle,
-  FileText,
   Clock,
-  TrendingUp,
   ShieldCheck,
-  ChevronRight,
-  Eye,
   X,
-  Layers,
-  Star,
   Activity,
   HeartPulse,
   UserCheck,
   Building2,
   Wrench,
-  BarChart3,
   Share2,
   Zap,
-  CloudSun,
-  DollarSign,
-  Mic,
-  Bot,
-  Bell,
-  Send,
-  Cpu,
-  FolderOpen,
-  Calculator,
-  AlertTriangle,
   PlusCircle,
-  HardHat,
-  MapPin,
-  Car,
-  Download,
-  RotateCcw,
-  Film,
-  Radio,
 } from 'lucide-react';
+import './neon-landing.css';
 
 interface ProjectItem {
   id: string;
@@ -325,7 +301,7 @@ function MockupSaludView() {
       <div className="neon-mockup-clinic-hero">
         <div className="neon-mockup-clinic-headline">
           <span className="neon-mockup-mini-tag">Salud & Bienestar</span>
-          <h5>Cuidar tu movimiento, es cuidar tu calidad de vida.</h5>
+          <h4>Cuidar tu movimiento, es cuidar tu calidad de vida.</h4>
           <p>Diagnóstico y tratamiento personalizado para volver a tu rutina sin dolor.</p>
         </div>
 
@@ -424,7 +400,7 @@ function MockupCorporateView() {
       {/* Corporate Hero */}
       <div className="neon-mockup-corp-hero">
         <span className="neon-mockup-mini-tag sky">Presencia Corporativa 2026</span>
-        <h5>Estrategias digitales que conectan marcas con personas.</h5>
+        <h4>Estrategias digitales que conectan marcas con personas.</h4>
         <p>Impulsamos a empresas con presencia sólida, diseño UX/UI de vanguardia y tecnología escalable.</p>
 
         {/* 2 Big stats */}
@@ -481,7 +457,7 @@ function MockupServicesTradesView() {
       {/* Trade Hero */}
       <div className="neon-mockup-trades-hero">
         <span className="neon-mockup-mini-tag yellow">Atención en toda la zona</span>
-        <h5>Instalaciones profesionales y mantenimiento con garantía escrita.</h5>
+        <h4>Instalaciones profesionales y mantenimiento con garantía escrita.</h4>
         <p>Mirá nuestros trabajos antes/después y cotizá en un solo clic.</p>
 
         {/* Action button */}
@@ -579,7 +555,7 @@ export function PortfolioSection() {
   };
 
   return (
-    <section id="portafolio" className="neon-portfolio-section">
+    <section className="neon-portfolio-section">
       <div className="neon-container">
         {/* Section Header */}
         <div className="neon-portfolio-header">
@@ -660,7 +636,7 @@ export function PortfolioSection() {
                     <div className="neon-phone-frame">
                       <div className="neon-phone-notch" />
                       <div className="neon-phone-screen">
-                        <div className="neon-phone-header">
+                        <div className="neon-phone-header" aria-hidden="true">
                           <span className="neon-phone-time">11:29</span>
                           <span className="neon-phone-battery">89%</span>
                         </div>
@@ -774,6 +750,9 @@ export function PortfolioSection() {
           <div className="neon-modal-backdrop" onClick={() => setSelectedProject(null)}>
             <motion.div
               className="neon-modal-content"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="project-modal-title"
               onClick={(e) => e.stopPropagation()}
               initial={{ opacity: 0, scale: 0.94, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -790,18 +769,18 @@ export function PortfolioSection() {
 
               <div className="neon-modal-header">
                 <span className="neon-project-category-tag">{selectedProject.categoryLabel}</span>
-                <h2>{selectedProject.title}</h2>
+                <h2 id="project-modal-title">{selectedProject.title}</h2>
                 <p className="neon-modal-subtitle">{selectedProject.subtitle}</p>
               </div>
 
               <div className="neon-modal-body">
                 <div className="neon-modal-section">
-                  <h4>¿Qué resuelve este sistema?</h4>
+                  <h3>¿Qué resuelve este sistema?</h3>
                   <p>{selectedProject.description}</p>
                 </div>
 
                 <div className="neon-modal-section">
-                  <h4>Funcionalidades y módulos incluidos en este desarrollo</h4>
+                  <h3>Funcionalidades y módulos incluidos en este desarrollo</h3>
                   <ul className="neon-modal-features-grid">
                     {selectedProject.features.map((feat, idx) => (
                       <li key={idx}>

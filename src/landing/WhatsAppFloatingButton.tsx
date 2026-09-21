@@ -14,13 +14,22 @@ export function WhatsAppFloatingButton({
   const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
+    let frameId: number | null = null;
+
     const handleScroll = () => {
-      if (window.scrollY > 200) {
-        setIsScrolled(true);
-      }
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(() => {
+        const shouldShow = window.scrollY > 200;
+        setIsScrolled((current) => (current === shouldShow ? current : shouldShow));
+        frameId = null;
+      });
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(defaultMessage)}`;
