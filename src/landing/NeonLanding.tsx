@@ -1,23 +1,16 @@
 import { type FormEvent, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
-  ArrowDownRight,
   ArrowUpRight,
   BarChart3,
   CheckCircle2,
   ChevronDown,
   Clock3,
   Globe2,
-  Instagram,
-  Mail,
   MessageCircle,
-  Phone,
   Rocket,
-  Search,
   Send,
-  Sparkles,
   Star,
-  Target,
   X,
   Zap,
 } from 'lucide-react';
@@ -109,15 +102,10 @@ function Header() {
       <div className="neon-container neon-header-inner">
         <Brand />
         <nav id="site-nav" className="neon-nav" aria-label="Navegación principal">
-          {/* OCULTO TEMPORALMENTE (prueba de diseño): enlaces a secciones escondidas
-          <a id="nav-item-soluciones" href="#soluciones">Soluciones</a>
-          <a id="nav-item-diferencia" href="#diferencia">Landing o sitio</a>
-          */}
           <a id="nav-item-portafolio" href="#portafolio" className="neon-nav-highlight">
             <span>Portfolio</span>
             <span className="neon-nav-badge">Casos</span>
           </a>
-          {/* <a id="nav-item-visibilidad" href="#visibilidad">SEO & IA</a> */}
           <a id="nav-item-testimonios" href="#testimonios">Reseñas</a>
           <a id="nav-item-preguntas" href="#preguntas">Preguntas</a>
         </nav>
@@ -154,11 +142,6 @@ function Header() {
           <a href="#portafolio" onClick={close} className="neon-mobile-highlight">
             Portfolio / Casos de Éxito <span className="neon-nav-badge">Casos</span>
           </a>
-          {/* OCULTO TEMPORALMENTE (prueba de diseño): enlaces a secciones escondidas
-          <a href="#soluciones" onClick={close}>Soluciones</a>
-          <a href="#diferencia" onClick={close}>Landing o sitio</a>
-          <a href="#visibilidad" onClick={close}>SEO & IA</a>
-          */}
           <a href="#testimonios" onClick={close}>Reseñas</a>
           <a href="#preguntas" onClick={close}>Preguntas</a>
           <a
@@ -181,71 +164,6 @@ function Header() {
     </header>
   );
 }
-
-function ContactChannels() {
-  const channels = [
-    {
-      id: 'channel-whatsapp',
-      icon: MessageCircle,
-      title: 'WhatsApp directo',
-      detail: '+54 9 2664 484918',
-      meta: 'En línea',
-      href: WHATSAPP_LINK,
-      isWhatsApp: true,
-    },
-    {
-      id: 'channel-instagram',
-      icon: Instagram,
-      title: '@impulsatunegocio.dev',
-      detail: 'Ideas, proyectos y soluciones',
-      meta: 'Instagram',
-      href: INSTAGRAM_LINK,
-      isWhatsApp: false,
-    },
-    {
-      id: 'channel-orientacion',
-      icon: Mail,
-      title: 'Primera orientación',
-      detail: 'Ordenamos juntos el próximo paso',
-      meta: 'sin compromiso',
-      href: '#contacto',
-      isWhatsApp: false,
-    },
-  ];
-
-  return (
-    <div className="neon-channels">
-      {channels.map(({ id, icon: Icon, title, detail, meta, href, isWhatsApp }, index) => (
-        <motion.a
-          id={id}
-          className={`neon-channel ${isWhatsApp ? 'neon-channel-whatsapp' : ''}`}
-          key={title}
-          href={href}
-          target={href.startsWith('http') ? '_blank' : undefined}
-          rel={href.startsWith('http') ? 'noreferrer' : undefined}
-          initial={{ opacity: 0, x: -14 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.22 + index * 0.07 }}
-        >
-          <span className="neon-channel-icon">
-            {isWhatsApp && <span className="neon-channel-pulse-dot" />}
-            <Icon size={18} />
-          </span>
-          <span className="neon-channel-copy">
-            <strong>{title}</strong>
-            <small>{detail}</small>
-          </span>
-          <span className={`neon-channel-meta ${isWhatsApp ? 'neon-channel-meta-online' : ''}`}>
-            {isWhatsApp && <span className="neon-live-green-dot" />}
-            {meta}
-          </span>
-          <ArrowUpRight className="neon-channel-arrow" size={17} />
-        </motion.a>
-      ))}
-    </div>
-  );
-}
-
 
 function TestimonialsSection() {
   return (
@@ -502,18 +420,7 @@ function Landing() {
                 <span>Pedir presupuesto</span>
                 <ArrowUpRight size={17} />
               </a>
-              {/* OCULTO TEMPORALMENTE (prueba de diseño): CTA secundario "Ver qué necesito"
-              <a
-                id="hero-secondary-cta"
-                className="neon-text-button"
-                href="#diferencia"
-              >
-                <span>Ver qué necesito</span>
-                <ArrowDownRight size={16} />
-              </a>
-              */}
             </div>
-            {false && <ContactChannels />}
             <div className="neon-proof-stats" aria-label="Lo que puede hacer una web profesional">
               <div><strong>01</strong><span>mensaje claro</span></div>
               <div><strong>02</strong><span>más confianza</span></div>
@@ -539,78 +446,7 @@ function Landing() {
           </div>
         </div>
 
-        {/* OCULTO TEMPORALMENTE (prueba de diseño): bloque educativo "No se trata de tener una web"
-        <section className="neon-split-section neon-container" id="soluciones">
-          <div className="neon-section-copy">
-            <span className="neon-mono-label">SOLUCIONES DIGITALES</span>
-            <h2 className="neon-section-title">No se trata de tener una web. <span>Se trata de que te ayude.</span></h2>
-            <p>Elegimos la herramienta correcta para el momento real de tu negocio, sin venderte algo más grande de lo que necesitás.</p>
-          </div>
-          <div className="neon-solution-stack">
-            <a className="neon-solution-card" href="#contacto">
-              <span className="neon-card-index">01</span>
-              <span className="neon-card-icon"><Globe2 size={20} /></span>
-              <span><strong>Sitio web completo</strong><small>Tu casa digital: servicios, contenido, FAQs, contacto y una base sólida de SEO.</small></span>
-              <ArrowUpRight size={18} />
-            </a>
-            <a className="neon-solution-card accent" href="#contacto">
-              <span className="neon-card-index">02</span>
-              <span className="neon-card-icon"><Target size={20} /></span>
-              <span><strong>Landing page</strong><small>Una campaña, un mensaje y una acción clara para convertir visitas en consultas.</small></span>
-              <ArrowUpRight size={18} />
-            </a>
-          </div>
-        </section>
-        */}
-
-        {/* OCULTO TEMPORALMENTE (prueba de diseño): comparativa "La diferencia importa"
-        <section className="neon-dark-section" id="diferencia">
-          <div className="neon-container neon-dark-grid">
-            <div>
-              <span className="neon-mono-label">LA DIFERENCIA IMPORTA</span>
-              <h2 className="neon-dark-title">Una landing <span>convierte.</span><br />Un sitio completo <b>acompaña.</b></h2>
-              <p>La pregunta no es qué se ve más grande. Es qué necesita tu negocio hoy y qué querés construir después.</p>
-            </div>
-            <div className="neon-comparison">
-              <div><span>Promocionar un servicio puntual</span><b>Landing page</b></div>
-              <div><span>Una campaña con un CTA</span><b>Landing page</b></div>
-              <div><span>Contar todo lo que hacés</span><strong>Sitio completo</strong></div>
-              <div><span>Crecer con contenido y SEO</span><strong>Sitio completo</strong></div>
-            </div>
-          </div>
-        </section>
-        */}
-
-        {/* Portfolio / Casos de Éxito - Prueba de trabajo real */}
         <PortfolioSection />
-
-        {/* SEO / Visibilidad */}
-        {/* OCULTO TEMPORALMENTE (prueba de diseño): sección SEO / Visibilidad
-        <section className="neon-visibility neon-container" id="visibilidad">
-          <div className="neon-search-card">
-            <div className="neon-browser-bar"><i /><i /><i /><small>google.com/search</small></div>
-            <div className="neon-search-input"><Search size={14} /> servicios profesionales en mi zona</div>
-            <div className="neon-search-result"><b>Tu negocio · Web Oficial</b><span>Presupuestos en el día por WhatsApp. Trabajos con garantía...</span></div>
-            <div className="neon-search-result muted"><b>Google Maps & IA</b><span>Ficha verificada y contenido estructurado.</span></div>
-            <div className="neon-ai-badge"><Sparkles size={14} /> Optimizado para Google y buscadores con Inteligencia Artificial</div>
-          </div>
-          <div className="neon-visibility-copy">
-            <span className="neon-mono-label">QUE TE ENCUENTREN RÁPIDO</span>
-            <h2 className="neon-section-title">SEO para Google y para <span>búsquedas con IA.</span></h2>
-            <p className="neon-visibility-summary">
-              Cuando alguien busca lo que hacés, tu web tiene que responder al instante con información clara, rápida y confiable.
-            </p>
-            <ul className="neon-visibility-fast-list">
-              <li><CheckCircle2 size={16} /><span><strong>Estructura limpia:</strong> Google comprende tus servicios y ciudad al instante.</span></li>
-              <li><CheckCircle2 size={16} /><span><strong>Respuestas directas:</strong> Contenido pensado para resolver dudas y generar consultas.</span></li>
-              <li><CheckCircle2 size={16} /><span><strong>Carga en 1 segundo:</strong> Fluidez instantánea en cualquier celular y conexión.</span></li>
-            </ul>
-            <small className="neon-honesty"><CheckCircle2 size={13} /> Sin humo ni promesas falsas: creamos las mejores bases técnicas para que te descubran.</small>
-          </div>
-        </section>
-        */}
-
-        {/* Testimonials / Client Reviews */}
         <TestimonialsSection />
 
         <section id="contacto-banner-section" className="neon-contact neon-container">
@@ -646,12 +482,7 @@ function Landing() {
           <Brand />
           <div className="neon-footer-links">
             <a href="#inicio">Inicio</a>
-            {/* OCULTO TEMPORALMENTE (prueba de diseño): enlaces a secciones escondidas
-            <a href="#soluciones">Soluciones</a>
-            <a href="#diferencia">Landing o sitio</a>
-            */}
             <a href="#portafolio">Portfolio</a>
-            {/* <a href="#visibilidad">SEO & IA</a> */}
             <a href="#testimonios">Reseñas</a>
             <a href="#preguntas">Preguntas</a>
             <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">Instagram</a>

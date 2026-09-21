@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   Calendar,
@@ -42,8 +42,6 @@ import {
   Car,
   Download,
   RotateCcw,
-  Volume2,
-  VolumeX,
   Film,
   Radio,
 } from 'lucide-react';
@@ -366,21 +364,6 @@ function MockupSaludView() {
 /* -------------------------------------------------------------------------- */
 
 function MockupElectricistaVideoViewer() {
-  const [isMuted, setIsMuted] = useState(true);
-  const videoRef = useRef<HTMLVideoElement | null>(null);
-
-  const toggleSound = () => {
-    if (!videoRef.current) return;
-    if (isMuted) {
-      videoRef.current.muted = false;
-      setIsMuted(false);
-    } else {
-      videoRef.current.muted = true;
-      setIsMuted(true);
-    }
-  };
-
-
   return (
     <div
       className="neon-mockup-inner neon-mockup-webapp"
@@ -398,12 +381,14 @@ function MockupElectricistaVideoViewer() {
         }}
       >
         <video
-          ref={videoRef}
           src="/assets/electricista-saas-demo.webm"
+          poster="/assets/electricista-saas-poster.webp"
+          muted
           autoPlay
           loop
-          muted={isMuted}
           playsInline
+          controls={false}
+          preload="metadata"
           style={{
             position: 'absolute',
             top: 0,
@@ -414,43 +399,6 @@ function MockupElectricistaVideoViewer() {
             display: 'block',
           }}
         />
-
-        {/* Minimal Floating Controls Overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            bottom: '10px',
-            right: '12px',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            zIndex: 10,
-            background: 'rgba(2, 6, 23, 0.75)',
-            backdropFilter: 'blur(8px)',
-            padding: '4px 8px',
-            borderRadius: '6px',
-            border: '1px solid rgba(255, 255, 255, 0.1)'
-          }}
-          onClick={(e) => e.stopPropagation()}
-        >
-
-          <button
-            type="button"
-            onClick={toggleSound}
-            style={{
-              background: 'transparent',
-              border: 'none',
-              color: '#38bdf8',
-              cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              padding: '2px'
-            }}
-            title={isMuted ? 'Activar Sonido' : 'Silenciar'}
-          >
-            {isMuted ? <VolumeX size={13} /> : <Volume2 size={13} />}
-          </button>
-        </div>
       </div>
     </div>
   );
