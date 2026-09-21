@@ -168,7 +168,9 @@ function Landing() {
             <h2 className="neon-section-title">Antes de empezar, <span>hablemos claro.</span></h2>
             <p>Una primera conversación también sirve para ordenar. No necesitás llegar con todo resuelto.</p>
           </div>
-          <ContactForm />
+          <Suspense fallback={null}>
+            <ContactForm />
+          </Suspense>
         </section>
       </main>
       <footer className="neon-footer">
