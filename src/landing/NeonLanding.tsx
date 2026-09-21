@@ -2,13 +2,10 @@ import { type FormEvent, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowUpRight,
-  BarChart3,
   CheckCircle2,
   ChevronDown,
   Clock3,
-  Globe2,
   MessageCircle,
-  Rocket,
   Send,
   Star,
   X,
@@ -395,14 +392,6 @@ function Landing() {
               <div><strong>∞</strong><span>posibilidades</span></div>
             </div>
           </div>
-          <div className="neon-hero-side">
-            <div className="neon-photo-card">
-              <img src="/assets/hero-business-owner.jpg" alt="Persona revisando una web profesional en su computadora" />
-              <div className="neon-photo-caption"><span className="neon-live-dot" /> Tu próxima consulta puede empezar acá</div>
-            </div>
-            <div className="neon-float-note neon-note-top"><Globe2 size={15} /> presencia que <strong>genera confianza</strong></div>
-            <div className="neon-float-note neon-note-bottom"><BarChart3 size={15} /> pensada para <strong>traer oportunidades</strong></div>
-            <div className="neon-side-tag"><Rocket size={14} /> hecha para negocios reales</div>
           </div>
         </section>
 
