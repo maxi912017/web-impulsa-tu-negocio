@@ -83,7 +83,7 @@ export function ContactForm() {
               <div className="neon-form-heading">
                 <div>
                   <span className="neon-mono-label">PEDÍ TU COTIZACIÓN</span>
-                  <h2>Hagamos que te elijan.</h2>
+                  <h3>Hagamos que te elijan.</h3>
                 </div>
                 <span className="neon-reply"><Clock3 size={12} /> respuesta rápida</span>
               </div>
@@ -143,7 +143,7 @@ export function ContactForm() {
             >
               <span className="neon-success-icon"><CheckCircle2 size={30} /></span>
               <span className="neon-mono-label">SOLICITUD RECIBIDA</span>
-              <h2>¡Perfecto! Ya dimos el primer paso.</h2>
+               <h3>¡Perfecto! Ya dimos el primer paso.</h3>
               <p>Gracias, {form.name.split(' ')[0] || 'por escribir'}. Tu solicitud de cotización fue enviada con éxito. Te contactaremos a tu WhatsApp <strong>{form.whatsapp}</strong> o a tu correo para ordenar la propuesta.</p>
               <div style={{ marginTop: '16px' }}>
                 <a

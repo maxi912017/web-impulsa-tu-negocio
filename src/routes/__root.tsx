@@ -111,8 +111,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       {
         rel: "preload",
-        as: "style",
-        href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap",
+        as: "font",
+        type: "font/woff2",
+        href: "/fonts/archivo-latin-800.woff2",
+        crossOrigin: "anonymous",
       },
       {
         rel: "stylesheet",
