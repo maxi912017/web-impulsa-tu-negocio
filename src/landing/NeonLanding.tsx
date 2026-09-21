@@ -12,67 +12,17 @@ import './neon-landing.css';
 const PortfolioSection = lazy(() =>
   import('./PortfolioSection').then((m) => ({ default: m.PortfolioSection })),
 );
-const LazySections = lazy(() => import('./LazySections'));
+const TestimonialsSection = lazy(() =>
+  import('./LazySections').then((m) => ({ default: m.TestimonialsSection })),
+);
+const ContactForm = lazy(() =>
+  import('./LazySections').then((m) => ({ default: m.ContactForm })),
+);
 
 const WHATSAPP_LINK =
   'https://wa.me/5492664484918?text=Hola%20Impulsa%20Tu%20Negocio%2C%20quiero%20contarles%20mi%20idea';
 const INSTAGRAM_LINK = 'https://www.instagram.com/impulsatunegocio.dev/';
 
-
-const faqs = [
-  {
-    question: '¿Landing page, sitio web o aplicación web?',
-    answer:
-      'Una landing concentra una campaña o servicio en una sola acción directa. Un sitio completo funciona como la casa digital del negocio con múltiples secciones y SEO. Y una app web permite automatizar procesos diarios como turnos online, reservas, presupuestos por WhatsApp o gestión de clientes.',
-  },
-  {
-    question: '¿Cómo funciona la integración con WhatsApp?',
-    answer:
-      'Conectamos los botones y formularios para que las solicitudes, reservas o consultas lleguen directamente a tu chat de WhatsApp con un mensaje prearmado y ordenado, sin intermediarios ni demoras.',
-  },
-  {
-    question: '¿Qué necesito para arrancar?',
-    answer:
-      'Solo una idea y ganas de ordenar el próximo paso. Entendemos tu negocio, tu público y tu objetivo antes de recomendarte una solución.',
-  },
-  {
-    question: '¿La web ayuda a aparecer en Google y en buscadores con IA?',
-    answer:
-      'Construimos una base de SEO honesta: estructura clara, contenido útil, velocidad, accesibilidad y datos organizados. Eso ayuda a que Google y los asistentes entiendan mejor tu negocio, sin prometer posiciones garantizadas.',
-  },
-  {
-    question: '¿Puedo empezar simple y sumar funciones después?',
-    answer:
-      'Sí, 100%. Podés arrancar con una landing o sitio base y más adelante incorporar un sistema de reservas, portal de clientes o catálogo autogestionable a medida que tu negocio crezca.',
-  },
-];
-
-const reviews = [
-  {
-    name: 'Martín R.',
-    role: 'Servicios Técnicos & Climatización',
-    stars: 5,
-    highlight: 'Más presupuestos cerrados en menos tiempo',
-    comment:
-      'Antes perdía clientes por pasar presupuestos tarde en notas de audio. Con la web y el botón directo a WhatsApp, la gente ve mis trabajos anteriores y me escribe decidida. Un cambio total en la imagen de mi negocio.',
-  },
-  {
-    name: 'Dra. Valeria S.',
-    role: 'Centro de Estética & Bienestar',
-    stars: 5,
-    highlight: 'Agenda completa desde Instagram',
-    comment:
-      'La landing page conectada con mis historias y anuncios de Instagram aumentó un montón las reservas de turnos. Se ve impecable, elegante y transmite la confianza que mi centro necesitaba.',
-  },
-  {
-    name: 'Gonzalo M.',
-    role: 'Emprendimiento Gastronómico & Eventos',
-    stars: 5,
-    highlight: 'Ahorro de horas de atención diaria',
-    comment:
-      'El diseño digital y la carta interactiva nos ahorraron horas de responder mensajes repetitivos en WhatsApp. La atención de Maxi fue súper cercana, rápida y atenta a cada detalle.',
-  },
-];
 
 function Brand() {
   return (
