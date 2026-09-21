@@ -495,9 +495,10 @@ function Landing() {
                 className="neon-primary-button"
                 href="#contacto"
               >
-                <span>Quiero impulsar mi negocio</span>
+                <span>Pedir presupuesto</span>
                 <ArrowUpRight size={17} />
               </a>
+              {/* OCULTO TEMPORALMENTE (prueba de diseño): CTA secundario "Ver qué necesito"
               <a
                 id="hero-secondary-cta"
                 className="neon-text-button"
@@ -506,8 +507,9 @@ function Landing() {
                 <span>Ver qué necesito</span>
                 <ArrowDownRight size={16} />
               </a>
+              */}
             </div>
-            <ContactChannels />
+            {false && <ContactChannels />}
             <div className="neon-proof-stats" aria-label="Lo que puede hacer una web profesional">
               <div><strong>01</strong><span>mensaje claro</span></div>
               <div><strong>02</strong><span>más confianza</span></div>
@@ -533,6 +535,7 @@ function Landing() {
           </div>
         </div>
 
+        {/* OCULTO TEMPORALMENTE (prueba de diseño): bloque educativo "No se trata de tener una web"
         <section className="neon-split-section neon-container" id="soluciones">
           <div className="neon-section-copy">
             <span className="neon-mono-label">SOLUCIONES DIGITALES</span>
@@ -554,7 +557,9 @@ function Landing() {
             </a>
           </div>
         </section>
+        */}
 
+        {/* OCULTO TEMPORALMENTE (prueba de diseño): comparativa "La diferencia importa"
         <section className="neon-dark-section" id="diferencia">
           <div className="neon-container neon-dark-grid">
             <div>
@@ -570,11 +575,13 @@ function Landing() {
             </div>
           </div>
         </section>
+        */}
 
         {/* Portfolio / Casos de Éxito - Prueba de trabajo real */}
         <PortfolioSection />
 
         {/* SEO / Visibilidad */}
+        {/* OCULTO TEMPORALMENTE (prueba de diseño): sección SEO / Visibilidad
         <section className="neon-visibility neon-container" id="visibilidad">
           <div className="neon-search-card">
             <div className="neon-browser-bar"><i /><i /><i /><small>google.com/search</small></div>
@@ -597,6 +604,7 @@ function Landing() {
             <small className="neon-honesty"><CheckCircle2 size={13} /> Sin humo ni promesas falsas: creamos las mejores bases técnicas para que te descubran.</small>
           </div>
         </section>
+        */}
 
         {/* Testimonials / Client Reviews */}
         <TestimonialsSection />
