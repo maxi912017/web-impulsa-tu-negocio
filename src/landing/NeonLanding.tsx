@@ -337,25 +337,12 @@ function ContactForm() {
             >
               <div className="neon-form-heading">
                 <div>
-                  <span className="neon-mono-label">CONTAME TU IDEA</span>
+                  <span className="neon-mono-label">PEDÍ TU COTIZACIÓN</span>
                   <h2>Hagamos que te elijan.</h2>
                 </div>
                 <span className="neon-reply"><Clock3 size={12} /> respuesta rápida</span>
               </div>
-              <p className="neon-form-intro">Contame qué hacés y qué te gustaría que una web o pieza digital empiece a hacer por vos.</p>
-              <span className="neon-mono-label">¿QUÉ ESTÁS BUSCANDO?</span>
-              <div className="neon-topic-list">
-                {contactTopics.map((item) => (
-                  <button
-                    className={topic === item.id ? 'neon-topic active' : 'neon-topic'}
-                    key={item.id}
-                    type="button"
-                    onClick={() => setTopic(item.id)}
-                  >
-                    {item.label}
-                  </button>
-                ))}
-              </div>
+              <p className="neon-form-intro">Contame qué necesitás cotizar y te respondo con una propuesta concreta.</p>
               <div className="neon-form-grid">
                 <input
                   className="neon-input"
@@ -368,37 +355,38 @@ function ContactForm() {
                 <input
                   className="neon-input"
                   type="tel"
-                  placeholder="Teléfono / WhatsApp *"
-                  aria-label="Teléfono o WhatsApp"
+                  placeholder="Número de WhatsApp *"
+                  aria-label="Número de WhatsApp"
                   required
-                  value={form.phone}
-                  onChange={(event) => setForm({ ...form, phone: event.target.value })}
+                  value={form.whatsapp}
+                  onChange={(event) => setForm({ ...form, whatsapp: event.target.value })}
                 />
               </div>
               <input
                 className="neon-input"
                 type="email"
-                placeholder="Tu email (opcional)"
-                aria-label="Tu email"
+                placeholder="Tu correo electrónico *"
+                aria-label="Tu correo electrónico"
+                required
                 value={form.email}
                 onChange={(event) => setForm({ ...form, email: event.target.value })}
               />
               <textarea
                 className="neon-input neon-textarea"
                 rows={4}
-                placeholder={topic === 'seo' ? '¿Qué querés que encuentren cuando te busquen?' : '¿Qué te gustaría mejorar o poner en marcha? Contanos sobre tu rubro.'}
-                aria-label="Contame tu idea"
+                placeholder="Detalle de lo que necesitás cotizar *"
+                aria-label="Detalle de lo que necesitás cotizar"
                 required
                 value={form.message}
                 onChange={(event) => setForm({ ...form, message: event.target.value })}
               />
               <button className="neon-submit" type="submit" disabled={sending} style={sending ? { opacity: 0.7 } : undefined}>
-                <span>{sending ? 'Enviando…' : 'Enviar mi consulta'}</span> <Send size={16} />
+                <span>{sending ? 'Enviando…' : 'Solicitar cotización'}</span> <Send size={16} />
               </button>
               {error ? (
                 <small className="neon-form-note" style={{ color: '#fca5a5' }}>{error}</small>
               ) : (
-                <small className="neon-form-note">Sin spam. Te responderemos directamente por WhatsApp para coordinar.</small>
+                <small className="neon-form-note">Sin spam. Te responderemos directamente para coordinar.</small>
               )}
             </motion.form>
           ) : (
@@ -409,12 +397,12 @@ function ContactForm() {
               animate={{ opacity: 1, y: 0 }}
             >
               <span className="neon-success-icon"><CheckCircle2 size={30} /></span>
-              <span className="neon-mono-label">CONSULTA RECIBIDA</span>
+              <span className="neon-mono-label">SOLICITUD RECIBIDA</span>
               <h2>¡Perfecto! Ya dimos el primer paso.</h2>
-              <p>Gracias, {form.name.split(' ')[0] || 'por escribir'}. Nos pondremos en contacto directamente a tu WhatsApp <strong>{form.phone}</strong> para ordenar la propuesta.</p>
+              <p>Gracias, {form.name.split(' ')[0] || 'por escribir'}. Tu solicitud de cotización fue enviada con éxito. Te contactaremos a tu WhatsApp <strong>{form.whatsapp}</strong> o a tu correo para ordenar la propuesta.</p>
               <div style={{ marginTop: '16px' }}>
                 <a
-                  href={`https://wa.me/5492664484918?text=Hola%20Maxi%2C%20soy%20${encodeURIComponent(form.name)}%2C%20acabo%20de%20enviar%20el%20formulario%20web%20para%20consultar%20por%20${encodeURIComponent(topic)}`}
+                  href={`https://wa.me/5492664484918?text=Hola%20Maxi%2C%20soy%20${encodeURIComponent(form.name)}%2C%20acabo%20de%20enviar%20una%20solicitud%20de%20cotizaci%C3%B3n%20desde%20la%20web`}
                   target="_blank"
                   rel="noreferrer"
                   className="neon-portfolio-yellow-button"
@@ -424,7 +412,7 @@ function ContactForm() {
                   <span>O abrir WhatsApp ahora</span>
                 </a>
               </div>
-              <button className="neon-reset" type="button" onClick={() => { setSent(false); setForm({ name: '', phone: '', email: '', message: '' }); }}>Enviar otra consulta</button>
+              <button className="neon-reset" type="button" onClick={() => { setSent(false); setForm({ name: '', email: '', whatsapp: '', message: '' }); }}>Enviar otra consulta</button>
             </motion.div>
           )}
         </AnimatePresence>
