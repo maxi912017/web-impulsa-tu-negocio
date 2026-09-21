@@ -80,7 +80,7 @@ function Brand() {
   return (
     <a id="header-brand" className="neon-brand" href="#inicio" aria-label="Impulsa Tu Negocio, inicio">
       <span id="header-brand-mark" className="neon-brand-mark">
-        <img id="header-brand-img" src="/assets/isotipo.jpg" alt="Logo de Impulsa Tu Negocio" />
+        <img id="header-brand-img" src="/assets/isotipo-150.webp" width="150" height="150" alt="Logo de Impulsa Tu Negocio" />
       </span>
       <span id="header-brand-name" className="neon-brand-name">
         impulsa<span>tu</span>negocio<span className="neon-brand-dot">.dev</span>
