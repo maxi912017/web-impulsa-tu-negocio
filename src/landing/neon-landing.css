@@ -987,27 +987,6 @@ a.neon-banner-button:visited,
     padding-top: 72px;
   }
 
-  .neon-hero-side {
-    min-height: 500px;
-  }
-
-  .neon-photo-card {
-    left: 50%;
-    right: auto;
-    transform: translateX(-50%) rotate(2deg);
-  }
-
-  .neon-photo-card:hover {
-    transform: translateX(-50%) rotate(0deg) translateY(-5px);
-  }
-
-  .neon-note-top {
-    left: 3%;
-  }
-
-  .neon-note-bottom {
-    right: 4%;
-  }
 
 }
 
@@ -1083,41 +1062,6 @@ a.neon-banner-button:visited,
 
   .neon-proof-stats span {
     font-size: 9px;
-  }
-
-  .neon-hero-side {
-    min-height: 360px;
-  }
-
-  .neon-photo-card {
-    top: 10px;
-    width: calc(100% - 28px);
-  }
-
-  .neon-float-note {
-    padding: 8px 9px;
-    font-size: 8px;
-  }
-
-  .neon-float-note strong {
-    font-size: 9px;
-  }
-
-  .neon-note-top {
-    top: 35px;
-    left: -2px;
-  }
-
-  .neon-note-bottom {
-    right: -2px;
-    bottom: 44px;
-  }
-
-  .neon-side-tag {
-    bottom: 0;
-    left: 7px;
-    padding: 8px 9px;
-    font-size: 8px;
   }
 
   .neon-contact-grid {
