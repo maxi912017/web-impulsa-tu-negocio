@@ -457,6 +457,7 @@ a.neon-primary-button:hover svg {
 
 .neon-section-title {
   max-width: 670px;
+}
 
 .neon-deferred-section {
   min-height: 520px;
@@ -614,6 +615,7 @@ a.neon-primary-button:hover svg {
   .neon-proof-stats span {
     font-size: 9px;
   }
+}
 
 @media (prefers-reduced-motion: reduce) {
   .neon-landing *,
