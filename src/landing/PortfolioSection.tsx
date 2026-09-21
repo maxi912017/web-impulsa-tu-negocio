@@ -555,7 +555,7 @@ export function PortfolioSection() {
   };
 
   return (
-    <section id="portafolio" className="neon-portfolio-section">
+    <section className="neon-portfolio-section">
       <div className="neon-container">
         {/* Section Header */}
         <div className="neon-portfolio-header">

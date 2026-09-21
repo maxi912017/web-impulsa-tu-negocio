@@ -30,7 +30,7 @@ const reviews = [
 
 export function TestimonialsSection() {
   return (
-    <section className="neon-reviews-section neon-container" id="testimonios">
+    <section className="neon-reviews-section neon-container">
       <div className="neon-reviews-header">
         <span className="neon-mono-label neon-accent-label">OPINIONES DE CLIENTES</span>
         <h2 className="neon-section-title">

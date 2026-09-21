@@ -133,12 +133,12 @@ function Landing() {
           </div>
         </div>
 
-        <DeferredSection>
+        <DeferredSection id="portafolio">
           <Suspense fallback={<div className="neon-deferred-section" aria-hidden="true" />}>
             <PortfolioSection />
           </Suspense>
         </DeferredSection>
-        <DeferredSection compact>
+        <DeferredSection compact id="testimonios">
           <Suspense fallback={<div className="neon-deferred-section neon-deferred-section--compact" aria-hidden="true" />}>
             <TestimonialsSection />
           </Suspense>
