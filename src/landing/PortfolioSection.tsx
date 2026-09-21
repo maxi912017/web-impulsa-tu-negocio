@@ -595,12 +595,6 @@ export function PortfolioSection() {
             </p>
           </div>
 
-          <div className="neon-portfolio-note">
-            <span className="neon-portfolio-note-dot" />
-            <span>
-              <strong>Mockups interactivos basados en desarrollos reales</strong> · Prototipos interactivos con funciones de producción: cálculos AEA, cotizador Dólar Blue, Panel con IA, agendamiento médico y sitios corporativos.
-            </span>
-          </div>
         </div>
 
         {/* Categories Filter */}
