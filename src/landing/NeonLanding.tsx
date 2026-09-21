@@ -109,13 +109,15 @@ function Header() {
       <div className="neon-container neon-header-inner">
         <Brand />
         <nav id="site-nav" className="neon-nav" aria-label="Navegación principal">
+          {/* OCULTO TEMPORALMENTE (prueba de diseño): enlaces a secciones escondidas
           <a id="nav-item-soluciones" href="#soluciones">Soluciones</a>
           <a id="nav-item-diferencia" href="#diferencia">Landing o sitio</a>
+          */}
           <a id="nav-item-portafolio" href="#portafolio" className="neon-nav-highlight">
             <span>Portfolio</span>
             <span className="neon-nav-badge">Casos</span>
           </a>
-          <a id="nav-item-visibilidad" href="#visibilidad">SEO & IA</a>
+          {/* <a id="nav-item-visibilidad" href="#visibilidad">SEO & IA</a> */}
           <a id="nav-item-testimonios" href="#testimonios">Reseñas</a>
           <a id="nav-item-preguntas" href="#preguntas">Preguntas</a>
         </nav>
@@ -149,12 +151,14 @@ function Header() {
       </div>
       {open && (
         <nav id="site-mobile-nav" className="neon-mobile-nav" aria-label="Navegación móvil">
-          <a href="#soluciones" onClick={close}>Soluciones</a>
-          <a href="#diferencia" onClick={close}>Landing o sitio</a>
           <a href="#portafolio" onClick={close} className="neon-mobile-highlight">
             Portfolio / Casos de Éxito <span className="neon-nav-badge">Casos</span>
           </a>
+          {/* OCULTO TEMPORALMENTE (prueba de diseño): enlaces a secciones escondidas
+          <a href="#soluciones" onClick={close}>Soluciones</a>
+          <a href="#diferencia" onClick={close}>Landing o sitio</a>
           <a href="#visibilidad" onClick={close}>SEO & IA</a>
+          */}
           <a href="#testimonios" onClick={close}>Reseñas</a>
           <a href="#preguntas" onClick={close}>Preguntas</a>
           <a
@@ -642,10 +646,12 @@ function Landing() {
           <Brand />
           <div className="neon-footer-links">
             <a href="#inicio">Inicio</a>
+            {/* OCULTO TEMPORALMENTE (prueba de diseño): enlaces a secciones escondidas
             <a href="#soluciones">Soluciones</a>
             <a href="#diferencia">Landing o sitio</a>
+            */}
             <a href="#portafolio">Portfolio</a>
-            <a href="#visibilidad">SEO & IA</a>
+            {/* <a href="#visibilidad">SEO & IA</a> */}
             <a href="#testimonios">Reseñas</a>
             <a href="#preguntas">Preguntas</a>
             <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">Instagram</a>
