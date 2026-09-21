@@ -392,7 +392,6 @@ function Landing() {
               <div><strong>∞</strong><span>posibilidades</span></div>
             </div>
           </div>
-          </div>
         </section>
 
         <div className="neon-marquee" aria-label="Beneficios de una web profesional">
