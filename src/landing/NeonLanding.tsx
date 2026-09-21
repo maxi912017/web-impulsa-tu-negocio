@@ -138,8 +138,10 @@ function Landing() {
           </div>
         </div>
 
-        <PortfolioSection />
-        <TestimonialsSection />
+        <Suspense fallback={null}>
+          <PortfolioSection />
+          <TestimonialsSection />
+        </Suspense>
 
         <section id="contacto-banner-section" className="neon-contact neon-container">
           <div id="contact-banner" className="neon-contact-banner">
