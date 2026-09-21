@@ -22,7 +22,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { PortfolioSection } from './PortfolioSection';
-import { sendContactMessage } from '@/lib/contact.functions';
+import { toast } from 'sonner';
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
 import './neon-landing.css';
 
@@ -288,32 +288,31 @@ function TestimonialsSection() {
 }
 
 function ContactForm() {
-  const [topic, setTopic] = useState('landing');
   const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const [form, setForm] = useState({ name: '', phone: '', email: '', message: '' });
+  const [form, setForm] = useState({ name: '', email: '', whatsapp: '', message: '' });
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!form.name || !form.phone || !form.message || sending) return;
+    if (!form.name || !form.email || !form.whatsapp || !form.message || sending) return;
     setSending(true);
     setError(null);
     try {
-      const result = await sendContactMessage({ data: { ...form, topic } });
-      if (!result.ok) {
-        setError('No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (!response.ok) {
+        setError('No pudimos enviar tu solicitud. Probá de nuevo o escribinos por WhatsApp.');
         return;
       }
       setSent(true);
-      const topicLabel = contactTopics.find((item) => item.id === topic)?.label ?? topic;
-      const waText = encodeURIComponent(
-        `Hola Maxi, soy ${form.name}. Te escribo desde el formulario web.\nBusco: ${topicLabel}\nMi teléfono: ${form.phone}${form.email ? `\nMi email: ${form.email}` : ''}\n\n${form.message}`,
-      );
-      window.open(`https://wa.me/5492664484918?text=${waText}`, '_blank', 'noopener');
+      toast.success('Tu solicitud de cotización fue enviada con éxito');
     } catch (err) {
       console.error(err);
-      setError('No pudimos enviar tu consulta. Probá de nuevo o escribinos por WhatsApp.');
+      setError('No pudimos enviar tu solicitud. Probá de nuevo o escribinos por WhatsApp.');
     } finally {
       setSending(false);
     }
