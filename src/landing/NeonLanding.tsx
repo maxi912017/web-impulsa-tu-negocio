@@ -1,20 +1,18 @@
-import { type FormEvent, useState } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { lazy, Suspense, useState } from 'react';
+import { motion } from 'framer-motion';
 import {
   ArrowUpRight,
-  CheckCircle2,
-  ChevronDown,
-  Clock3,
   MessageCircle,
-  Send,
-  Star,
   X,
   Zap,
 } from 'lucide-react';
-import { PortfolioSection } from './PortfolioSection';
-import { toast } from 'sonner';
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
 import './neon-landing.css';
+
+const PortfolioSection = lazy(() =>
+  import('./PortfolioSection').then((m) => ({ default: m.PortfolioSection })),
+);
+const LazySections = lazy(() => import('./LazySections'));
 
 const WHATSAPP_LINK =
   'https://wa.me/5492664484918?text=Hola%20Impulsa%20Tu%20Negocio%2C%20quiero%20contarles%20mi%20idea';
