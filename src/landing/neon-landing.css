@@ -798,7 +798,7 @@ a.neon-banner-button:visited,
   color: #061116;
 }
 
-.neon-success h2 {
+.neon-success h3 {
   margin-top: 12px;
 }
 
@@ -1610,7 +1610,7 @@ a.neon-banner-button:visited,
   color: #d7fe3b;
 }
 
-.neon-mockup-clinic-headline h5 {
+.neon-mockup-clinic-headline h4 {
   margin: 0 0 3px;
   font-family: 'Archivo', sans-serif;
   font-size: 10px;
@@ -3083,7 +3083,7 @@ a.neon-banner-button:visited,
   font-weight: 700;
 }
 
-.neon-mockup-corp-hero h5 {
+.neon-mockup-corp-hero h4 {
   margin: 0 0 3px;
   font-family: 'Archivo', sans-serif;
   font-size: 9.5px;
@@ -3202,7 +3202,7 @@ a.neon-banner-button:visited,
   font-family: 'DM Mono', monospace;
 }
 
-.neon-mockup-trades-hero h5 {
+.neon-mockup-trades-hero h4 {
   margin: 0 0 3px;
   font-family: 'Archivo', sans-serif;
   font-size: 9.5px;
@@ -3513,8 +3513,9 @@ a.neon-banner-button:visited,
   display: flex;
   justify-content: space-between;
   font-size: 6px;
-  color: #64748b;
+  color: #cbd5e1;
   font-family: 'DM Mono', monospace;
+  font-weight: 700;
   margin-bottom: 4px;
 }
 
@@ -3880,7 +3881,7 @@ a.neon-whatsapp-hero-cta {
   gap: 22px;
 }
 
-.neon-modal-section h4 {
+.neon-modal-section h3 {
   margin: 0 0 10px;
   color: var(--neon-cyan);
   font-family: 'Archivo', sans-serif;

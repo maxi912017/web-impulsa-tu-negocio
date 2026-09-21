@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'Archivo Hero';
+  src: url('/fonts/archivo-latin-800.woff2') format('woff2');
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+}
+
 
 .neon-landing {
   --neon-bg: #0b0d0a;
@@ -290,6 +298,7 @@
 }
 
 .neon-display {
+  font-family: 'Archivo Hero', 'Archivo', sans-serif;
   max-width: 760px;
   margin: 27px 0 0;
   color: #f8fafc;
