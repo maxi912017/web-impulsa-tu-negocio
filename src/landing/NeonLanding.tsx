@@ -109,23 +109,6 @@ function Header() {
           <a id="nav-item-testimonios" href="#testimonios">Reseñas</a>
           <a id="nav-item-preguntas" href="#preguntas">Preguntas</a>
         </nav>
-        <div className="neon-header-actions-group">
-          <a
-            id="header-whatsapp-btn"
-            className="neon-header-whatsapp-btn"
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="Contactar por WhatsApp"
-          >
-            <span className="neon-whatsapp-dot" />
-            <MessageCircle size={15} />
-            <span className="neon-header-whatsapp-text">WhatsApp</span>
-          </a>
-          <a id="header-cta-btn" className="neon-header-cta" href="#contacto">
-            <span>Hablemos</span> <ArrowUpRight size={14} />
-          </a>
-        </div>
         <button
           id="header-menu-btn"
           className="neon-menu-button"
@@ -144,21 +127,6 @@ function Header() {
           </a>
           <a href="#testimonios" onClick={close}>Reseñas</a>
           <a href="#preguntas" onClick={close}>Preguntas</a>
-          <a
-            id="mobile-menu-whatsapp-btn"
-            className="neon-mobile-whatsapp-cta"
-            href={WHATSAPP_LINK}
-            target="_blank"
-            rel="noreferrer"
-            onClick={close}
-          >
-            <span className="neon-whatsapp-dot" />
-            <MessageCircle size={17} />
-            <span>Escribir por WhatsApp</span>
-          </a>
-          <a id="mobile-menu-cta-btn" className="neon-mobile-cta" href="#contacto" onClick={close}>
-            Contame tu idea <ArrowUpRight size={16} />
-          </a>
         </nav>
       )}
     </header>
