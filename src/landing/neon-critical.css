@@ -289,7 +289,7 @@
 
 .neon-display,
 .neon-section-title,
-.neon-form-card h2,
+.neon-form-card h3,
 .neon-contact-banner h2 {
   font-family: 'Archivo', sans-serif;
   font-weight: 800;
@@ -466,6 +466,10 @@ a.neon-primary-button:hover svg {
 
 .neon-deferred-section--compact {
   min-height: 360px;
+}
+
+.neon-contact-anchor {
+  scroll-margin-top: 90px;
 }
 
 @keyframes neon-pulse {

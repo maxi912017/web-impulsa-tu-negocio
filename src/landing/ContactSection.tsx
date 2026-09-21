@@ -70,7 +70,7 @@ export function ContactForm() {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.14 }}
     >
-      <div className="neon-form-card" id="contacto">
+      <div className="neon-form-card">
         <span className="neon-form-glow" aria-hidden="true" />
         <AnimatePresence mode="wait">
           {!sent ? (

@@ -163,6 +163,7 @@ function Landing() {
           </div>
         </section>
 
+        <div id="contacto" className="neon-contact-anchor" aria-hidden="true" />
         <section id="preguntas" className="neon-contact-grid neon-container">
           <div>
             <span className="neon-mono-label">PREGUNTAS FRECUENTES</span>

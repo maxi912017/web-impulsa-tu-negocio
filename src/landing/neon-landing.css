@@ -281,7 +281,7 @@
 
 .neon-display,
 .neon-section-title,
-.neon-form-card h2,
+.neon-form-card h3,
 .neon-contact-banner h2 {
   font-family: 'Archivo', sans-serif;
   font-weight: 800;
@@ -629,7 +629,7 @@ a.neon-banner-button:visited,
   gap: 16px;
 }
 
-.neon-form-card h2 {
+.neon-form-card h3 {
   margin: 8px 0 0;
   font-size: 34px;
   line-height: 0.95;
@@ -1099,7 +1099,7 @@ a.neon-banner-button:visited,
     display: grid;
   }
 
-  .neon-form-card h2 {
+  .neon-form-card h3 {
     font-size: 30px;
   }
 
