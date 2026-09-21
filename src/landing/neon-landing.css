@@ -1446,52 +1446,6 @@ a.neon-banner-button:visited,
   margin-top: 6px;
 }
 
-/* Hero Channel WhatsApp Card with Pulse */
-.neon-channel-whatsapp {
-  border-color: rgba(37, 211, 102, 0.32) !important;
-  background: linear-gradient(120deg, rgba(37, 211, 102, 0.08), rgba(7, 18, 24, 0.75)) !important;
-}
-
-.neon-channel-whatsapp:hover {
-  border-color: rgba(37, 211, 102, 0.65) !important;
-  box-shadow: 0 8px 26px rgba(0, 0, 0, 0.45), 0 0 24px rgba(37, 211, 102, 0.15) !important;
-}
-
-.neon-channel-whatsapp .neon-channel-icon {
-  background: rgba(37, 211, 102, 0.16) !important;
-  color: #25d366 !important;
-  border-color: rgba(37, 211, 102, 0.35) !important;
-  position: relative;
-}
-
-.neon-channel-pulse-dot {
-  position: absolute;
-  top: -2px;
-  right: -2px;
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: #25d366;
-  border: 1.5px solid #071218;
-}
-
-.neon-channel-pulse-dot::before {
-  content: '';
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  background: rgba(37, 211, 102, 0.6);
-  animation: live-green-ping 1.6s infinite;
-}
-
-.neon-channel-meta-online {
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  color: #4ade80 !important;
-  font-weight: 600;
-}
-
 .neon-live-green-dot {
   width: 6px;
   height: 6px;
@@ -4410,41 +4364,6 @@ a.neon-whatsapp-hero-cta {
   font-weight: 700 !important;
 }
 
-/* Visibility section fast list */
-.neon-visibility-summary {
-  margin-top: 14px;
-  color: #cbd5e1;
-  font-size: 15px;
-  line-height: 1.6;
-}
-
-.neon-visibility-fast-list {
-  display: grid;
-  gap: 12px;
-  margin: 22px 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.neon-visibility-fast-list li {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  color: #94a3b8;
-  font-size: 13.5px;
-  line-height: 1.5;
-}
-
-.neon-visibility-fast-list li svg {
-  flex: 0 0 auto;
-  margin-top: 2px;
-  color: var(--neon-cyan);
-}
-
-.neon-visibility-fast-list li strong {
-  color: #f8fafc;
-}
-
 /* About Me / Humanization Section */
 .neon-about-section {
   padding-top: 60px;
@@ -4782,19 +4701,15 @@ a.neon-whatsapp-hero-cta {
     letter-spacing: -0.02em;
   }
 
-  .neon-section-title,
-  .neon-dark-title {
+  .neon-section-title {
     font-size: clamp(26px, 8.2vw, 34px);
     line-height: 1.12;
     letter-spacing: -0.015em;
   }
 
   .neon-hero-intro,
-  .neon-visibility-summary,
   .neon-portfolio-intro,
   .neon-reviews-intro,
-  .neon-section-copy p,
-  .neon-dark-grid > div:first-child p,
   .neon-contact-grid > div p,
   .neon-about-text {
     font-size: 14.5px;
@@ -4808,11 +4723,8 @@ a.neon-whatsapp-hero-cta {
     line-height: 1.4;
   }
 
-  .neon-solution-card small,
-  .neon-visibility-fast-list li span,
   .neon-review-comment,
   .neon-faq-answer p,
-  .neon-honesty,
   .neon-form-note {
     font-size: 13.5px;
     line-height: 1.55;
@@ -4824,32 +4736,10 @@ a.neon-whatsapp-hero-cta {
     line-height: 1.35;
   }
 
-  .neon-comparison div {
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .neon-comparison div span {
-    font-size: 13.5px;
-    line-height: 1.45;
-  }
-
-  .neon-comparison div b,
-  .neon-comparison div strong {
-    font-size: 12.5px;
-  }
-
   .neon-contact-banner h2,
   #banner-title {
     font-size: clamp(23px, 7.4vw, 30px);
     line-height: 1.15;
-  }
-
-  .neon-search-input,
-  .neon-search-result span,
-  .neon-ai-badge {
-    font-size: 12.5px;
-    line-height: 1.45;
   }
 
   .neon-proof-stats span {
