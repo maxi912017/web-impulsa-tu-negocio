@@ -118,7 +118,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap",
         media: "print",
-        onLoad: "this.media='all'",
+        onLoad: (event: { currentTarget: HTMLLinkElement }) => {
+          event.currentTarget.media = "all";
+        },
       },
       { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
     ],
