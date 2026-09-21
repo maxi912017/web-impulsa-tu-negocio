@@ -250,7 +250,7 @@
 
 .neon-hero {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(390px, 0.95fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(50px, 8vw, 128px);
   align-items: center;
   padding: 94px 0 94px;
