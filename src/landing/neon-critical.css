@@ -314,7 +314,12 @@
 
 @media (max-width: 900px) {
   .neon-hero-glow {
-    display: none;
+    top: 35%;
+    right: -24%;
+    width: min(84vw, 390px);
+    opacity: 0.3;
+    mask-image: radial-gradient(circle at 50% 45%, #000 34%, transparent 70%);
+    -webkit-mask-image: radial-gradient(circle at 50% 45%, #000 34%, transparent 70%);
   }
 }
 
@@ -631,6 +636,13 @@ a.neon-primary-button:hover svg {
     gap: 38px;
     padding-top: 55px;
     padding-bottom: 60px;
+  }
+
+  .neon-hero-glow {
+    top: 31%;
+    right: -34%;
+    width: min(96vw, 370px);
+    opacity: 0.25;
   }
 
   .neon-display {

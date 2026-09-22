@@ -66,8 +66,7 @@ export function AnimatedLogoMark({ label }: { label: string }) {
 
 export function HeroLogoGlow() {
   const ready = useMotionLogo();
-  const wide = typeof window !== 'undefined' && window.innerWidth >= 900;
-  if (!ready || !wide) return null;
+  if (!ready) return null;
 
   return (
     <div className="neon-hero-glow" aria-hidden="true">
