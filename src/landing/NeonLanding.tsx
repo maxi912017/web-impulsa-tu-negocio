@@ -27,17 +27,8 @@ const INSTAGRAM_LINK = 'https://www.instagram.com/impulsatunegocio.dev/';
 function Brand() {
   return (
     <a id="header-brand" className="neon-brand" href="#inicio" aria-label="Impulsa Tu Negocio, inicio">
-      <span id="header-brand-mark" className="neon-brand-mark">
-        <img
-          id="header-brand-img"
-          src="/assets/isotipo-44.webp"
-          srcSet="/assets/isotipo-44.webp 44w, /assets/isotipo-88.webp 88w, /assets/isotipo-150.webp 150w"
-          sizes="44px"
-          width="44"
-          height="44"
-          alt="Logo de Impulsa Tu Negocio"
-          decoding="async"
-        />
+      <span id="header-brand-mark" className="neon-brand-mark neon-brand-mark--motion">
+        <AnimatedLogoMark label="Logo animado de Impulsa Tu Negocio" />
       </span>
       <span id="header-brand-name" className="neon-brand-name">
         impulsa<span>tu</span>negocio<span className="neon-brand-dot">.dev</span>
