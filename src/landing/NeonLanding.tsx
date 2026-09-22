@@ -25,13 +25,13 @@ const WHATSAPP_LINK =
 const INSTAGRAM_LINK = 'https://www.instagram.com/impulsatunegocio.dev/';
 
 
-function Brand() {
+function Brand({ idPrefix }: { idPrefix: string }) {
   return (
-    <a id="header-brand" className="neon-brand" href="#inicio" aria-label="Impulsa Tu Negocio, inicio">
-      <span id="header-brand-mark" className="neon-brand-mark neon-brand-mark--motion">
+    <a id={`${idPrefix}-brand`} className="neon-brand" href="#inicio" aria-label="Impulsa Tu Negocio, inicio">
+      <span id={`${idPrefix}-brand-mark`} className="neon-brand-mark neon-brand-mark--motion">
         <AnimatedLogoMark label="Logo animado de Impulsa Tu Negocio" />
       </span>
-      <span id="header-brand-name" className="neon-brand-name">
+      <span id={`${idPrefix}-brand-name`} className="neon-brand-name">
         impulsa<span>tu</span>negocio<span className="neon-brand-dot">.dev</span>
         <small>webs que hacen crecer negocios</small>
       </span>
