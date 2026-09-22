@@ -8,6 +8,7 @@ import {
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
 import { AnimatedLogoMark, HeroLogoGlow } from './AnimatedLogo';
 import { DeferredSection } from './DeferredSection';
+import { Button } from '@/components/ui/button';
 import './neon-critical.css';
 
 const PortfolioSection = lazy(() =>
@@ -31,9 +32,11 @@ function Brand({ idPrefix }: { idPrefix: string }) {
       <span id={`${idPrefix}-brand-mark`} className="neon-brand-mark neon-brand-mark--motion">
         <AnimatedLogoMark label="Logo animado de Impulsa Tu Negocio" />
       </span>
-      <span id={`${idPrefix}-brand-name`} className="neon-brand-name">
-        impulsa<span>tu</span>negocio<span className="neon-brand-dot">.dev</span>
-        <small>webs que hacen crecer negocios</small>
+      <span className="neon-brand-lockup">
+        <span id={`${idPrefix}-brand-name`} className="neon-brand-name">
+          impulsa tu negocio<span className="neon-brand-dot">.dev</span>
+        </span>
+        <small>estudio digital · webs que crecen</small>
       </span>
     </a>
   );
@@ -55,8 +58,10 @@ function Header() {
           <a id="nav-item-testimonios" href="#testimonios">Reseñas</a>
           <a id="nav-item-preguntas" href="#preguntas">Preguntas</a>
         </nav>
-        <button
+        <Button
           id="header-menu-btn"
+          variant="ghost"
+          size="icon"
           className="neon-menu-button"
           type="button"
           onClick={() => setOpen((value) => !value)}
@@ -64,12 +69,12 @@ function Header() {
           aria-expanded={open}
         >
           {open ? <X size={20} /> : <span className="neon-menu-lines"><i /><i /><i /></span>}
-        </button>
+        </Button>
       </div>
       {open && (
         <nav id="site-mobile-nav" className="neon-mobile-nav" aria-label="Navegación móvil">
           <a href="#portafolio" onClick={close} className="neon-mobile-highlight">
-            Portfolio / Casos de Éxito <span className="neon-nav-badge">Casos</span>
+            Portfolio <span className="neon-nav-badge">Casos</span>
           </a>
           <a href="#testimonios" onClick={close}>Reseñas</a>
           <a href="#preguntas" onClick={close}>Preguntas</a>
