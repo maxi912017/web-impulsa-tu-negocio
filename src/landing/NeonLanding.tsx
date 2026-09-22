@@ -74,7 +74,7 @@ function Header() {
       {open && (
         <nav id="site-mobile-nav" className="neon-mobile-nav" aria-label="Navegación móvil">
           <a href="#portafolio" onClick={close} className="neon-mobile-highlight">
-            Portfolio / Casos de Éxito <span className="neon-nav-badge">Casos</span>
+            Portfolio <span className="neon-nav-badge">Casos</span>
           </a>
           <a href="#testimonios" onClick={close}>Reseñas</a>
           <a href="#preguntas" onClick={close}>Preguntas</a>
