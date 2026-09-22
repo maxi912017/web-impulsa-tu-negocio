@@ -6,6 +6,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
+import { AnimatedLogoMark, HeroLogoGlow } from './AnimatedLogo';
 import { DeferredSection } from './DeferredSection';
 import './neon-critical.css';
 
@@ -24,22 +25,13 @@ const WHATSAPP_LINK =
 const INSTAGRAM_LINK = 'https://www.instagram.com/impulsatunegocio.dev/';
 
 
-function Brand() {
+function Brand({ idPrefix }: { idPrefix: string }) {
   return (
-    <a id="header-brand" className="neon-brand" href="#inicio" aria-label="Impulsa Tu Negocio, inicio">
-      <span id="header-brand-mark" className="neon-brand-mark">
-        <img
-          id="header-brand-img"
-          src="/assets/isotipo-44.webp"
-          srcSet="/assets/isotipo-44.webp 44w, /assets/isotipo-88.webp 88w, /assets/isotipo-150.webp 150w"
-          sizes="44px"
-          width="44"
-          height="44"
-          alt="Logo de Impulsa Tu Negocio"
-          decoding="async"
-        />
+    <a id={`${idPrefix}-brand`} className="neon-brand" href="#inicio" aria-label="Impulsa Tu Negocio, inicio">
+      <span id={`${idPrefix}-brand-mark`} className="neon-brand-mark neon-brand-mark--motion">
+        <AnimatedLogoMark label="Logo animado de Impulsa Tu Negocio" />
       </span>
-      <span id="header-brand-name" className="neon-brand-name">
+      <span id={`${idPrefix}-brand-name`} className="neon-brand-name">
         impulsa<span>tu</span>negocio<span className="neon-brand-dot">.dev</span>
         <small>webs que hacen crecer negocios</small>
       </span>
@@ -54,7 +46,7 @@ function Header() {
   return (
     <header id="site-header" className="neon-header">
       <div className="neon-container neon-header-inner">
-        <Brand />
+        <Brand idPrefix="header" />
         <nav id="site-nav" className="neon-nav" aria-label="Navegación principal">
           <a id="nav-item-portafolio" href="#portafolio" className="neon-nav-highlight">
             <span>Portfolio</span>
@@ -93,6 +85,7 @@ function Landing() {
       <Header />
       <main>
         <section className="neon-hero neon-container" id="inicio">
+          <HeroLogoGlow />
           <div className="neon-hero-copy">
             <span className="neon-mono-label neon-accent-label">
               DISEÑO WEB · DESARROLLO · VISIBILIDAD
@@ -179,7 +172,7 @@ function Landing() {
       </main>
       <footer className="neon-footer">
         <div className="neon-container neon-footer-inner">
-          <Brand />
+          <Brand idPrefix="footer" />
           <div className="neon-footer-links">
             <a href="#inicio">Inicio</a>
             <a href="#portafolio">Portfolio</a>
