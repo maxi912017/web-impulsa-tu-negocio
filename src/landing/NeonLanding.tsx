@@ -6,6 +6,7 @@ import {
   Zap,
 } from 'lucide-react';
 import { WhatsAppFloatingButton } from './WhatsAppFloatingButton';
+import { AnimatedLogoMark, HeroLogoGlow } from './AnimatedLogo';
 import { DeferredSection } from './DeferredSection';
 import './neon-critical.css';
 
@@ -84,6 +85,7 @@ function Landing() {
       <Header />
       <main>
         <section className="neon-hero neon-container" id="inicio">
+          <HeroLogoGlow />
           <div className="neon-hero-copy">
             <span className="neon-mono-label neon-accent-label">
               DISEÑO WEB · DESARROLLO · VISIBILIDAD
