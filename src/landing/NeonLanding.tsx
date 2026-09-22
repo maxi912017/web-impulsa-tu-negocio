@@ -46,7 +46,7 @@ function Header() {
   return (
     <header id="site-header" className="neon-header">
       <div className="neon-container neon-header-inner">
-        <Brand />
+        <Brand idPrefix="header" />
         <nav id="site-nav" className="neon-nav" aria-label="Navegación principal">
           <a id="nav-item-portafolio" href="#portafolio" className="neon-nav-highlight">
             <span>Portfolio</span>
@@ -172,7 +172,7 @@ function Landing() {
       </main>
       <footer className="neon-footer">
         <div className="neon-container neon-footer-inner">
-          <Brand />
+          <Brand idPrefix="footer" />
           <div className="neon-footer-links">
             <a href="#inicio">Inicio</a>
             <a href="#portafolio">Portfolio</a>
