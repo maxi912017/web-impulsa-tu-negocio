@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Calendar,
@@ -420,6 +420,21 @@ function MockupSaludView() {
 /* -------------------------------------------------------------------------- */
 
 function MockupElectricistaVideoViewer() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // Fallback gracefully keeps poster displayed if browser restricts autoplay
+      });
+    }
+  }, []);
+
   return (
     <div
       className="neon-mockup-inner neon-mockup-webapp"
@@ -437,14 +452,14 @@ function MockupElectricistaVideoViewer() {
         }}
       >
         <video
-          src="/assets/electricista-saas-demo.webm"
+          ref={videoRef}
           poster="/assets/electricista-saas-poster.webp"
           muted
           autoPlay
           loop
           playsInline
           controls={false}
-          preload="metadata"
+          preload="auto"
           style={{
             position: "absolute",
             top: 0,
@@ -454,7 +469,10 @@ function MockupElectricistaVideoViewer() {
             objectFit: "cover",
             display: "block",
           }}
-        />
+        >
+          <source src="/assets/electricista-saas-demo.mp4" type="video/mp4" />
+          <source src="/assets/electricista-saas-demo.webm" type="video/webm" />
+        </video>
       </div>
     </div>
   );

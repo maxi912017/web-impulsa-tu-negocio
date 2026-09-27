@@ -1,37 +1,45 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const POSTER = "/assets/logo-arrow-poster.webp";
 const WEBM = "/assets/logo-arrow.webm";
 const MP4 = "/assets/logo-arrow.mp4";
 
-/** Monta el video del logo solo cuando el navegador está libre y el usuario acepta animaciones. */
-function useMotionLogo() {
-  const [ready, setReady] = useState(false);
+/** Detecta si el usuario tiene activada la preferencia de reducción de movimiento */
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReduced(mediaQuery.matches);
 
-    let cancelled = false;
-    const enable = () => {
-      if (!cancelled) setReady(true);
-    };
-    const idleId = window.requestIdleCallback?.(enable);
-    const timeoutId = window.setTimeout(enable, 1500);
-
-    return () => {
-      cancelled = true;
-      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
-      window.clearTimeout(timeoutId);
-    };
+    const handler = (e: MediaQueryListEvent) => setReduced(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
   }, []);
 
-  return ready;
+  return reduced;
 }
 
 export function AnimatedLogoMark({ label }: { label: string }) {
-  const ready = useMotionLogo();
+  const reducedMotion = usePrefersReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
 
-  if (!ready) {
+  useEffect(() => {
+    if (reducedMotion) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // En caso de que el navegador pause el video, el poster verde de alta resolución queda visible
+      });
+    }
+  }, [reducedMotion]);
+
+  if (reducedMotion) {
     return (
       <img
         className="neon-brand-video"
@@ -46,6 +54,7 @@ export function AnimatedLogoMark({ label }: { label: string }) {
 
   return (
     <video
+      ref={videoRef}
       className="neon-brand-video"
       poster={POSTER}
       width={44}
@@ -55,25 +64,60 @@ export function AnimatedLogoMark({ label }: { label: string }) {
       loop
       playsInline
       controls={false}
-      preload="none"
+      preload="auto"
       aria-label={label}
     >
-      <source src={WEBM} type="video/webm" />
       <source src={MP4} type="video/mp4" />
+      <source src={WEBM} type="video/webm" />
     </video>
   );
 }
 
 export function HeroLogoGlow() {
-  const ready = useMotionLogo();
-  if (!ready) return null;
+  const reducedMotion = usePrefersReducedMotion();
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    if (reducedMotion) return;
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    const playPromise = video.play();
+    if (playPromise !== undefined) {
+      playPromise.catch(() => {
+        // En caso de bloqueo de autoplay en escritorio, el poster verde de alta definición queda visible
+      });
+    }
+  }, [reducedMotion]);
 
   return (
     <div className="neon-hero-glow" aria-hidden="true">
-      <video muted autoPlay loop playsInline controls={false} preload="none" poster={POSTER}>
-        <source src={WEBM} type="video/webm" />
-        <source src={MP4} type="video/mp4" />
-      </video>
+      {reducedMotion ? (
+        <img
+          src={POSTER}
+          alt=""
+          className="neon-hero-glow-media"
+          width="480"
+          height="480"
+          decoding="async"
+        />
+      ) : (
+        <video
+          ref={videoRef}
+          className="neon-hero-glow-media"
+          muted
+          autoPlay
+          loop
+          playsInline
+          controls={false}
+          preload="auto"
+          poster={POSTER}
+        >
+          <source src={MP4} type="video/mp4" />
+          <source src={WEBM} type="video/webm" />
+        </video>
+      )}
     </div>
   );
 }
