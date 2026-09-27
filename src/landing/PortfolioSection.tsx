@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useAutoPlayOnVisible } from "./AnimatedLogo";
 import {
   Calendar,
   Smartphone,
@@ -421,19 +422,7 @@ function MockupSaludView() {
 
 function MockupElectricistaVideoViewer() {
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-    video.muted = true;
-    video.defaultMuted = true;
-    const playPromise = video.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {
-        // Fallback gracefully keeps poster displayed if browser restricts autoplay
-      });
-    }
-  }, []);
+  useAutoPlayOnVisible(videoRef);
 
   return (
     <div

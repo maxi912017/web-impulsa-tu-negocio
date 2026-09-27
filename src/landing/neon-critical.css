@@ -69,6 +69,18 @@
   gap: 28px;
 }
 
+/* Keyframes de resplandor para el logo que nunca se purgan en producción */
+@keyframes logo-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 16px rgba(183, 255, 0, 0.18);
+    border-color: rgba(183, 255, 0, 0.32);
+  }
+  50% {
+    box-shadow: 0 0 24px rgba(183, 255, 0, 0.38);
+    border-color: rgba(183, 255, 0, 0.58);
+  }
+}
+
 /* Header Brand */
 .neon-brand {
   display: inline-flex;
@@ -96,6 +108,7 @@
   border-radius: 7px;
   background: #050704;
   box-shadow: 0 0 20px rgba(183, 255, 0, 0.16);
+  animation: logo-glow-pulse 3.5s ease-in-out infinite;
   transition:
     transform 200ms ease,
     border-color 200ms ease,
@@ -105,45 +118,43 @@
 
 .neon-brand:hover .neon-brand-mark {
   border-color: rgba(183, 255, 0, 0.72);
-  box-shadow: 0 0 26px rgba(183, 255, 0, 0.3);
+  box-shadow: 0 0 26px rgba(183, 255, 0, 0.45);
 }
 
 .neon-brand-mark img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* Filter: Shifts isologo to the website's signature apple green (#d7fe3b) */
-  filter: hue-rotate(248deg) saturate(2.6) brightness(1.2) contrast(1.15);
+  display: block;
   transition:
     filter 200ms ease,
     transform 200ms ease;
 }
 
 .neon-brand:hover .neon-brand-mark img {
-  filter: hue-rotate(248deg) saturate(3) brightness(1.3) contrast(1.2);
+  filter: brightness(1.1) contrast(1.1);
   transform: scale(1.04);
 }
 
 /* Isologo animado (video) del encabezado y el pie */
 .neon-brand-mark--motion {
-  background: #04090a;
+  background: #050704;
 }
 
 .neon-brand-video {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: none;
-  mix-blend-mode: screen;
-  transform: scale(1.06);
+  display: block;
+  transform: scale(1.04);
   transition:
     transform 220ms ease,
     filter 220ms ease;
 }
 
 .neon-brand:hover .neon-brand-video {
-  transform: scale(1.14);
-  filter: brightness(1.12) saturate(1.1);
+  transform: scale(1.12);
+  filter: brightness(1.15) saturate(1.1);
 }
 
 .neon-brand-lockup {
@@ -337,9 +348,27 @@
   aspect-ratio: 1;
   transform: translateY(-50%);
   pointer-events: none;
-  opacity: 0.95;
   z-index: 1;
-  filter: drop-shadow(0 0 32px rgba(215, 254, 59, 0.35));
+  /* Resplandor radial suave detrás de la flecha verde sin bordes rectangulares */
+  background: radial-gradient(
+    circle at 50% 50%,
+    rgba(215, 254, 59, 0.14) 0%,
+    rgba(215, 254, 59, 0.04) 45%,
+    transparent 70%
+  );
+  /* Máscara radial de desvanecimiento suave para que las esquinas y límites del video se disuelvan 100% en el fondo */
+  mask-image: radial-gradient(
+    circle at 50% 50%,
+    black 44%,
+    rgba(0, 0, 0, 0.8) 58%,
+    transparent 74%
+  );
+  -webkit-mask-image: radial-gradient(
+    circle at 50% 50%,
+    black 44%,
+    rgba(0, 0, 0, 0.8) 58%,
+    transparent 74%
+  );
 }
 
 .neon-hero-glow video,
@@ -349,7 +378,8 @@
   height: 100%;
   object-fit: contain;
   mix-blend-mode: screen;
-  filter: saturate(1.2) brightness(1.08);
+  filter: brightness(1.12) contrast(1.18) saturate(1.2);
+  display: block;
 }
 
 .neon-hero-copy {
@@ -743,6 +773,80 @@ a.neon-primary-button:hover svg {
 
   .neon-proof-stats span {
     font-size: 9px;
+  }
+}
+
+/* Footer Section */
+.neon-footer {
+  border-top: 1px solid rgba(183, 255, 0, 0.14);
+  background: rgba(5, 7, 4, 0.96);
+  padding: 36px 0;
+  position: relative;
+  z-index: 10;
+}
+
+.neon-footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 28px;
+  min-height: 80px;
+}
+
+.neon-footer .neon-brand {
+  min-width: 0;
+}
+
+.neon-footer .neon-brand-mark {
+  width: 48px;
+  height: 48px;
+  border-radius: 7px;
+}
+
+.neon-footer .neon-brand-name {
+  font-size: 17px;
+}
+
+.neon-footer .neon-brand-lockup small {
+  font-size: 11px;
+  color: var(--neon-muted);
+}
+
+.neon-footer-links {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  color: var(--neon-muted);
+  font-size: 13px;
+  font-weight: 500;
+  flex-wrap: wrap;
+}
+
+.neon-footer-links a {
+  transition: color 180ms ease, text-shadow 180ms ease;
+}
+
+.neon-footer-links a:hover {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 10px rgba(215, 254, 59, 0.4);
+}
+
+.neon-footer-copy {
+  color: #64748b;
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+}
+
+@media (max-width: 768px) {
+  .neon-footer-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .neon-footer-links {
+    gap: 16px;
   }
 }
 
