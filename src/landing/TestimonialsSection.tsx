@@ -1,30 +1,30 @@
-import { Star } from 'lucide-react';
-import './neon-landing.css';
+import { Star } from "lucide-react";
+import "./neon-landing.css";
 
 const reviews = [
   {
-    name: 'Martín R.',
-    role: 'Servicios Técnicos & Climatización',
+    name: "Martín R.",
+    role: "Servicios Técnicos & Climatización",
     stars: 5,
-    highlight: 'Más presupuestos cerrados en menos tiempo',
+    highlight: "Más presupuestos cerrados en menos tiempo",
     comment:
-      'Antes perdía clientes por pasar presupuestos tarde en notas de audio. Con la web y el botón directo a WhatsApp, la gente ve mis trabajos anteriores y me escribe decidida. Un cambio total en la imagen de mi negocio.',
+      "Antes perdía clientes por pasar presupuestos tarde en notas de audio. Con la web y el botón directo a WhatsApp, la gente ve mis trabajos anteriores y me escribe decidida. Un cambio total en la imagen de mi negocio.",
   },
   {
-    name: 'Dra. Valeria S.',
-    role: 'Centro de Estética & Bienestar',
+    name: "Dra. Valeria S.",
+    role: "Centro de Estética & Bienestar",
     stars: 5,
-    highlight: 'Agenda completa desde Instagram',
+    highlight: "Agenda completa desde Instagram",
     comment:
-      'La landing page conectada con mis historias y anuncios de Instagram aumentó un montón las reservas de turnos. Se ve impecable, elegante y transmite la confianza que mi centro necesitaba.',
+      "La landing page conectada con mis historias y anuncios de Instagram aumentó un montón las reservas de turnos. Se ve impecable, elegante y transmite la confianza que mi centro necesitaba.",
   },
   {
-    name: 'Gonzalo M.',
-    role: 'Emprendimiento Gastronómico & Eventos',
+    name: "Gonzalo M.",
+    role: "Emprendimiento Gastronómico & Eventos",
     stars: 5,
-    highlight: 'Ahorro de horas de atención diaria',
+    highlight: "Ahorro de horas de atención diaria",
     comment:
-      'El diseño digital y la carta interactiva nos ahorraron horas de responder mensajes repetitivos en WhatsApp. La atención de Maxi fue súper cercana, rápida y atenta a cada detalle.',
+      "El diseño digital y la carta interactiva nos ahorraron horas de responder mensajes repetitivos en WhatsApp. La atención de Maxi fue súper cercana, rápida y atenta a cada detalle.",
   },
 ];
 
@@ -37,7 +37,8 @@ export function TestimonialsSection() {
           Lo que dicen quienes ya <span>confiaron en su presencia digital.</span>
         </h2>
         <p className="neon-reviews-intro">
-          Resultados medibles: más consultas por WhatsApp, agendas organizadas y clientes que reconocen la calidad del servicio.
+          Resultados medibles: más consultas por WhatsApp, agendas organizadas y clientes que
+          reconocen la calidad del servicio.
         </p>
       </div>
 

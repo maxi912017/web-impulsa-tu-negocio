@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ReactNode, useEffect, useRef, useState } from "react";
 
 interface DeferredSectionProps {
   children: ReactNode;
@@ -12,7 +12,7 @@ export function DeferredSection({ children, compact = false, id }: DeferredSecti
 
   useEffect(() => {
     const element = placeholderRef.current;
-    if (!element || typeof IntersectionObserver === 'undefined') {
+    if (!element || typeof IntersectionObserver === "undefined") {
       setIsReady(true);
       return;
     }
@@ -23,7 +23,7 @@ export function DeferredSection({ children, compact = false, id }: DeferredSecti
         setIsReady(true);
         observer.disconnect();
       },
-      { rootMargin: '0px' },
+      { rootMargin: "0px" },
     );
 
     observer.observe(element);
@@ -34,7 +34,13 @@ export function DeferredSection({ children, compact = false, id }: DeferredSecti
     <div
       id={id}
       ref={placeholderRef}
-      className={!isReady ? (compact ? 'neon-deferred-section neon-deferred-section--compact' : 'neon-deferred-section') : undefined}
+      className={
+        !isReady
+          ? compact
+            ? "neon-deferred-section neon-deferred-section--compact"
+            : "neon-deferred-section"
+          : undefined
+      }
       aria-hidden={!isReady ? true : undefined}
     >
       {isReady ? children : null}

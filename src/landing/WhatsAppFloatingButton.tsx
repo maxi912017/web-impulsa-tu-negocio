@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { MessageCircle, X } from 'lucide-react';
+import { useState, useEffect } from "react";
+import { MessageCircle, X } from "lucide-react";
 
 interface WhatsAppFloatingButtonProps {
   phoneNumber?: string;
@@ -7,8 +7,8 @@ interface WhatsAppFloatingButtonProps {
 }
 
 export function WhatsAppFloatingButton({
-  phoneNumber = '5492664484918',
-  defaultMessage = 'Hola Impulsa Tu Negocio, quiero consultar por una web o app para mi negocio',
+  phoneNumber = "5492664484918",
+  defaultMessage = "Hola Impulsa Tu Negocio, quiero consultar por una web o app para mi negocio",
 }: WhatsAppFloatingButtonProps) {
   const [showTooltip, setShowTooltip] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -25,9 +25,9 @@ export function WhatsAppFloatingButton({
       });
     };
     handleScroll();
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       if (frameId !== null) window.cancelAnimationFrame(frameId);
     };
   }, []);
@@ -55,7 +55,8 @@ export function WhatsAppFloatingButton({
             <span className="neon-whatsapp-tooltip-title">Impulsa Tu Negocio</span>
           </div>
           <p className="neon-whatsapp-tooltip-text">
-            ¡Hola! 👋 ¿Querés saber qué tipo de web o app necesita tu negocio? Escribinos y te orientamos sin compromiso.
+            ¡Hola! 👋 ¿Querés saber qué tipo de web o app necesita tu negocio? Escribinos y te
+            orientamos sin compromiso.
           </p>
           <a
             id="whatsapp-tooltip-action"
@@ -74,7 +75,7 @@ export function WhatsAppFloatingButton({
         href={whatsappUrl}
         target="_blank"
         rel="noreferrer"
-        className={`neon-whatsapp-fab ${isScrolled ? 'visible' : ''}`}
+        className={`neon-whatsapp-fab ${isScrolled ? "visible" : ""}`}
         aria-label="Chatear por WhatsApp con Impulsa Tu Negocio"
       >
         <span className="neon-whatsapp-radar" aria-hidden="true" />

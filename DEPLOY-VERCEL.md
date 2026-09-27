@@ -10,12 +10,12 @@ No hace falta elegir framework: el archivo `vercel.json` ya define el build
 
 El formulario de cotización envía correos con Nodemailer usando tu cuenta de
 Gmail. En Vercel: **Project → Settings → Environment Variables**, agregá estas
-dos para los entornos *Production* y *Preview*:
+dos para los entornos _Production_ y _Preview_:
 
-| Nombre                | Para qué sirve                                        |
-| --------------------- | ----------------------------------------------------- |
-| `GMAIL_USER`          | Tu correo de Gmail (maxi.91.2017@gmail.com)           |
-| `GMAIL_APP_PASSWORD`  | Contraseña de aplicación de Gmail (no tu contraseña)  |
+| Nombre               | Para qué sirve                                       |
+| -------------------- | ---------------------------------------------------- |
+| `GMAIL_USER`         | Tu correo de Gmail (maxi.91.2017@gmail.com)          |
+| `GMAIL_APP_PASSWORD` | Contraseña de aplicación de Gmail (no tu contraseña) |
 
 ### Cómo obtener la contraseña de aplicación (gratis, 2 minutos)
 

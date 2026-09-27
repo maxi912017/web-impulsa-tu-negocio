@@ -1,5 +1,5 @@
-import { createFileRoute } from '@tanstack/react-router';
-import { z } from 'zod';
+import { createFileRoute } from "@tanstack/react-router";
+import { z } from "zod";
 
 const payloadSchema = z.object({
   name: z.string().trim().min(1).max(120),
@@ -10,16 +10,16 @@ const payloadSchema = z.object({
 
 const escapeHtml = (value: string) =>
   value
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
 
 // wa.me solo acepta dígitos: quitamos +, espacios, guiones y paréntesis.
-const waDigits = (value: string) => value.replace(/\D/g, '');
+const waDigits = (value: string) => value.replace(/\D/g, "");
 
-export const Route = createFileRoute('/api/send-email')({
+export const Route = createFileRoute("/api/send-email")({
   server: {
     handlers: {
       POST: async ({ request }) => {
@@ -27,21 +27,24 @@ export const Route = createFileRoute('/api/send-email')({
         try {
           body = await request.json();
         } catch {
-          return Response.json({ ok: false, error: 'Cuerpo inválido' }, { status: 400 });
+          return Response.json({ ok: false, error: "Cuerpo inválido" }, { status: 400 });
         }
 
         const parsed = payloadSchema.safeParse(body);
         if (!parsed.success) {
-          return Response.json({ ok: false, error: 'Datos incompletos o inválidos' }, { status: 400 });
+          return Response.json(
+            { ok: false, error: "Datos incompletos o inválidos" },
+            { status: 400 },
+          );
         }
         const { name, email, whatsapp, message } = parsed.data;
 
-        const gmailUser = process.env['GMAIL_USER'];
-        const gmailAppPassword = process.env['GMAIL_APP_PASSWORD'];
+        const gmailUser = process.env["GMAIL_USER"];
+        const gmailAppPassword = process.env["GMAIL_APP_PASSWORD"];
         if (!gmailUser || !gmailAppPassword) {
-          console.error('Missing GMAIL_USER or GMAIL_APP_PASSWORD');
+          console.error("Missing GMAIL_USER or GMAIL_APP_PASSWORD");
           return Response.json(
-            { ok: false, error: 'Servicio de email no configurado' },
+            { ok: false, error: "Servicio de email no configurado" },
             { status: 500 },
           );
         }
@@ -83,9 +86,9 @@ export const Route = createFileRoute('/api/send-email')({
         `;
 
         try {
-          const nodemailer = (await import('nodemailer')).default;
+          const nodemailer = (await import("nodemailer")).default;
           const transporter = nodemailer.createTransport({
-            service: 'gmail',
+            service: "gmail",
             auth: { user: gmailUser, pass: gmailAppPassword },
           });
 
@@ -99,8 +102,11 @@ export const Route = createFileRoute('/api/send-email')({
 
           return Response.json({ ok: true });
         } catch (error) {
-          console.error('Nodemailer send failed:', error);
-          return Response.json({ ok: false, error: 'No se pudo enviar el correo' }, { status: 502 });
+          console.error("Nodemailer send failed:", error);
+          return Response.json(
+            { ok: false, error: "No se pudo enviar el correo" },
+            { status: 502 },
+          );
         }
       },
     },

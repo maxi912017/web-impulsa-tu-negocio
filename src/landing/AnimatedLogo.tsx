@@ -1,15 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from "react";
 
-const POSTER = '/assets/logo-arrow-poster.webp';
-const WEBM = '/assets/logo-arrow.webm';
-const MP4 = '/assets/logo-arrow.mp4';
+const POSTER = "/assets/logo-arrow-poster.webp";
+const WEBM = "/assets/logo-arrow.webm";
+const MP4 = "/assets/logo-arrow.mp4";
 
 /** Monta el video del logo solo cuando el navegador está libre y el usuario acepta animaciones. */
 function useMotionLogo() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     let cancelled = false;
     const enable = () => {
