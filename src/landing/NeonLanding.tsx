@@ -1,7 +1,6 @@
 import { lazy, Suspense, useState } from "react";
-import { ArrowUpRight, Check, Code2, LayoutTemplate, MessageCircle, Palette, Rocket, X, Zap } from "lucide-react";
+import { ArrowUpRight, Check, Code2, LayoutTemplate, Palette, Rocket, X, Zap } from "lucide-react";
 import { WhatsAppFloatingButton } from "./WhatsAppFloatingButton";
-import { AnimatedLogoMark } from "./AnimatedLogo";
 import { DeferredSection } from "./DeferredSection";
 import { Button } from "@/components/ui/button";
 import "./neon-critical.css";
@@ -15,28 +14,69 @@ const TestimonialsSection = lazy(() =>
 const ContactForm = lazy(() =>
   import("./ContactSection").then((m) => ({ default: m.ContactForm })),
 );
+const FAQ = lazy(() =>
+  import("./ContactSection").then((m) => ({ default: m.FAQ })),
+);
 
 const WHATSAPP_LINK =
   "https://wa.me/5492664484918?text=Hola%20Impulsa%20Tu%20Negocio%2C%20quiero%20contarles%20mi%20idea";
 const INSTAGRAM_LINK = "https://www.instagram.com/impulsatunegocio.dev/";
 
-function Brand({ idPrefix }: { idPrefix: string }) {
+function HeaderBrand() {
   return (
     <a
-      id={`${idPrefix}-brand`}
+      id="header-brand"
       className="neon-brand"
       href="#inicio"
       aria-label="Impulsa Tu Negocio, inicio"
     >
-      <span id={`${idPrefix}-brand-mark`} className="neon-brand-mark neon-brand-mark--motion">
-        <AnimatedLogoMark label="Logo animado de Impulsa Tu Negocio" />
+      <span id="header-brand-mark" className="neon-brand-mark">
+        <img
+          src="/assets/brand-isologo-dark.png"
+          alt="Isologo de Impulsa Tu Negocio"
+          width={44}
+          height={44}
+          className="neon-brand-img"
+        />
       </span>
       <span className="neon-brand-lockup">
-        <span id={`${idPrefix}-brand-name`} className="neon-brand-name">
+        <span id="header-brand-name" className="neon-brand-name">
           impulsa tu negocio<span className="neon-brand-dot">.dev</span>
         </span>
         <small>estudio digital · webs que crecen</small>
       </span>
+    </a>
+  );
+}
+
+function FooterBrand() {
+  return (
+    <a
+      id="footer-brand"
+      className="neon-footer-brand"
+      href="#inicio"
+      aria-label="Impulsa Tu Negocio, volver al inicio"
+    >
+      <div className="neon-footer-brand-mark">
+        <img
+          src="/assets/brand-isologo-dark.png"
+          alt="Isologo de Impulsa Tu Negocio"
+          width={76}
+          height={76}
+          className="neon-footer-brand-img"
+          loading="lazy"
+        />
+      </div>
+      <div className="neon-footer-brand-copy">
+        <span className="neon-footer-brand-title">
+          impulsa tu negocio<span className="neon-footer-brand-dot">.dev</span>
+        </span>
+        <div className="neon-footer-brand-tagline">
+          <span className="neon-tagline-line" aria-hidden="true" />
+          <span className="neon-tagline-text">ESTUDIO DIGITAL · WEBS QUE CRECEN</span>
+          <span className="neon-tagline-line" aria-hidden="true" />
+        </div>
+      </div>
     </a>
   );
 }
@@ -48,7 +88,7 @@ function Header() {
   return (
     <header id="site-header" className="neon-header">
       <div className="neon-container neon-header-inner">
-        <Brand idPrefix="header" />
+        <HeaderBrand />
         <nav id="site-nav" className="neon-nav" aria-label="Navegación principal">
           <a href="#servicios">Servicios</a>
           <a id="nav-item-portafolio" href="#portafolio" className="neon-nav-highlight">
@@ -226,72 +266,80 @@ function Landing() {
           </Suspense>
         </DeferredSection>
 
-        <section id="contacto-banner-section" className="neon-contact neon-container">
-          <div id="contact-banner" className="neon-contact-banner">
-            <div>
-              <span id="banner-mono-label" className="neon-mono-label neon-accent-label">
-                EL PRÓXIMO PASO ES SIMPLE
-              </span>
-              <h2 id="banner-title">
-                Hablemos de lo que <span>tu negocio necesita.</span>
-              </h2>
-            </div>
-            <a
-              id="banner-whatsapp-btn"
-              className="neon-banner-button"
-              href={WHATSAPP_LINK}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <MessageCircle size={18} />
-              <span>Escribime por WhatsApp</span>
-            </a>
-          </div>
-        </section>
-
         <div id="contacto" className="neon-contact-anchor" aria-hidden="true" />
-        <section id="preguntas" className="neon-contact-grid neon-container">
-          <div>
-            <span className="neon-mono-label">PREGUNTAS FRECUENTES</span>
-            <h2 className="neon-section-title">
-              Antes de empezar, <span>hablemos claro.</span>
+        <section id="contacto-seccion" className="neon-contact-unified neon-container">
+          <div className="neon-contact-unified-header">
+            <span id="banner-mono-label" className="neon-mono-label neon-accent-label">
+              EL PRÓXIMO PASO ES SIMPLE
+            </span>
+            <h2 id="banner-title" className="neon-contact-unified-title">
+              Hablemos de lo que <span>tu negocio necesita.</span>
             </h2>
-            <p>
-              Una primera conversación también sirve para ordenar. No necesitás llegar con todo
-              resuelto.
+            <p className="neon-contact-unified-desc">
+              ¿Querés una Web App, Landing Page o Sistema de Gestión a medida de tu negocio?
+              Diseñamos soluciones potentes que integran cálculo de costos, Inteligencia
+              Artificial, presupuestos en vivo y conexión directa para que automatices tu
+              operativa y vendas más.
             </p>
           </div>
-          <DeferredSection compact>
-            <Suspense
-              fallback={
-                <div
-                  className="neon-deferred-section neon-deferred-section--compact"
-                  aria-hidden="true"
-                />
-              }
-            >
-              <ContactForm />
-            </Suspense>
-          </DeferredSection>
+
+          <div id="preguntas" className="neon-contact-grid">
+            <div className="neon-contact-left-col">
+              <span className="neon-mono-label">PREGUNTAS FRECUENTES</span>
+              <h3 className="neon-faq-heading">
+                Antes de empezar, <span>hablemos claro.</span>
+              </h3>
+              <p className="neon-contact-intro-text">
+                Una primera conversación también sirve para ordenar. No necesitás llegar con todo
+                resuelto.
+              </p>
+              <DeferredSection compact>
+                <Suspense fallback={null}>
+                  <FAQ />
+                </Suspense>
+              </DeferredSection>
+            </div>
+            <DeferredSection compact>
+              <Suspense
+                fallback={
+                  <div
+                    className="neon-deferred-section neon-deferred-section--compact"
+                    aria-hidden="true"
+                  />
+                }
+              >
+                <ContactForm />
+              </Suspense>
+            </DeferredSection>
+          </div>
         </section>
       </main>
       <footer className="neon-footer">
-        <div className="neon-container neon-footer-inner">
-          <Brand idPrefix="footer" />
-          <div className="neon-footer-links">
-            <a href="#inicio">Inicio</a>
-            <a href="#servicios">Servicios</a>
-            <a href="#portafolio">Portfolio</a>
-            <a href="#testimonios">Reseñas</a>
-            <a href="#preguntas">Preguntas</a>
-            <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">
-              Instagram
-            </a>
-            <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer">
-              WhatsApp
-            </a>
+        <div className="neon-container neon-footer-container">
+          <div className="neon-footer-main">
+            <FooterBrand />
+            <nav className="neon-footer-links" aria-label="Navegación del pie de página">
+              <a href="#inicio">Inicio</a>
+              <a href="#servicios">Servicios</a>
+              <a href="#portafolio">Portfolio</a>
+              <a href="#testimonios">Reseñas</a>
+              <a href="#preguntas">Preguntas</a>
+              <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">
+                Instagram
+              </a>
+              <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer">
+                WhatsApp
+              </a>
+            </nav>
           </div>
-          <span className="neon-footer-copy">© {new Date().getFullYear()} Impulsa Tu Negocio</span>
+          <div className="neon-footer-bottom">
+            <span className="neon-footer-copy">
+              © {new Date().getFullYear()} Impulsa Tu Negocio · Todos los derechos reservados.
+            </span>
+            <span className="neon-footer-subcopy">
+              Desarrollo web de alto impacto & sistemas a medida
+            </span>
+          </div>
         </div>
       </footer>
       <WhatsAppFloatingButton />

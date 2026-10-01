@@ -542,6 +542,59 @@ a.neon-primary-button:hover svg {
   padding-top: 0;
 }
 
+/* Unified Contact & Quotation Section */
+.neon-contact-unified {
+  padding-top: clamp(60px, 8vw, 100px);
+  padding-bottom: clamp(60px, 8vw, 110px);
+}
+
+.neon-contact-unified-header {
+  max-width: 860px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.neon-contact-unified-title {
+  margin: 14px 0 0;
+  color: #f8fafc;
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.neon-contact-unified-title span {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 24px rgba(215, 254, 59, 0.35);
+}
+
+.neon-contact-unified-desc {
+  max-width: 740px;
+  margin: 16px 0 0;
+  color: #cbd5e1;
+  font-size: clamp(14.5px, 1.1vw, 16px);
+  line-height: 1.65;
+}
+
+.neon-contact-unified .neon-contact-grid {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.neon-faq-heading {
+  margin: 14px 0 0;
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: #f8fafc;
+}
+
+.neon-faq-heading span {
+  color: var(--neon-cyan);
+}
+
 /* Redesigned Contact Banner: In Harmony with the Whole Web */
 .neon-contact-banner {
   display: flex;
@@ -597,6 +650,18 @@ a.neon-primary-button:hover svg {
 .neon-contact-banner h2 span {
   color: var(--neon-cyan);
   text-shadow: 0 0 24px rgba(215, 254, 59, 0.35);
+}
+
+.neon-contact-banner-copy {
+  max-width: 720px;
+}
+
+.neon-banner-desc {
+  max-width: 680px;
+  margin: 16px 0 0;
+  color: #cbd5e1;
+  font-size: 15px;
+  line-height: 1.65;
 }
 
 /* Cohesive, High-Contrast Banner CTA Button */
@@ -669,26 +734,54 @@ a.neon-banner-button:visited,
   min-width: 0;
 }
 
+.neon-contact-left-col {
+  min-width: 0;
+}
+
+.neon-contact-heading {
+  margin: 18px 0 0;
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(38px, 4.8vw, 68px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: #f8fafc;
+}
+
+.neon-contact-heading span {
+  color: var(--neon-cyan);
+}
+
+.neon-contact-intro-text {
+  max-width: 470px;
+  margin: 24px 0 36px;
+  color: var(--neon-muted);
+  font-size: 15px;
+  line-height: 1.7;
+}
+
 .neon-form-card {
   position: relative;
   overflow: hidden;
-  padding: 36px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 18px;
+  padding: 38px 40px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
   background:
-    radial-gradient(circle at 90% 10%, rgba(215, 254, 59, 0.06), transparent 18rem),
-    linear-gradient(145deg, rgba(20, 24, 18, 0.95), rgba(14, 17, 12, 0.98));
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+    radial-gradient(circle at 92% 8%, rgba(215, 254, 59, 0.09), transparent 22rem),
+    linear-gradient(150deg, rgba(16, 21, 14, 0.97), rgba(9, 12, 8, 0.99));
+  box-shadow:
+    0 24px 60px rgba(0, 0, 0, 0.65),
+    0 0 36px rgba(215, 254, 59, 0.03);
 }
 
 .neon-form-glow {
   position: absolute;
-  top: -100px;
-  right: -100px;
-  width: 270px;
-  height: 270px;
+  top: -80px;
+  right: -80px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
-  background: rgba(215, 254, 59, 0.12);
+  background: radial-gradient(circle, rgba(215, 254, 59, 0.16) 0%, transparent 70%);
   filter: blur(30px);
   pointer-events: none;
 }
@@ -706,68 +799,91 @@ a.neon-banner-button:visited,
 
 .neon-form-card h3 {
   margin: 8px 0 0;
-  font-size: 34px;
-  line-height: 0.95;
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(28px, 3.2vw, 36px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: #f8fafc;
 }
 
 .neon-reply {
   display: inline-flex;
   align-items: center;
   gap: 5px;
-  padding: 6px 8px;
-  border: 1px solid rgba(163, 203, 199, 0.17);
+  padding: 5px 9px;
+  border: 1px solid rgba(163, 203, 199, 0.22);
   border-radius: 999px;
-  color: #7e9493;
+  color: #94a3b8;
   font-family: "DM Mono", monospace;
-  font-size: 9px;
+  font-size: 10px;
   white-space: nowrap;
 }
 
 .neon-form-intro {
-  max-width: 480px;
-  margin: 16px 0 28px;
+  max-width: 500px;
+  margin: 12px 0 0;
   color: #cbd5e1;
   font-size: 14px;
-  line-height: 1.65;
+  line-height: 1.6;
+}
+
+.neon-form-subheading {
+  margin: 26px 0 6px;
+  color: #ffffff;
+  font-family: "Archivo", sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.neon-form-group-label {
+  display: block;
+  margin: 10px 0 10px;
+  color: #94a3b8;
+  font-size: 13.5px;
+  font-weight: 500;
 }
 
 .neon-topic-list {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin: 12px 0 27px;
+  margin: 0 0 24px;
 }
 
 .neon-topic {
-  min-height: 36px;
-  padding: 0 16px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  min-height: 38px;
+  padding: 0 18px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
   font-family: "Manrope", sans-serif;
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
   cursor: pointer;
   transition:
     border-color 180ms ease,
     background-color 180ms ease,
     color 180ms ease,
-    box-shadow 180ms ease;
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .neon-topic:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.24);
+  border-color: rgba(255, 255, 255, 0.35);
   color: #ffffff;
+  transform: translateY(-1px);
 }
 
 .neon-topic.active {
   border-color: var(--neon-cyan);
   background: var(--neon-cyan);
-  color: #070d02;
-  font-weight: 700;
-  box-shadow: 0 0 16px rgba(215, 254, 59, 0.25);
+  color: #070d02 !important;
+  font-weight: 800;
+  box-shadow: 0 0 18px rgba(215, 254, 59, 0.35);
 }
 
 .neon-form-grid {
@@ -778,10 +894,10 @@ a.neon-banner-button:visited,
 
 .neon-input {
   width: 100%;
-  min-height: 48px;
-  padding: 12px 0;
+  min-height: 46px;
+  padding: 10px 2px;
   border: 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
   outline: none;
   background: transparent;
   color: #f8fafc;
@@ -802,11 +918,30 @@ a.neon-banner-button:visited,
 }
 
 .neon-textarea {
-  margin-top: 10px;
+  width: 100%;
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  background: rgba(0, 0, 0, 0.3);
+  color: #f8fafc;
+  font: inherit;
+  font-size: 14px;
   resize: vertical;
+  min-height: 94px;
+  line-height: 1.6;
+  outline: none;
+  transition:
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
 
-/* Redesigned Submit Button */
+.neon-textarea:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 0 1px var(--neon-cyan);
+}
+
+/* Primary Submit Button: Solicitar cotización */
 .neon-submit,
 .neon-submit span {
   display: inline-flex;
@@ -815,10 +950,10 @@ a.neon-banner-button:visited,
   gap: 10px;
   width: 100%;
   min-height: 52px;
-  margin-top: 28px;
+  margin-top: 24px;
   border: 1px solid rgba(215, 254, 59, 0.45);
   border-radius: 12px;
-  background: linear-gradient(135deg, #e7fe5d 0%, #d7fe3b 50%, #b8e614 100%);
+  background: var(--neon-cyan);
   color: #070d02 !important;
   -webkit-text-fill-color: #070d02 !important;
   font-family: "Archivo", sans-serif;
@@ -827,17 +962,17 @@ a.neon-banner-button:visited,
   letter-spacing: 0.01em;
   cursor: pointer;
   box-shadow:
-    0 4px 22px rgba(215, 254, 59, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.45);
+    0 4px 22px rgba(215, 254, 59, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
     filter 180ms ease;
 }
 
-.neon-submit:hover,
-.neon-submit:hover span {
-  filter: brightness(1.08);
+.neon-submit:hover:not(:disabled),
+.neon-submit:hover:not(:disabled) span {
+  filter: brightness(1.06);
   box-shadow:
     0 8px 32px rgba(215, 254, 59, 0.42),
     inset 0 1px 0 rgba(255, 255, 255, 0.55);
@@ -855,17 +990,185 @@ a.neon-banner-button:visited,
     stroke 180ms ease;
 }
 
-.neon-submit:hover svg {
+.neon-submit:hover:not(:disabled) svg {
   color: #000000 !important;
   stroke: #000000 !important;
   transform: translate(2px, -2px);
 }
 
+/* Selector de canal de respuesta para la cotización */
+.neon-channel-selector {
+  margin: 20px 0 6px;
+}
+
+.neon-channel-options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.neon-channel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  color: #cbd5e1;
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.neon-channel-btn:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+}
+
+.neon-channel-btn.active {
+  border-color: var(--neon-cyan);
+  background: rgba(215, 254, 59, 0.14);
+  color: #ffffff;
+  font-weight: 700;
+  box-shadow: 0 0 14px rgba(215, 254, 59, 0.2);
+}
+
+.neon-channel-btn.active svg {
+  color: var(--neon-cyan);
+}
+
+/* Alerta de validación de campos obligatorios */
+.neon-validation-alert {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 10px 14px;
+  border: 1px solid rgba(239, 68, 68, 0.38);
+  border-radius: 10px;
+  background: rgba(239, 68, 68, 0.12);
+  color: #fca5a5;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+
+.neon-validation-alert svg {
+  flex-shrink: 0;
+  color: #ef4444;
+}
+
+/* Contacto directo sin formulario */
+.neon-direct-contact-wrapper {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+.neon-direct-link-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: auto;
+  min-height: unset;
+  background: transparent;
+  border: 1px solid rgba(215, 254, 59, 0.22);
+  border-radius: 9999px;
+  padding: 8px 18px;
+  color: #cbd5e1;
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.neon-direct-link-btn:hover {
+  color: #f8fafc;
+  background: rgba(215, 254, 59, 0.08);
+  border-color: rgba(215, 254, 59, 0.5);
+  box-shadow: 0 0 16px rgba(215, 254, 59, 0.15);
+}
+
+.neon-direct-link-btn svg {
+  color: var(--neon-cyan);
+  flex-shrink: 0;
+}
+
+.neon-direct-divider {
+  display: block;
+  margin-bottom: 12px;
+  color: #94a3b8;
+  font-size: 11.5px;
+  letter-spacing: 0.04em;
+}
+
+.neon-direct-whatsapp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  border: 1px solid rgba(37, 211, 102, 0.4);
+  border-radius: 12px;
+  background: rgba(37, 211, 102, 0.1);
+  color: #4ade80 !important;
+  font-family: "Archivo", sans-serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 180ms ease;
+}
+
+.neon-direct-whatsapp-btn:hover {
+  background: rgba(37, 211, 102, 0.2);
+  border-color: rgba(37, 211, 102, 0.65);
+  color: #86efac !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
+}
+
+.neon-direct-whatsapp-btn svg {
+  color: #4ade80 !important;
+  flex-shrink: 0;
+}
+
+/* Errores en inputs */
+.neon-input-error {
+  border-bottom-color: #ef4444 !important;
+  box-shadow: 0 1px 0 #ef4444 !important;
+}
+
+.neon-field-error-msg {
+  display: block;
+  font-size: 11px;
+  color: #f87171;
+  margin-top: 4px;
+}
+
 .neon-form-note {
   display: block;
-  margin-top: 14px;
+  margin-top: 12px;
   color: #94a3b8;
-  font-size: 11px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.neon-form-footer-note {
+  margin: 16px 0 0;
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.5;
   text-align: center;
 }
 
@@ -978,32 +1281,142 @@ a.neon-banner-button:visited,
   z-index: 10;
 }
 
-.neon-footer-inner {
+.neon-footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 48px;
+  padding-bottom: 30px;
+}
+
+.neon-footer-main {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  gap: 28px;
-  min-height: 80px;
+  gap: 32px;
 }
 
-.neon-footer .neon-brand {
+/* Rediseño del logo en el final de página: Texto más grande y al costado del isologo */
+.neon-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  transition: transform 200ms ease;
+}
+
+.neon-footer-brand:hover {
+  transform: translateY(-2px);
+}
+
+.neon-footer-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(215, 254, 59, 0.4);
+  background: radial-gradient(circle at center, #0f170b 0%, #050804 100%);
+  box-shadow:
+    0 0 24px rgba(215, 254, 59, 0.16),
+    inset 0 0 14px rgba(215, 254, 59, 0.08);
+  overflow: hidden;
+  position: relative;
+  transition: all 250ms ease;
+}
+
+.neon-footer-brand:hover .neon-footer-brand-mark {
+  border-color: rgba(215, 254, 59, 0.85);
+  box-shadow:
+    0 0 36px rgba(215, 254, 59, 0.45),
+    inset 0 0 20px rgba(215, 254, 59, 0.15);
+  transform: scale(1.03);
+}
+
+.neon-footer-brand-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  display: block;
+  transition: transform 250ms ease;
+}
+
+.neon-footer-brand:hover .neon-footer-brand-img {
+  transform: scale(1.06);
+}
+
+.neon-footer-brand-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
   min-width: 0;
 }
 
-.neon-footer .neon-brand-mark {
-  width: 48px;
-  height: 48px;
-  border-radius: 7px;
+.neon-footer-brand-title {
+  display: block;
+  color: #ffffff;
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  white-space: nowrap;
 }
 
-.neon-footer .neon-brand-name {
-  font-size: 17px;
+.neon-footer-brand-dot {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 16px rgba(215, 254, 59, 0.55);
 }
 
-.neon-footer .neon-brand-lockup small {
-  font-size: 11px;
-  color: var(--neon-muted);
+.neon-footer-brand-tagline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.neon-tagline-text {
+  color: #b7ff00;
+  font-family: "DM Mono", monospace;
+  font-size: clamp(8.5px, 1.1vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.neon-tagline-line {
+  height: 1.5px;
+  flex: 1;
+  min-width: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(215, 254, 59, 0.8), transparent);
+  box-shadow: 0 0 8px rgba(215, 254, 59, 0.4);
+}
+
+.neon-tagline-line:first-child {
+  background: linear-gradient(270deg, rgba(215, 254, 59, 0.8), transparent);
+}
+
+.neon-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.neon-footer-subcopy {
+  color: #475569;
+  font-size: 12px;
 }
 
 .neon-footer-links {
@@ -1228,6 +1641,15 @@ a.neon-banner-button:visited,
   .neon-form-grid {
     grid-template-columns: 1fr;
     gap: 0;
+  }
+
+  .neon-actions-dual {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .neon-contact-heading {
+    font-size: clamp(34px, 9vw, 44px);
   }
 
   .neon-footer-inner {
@@ -4761,4 +5183,14 @@ a.neon-whatsapp-hero-cta {
   .neon-landing video {
     max-width: 100%;
   }
+}
+
+/* Pie descriptivo de la vista previa de cada proyecto */
+.neon-project-showcase-caption {
+  margin: 0.85rem 1.35rem 0;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: rgba(226, 232, 240, 0.72);
+  border-left: 2px solid rgba(215, 254, 59, 0.55);
+  padding-left: 0.7rem;
 }

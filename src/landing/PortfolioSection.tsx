@@ -1,26 +1,7 @@
 import { useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAutoPlayOnVisible } from "./AnimatedLogo";
-import {
-  Calendar,
-  Smartphone,
-  Laptop,
-  CheckCircle2,
-  ArrowUpRight,
-  Sparkles,
-  MessageCircle,
-  Clock,
-  ShieldCheck,
-  X,
-  Activity,
-  HeartPulse,
-  UserCheck,
-  Building2,
-  Wrench,
-  Share2,
-  Zap,
-  PlusCircle,
-} from "lucide-react";
+import { CheckCircle2, ArrowUpRight, Sparkles, MessageCircle, X } from "lucide-react";
 import "./neon-landing.css";
 
 interface ProjectItem {
@@ -35,23 +16,14 @@ interface ProjectItem {
   metrics: { label: string; value: string }[];
   features: string[];
   whatsappMessage: string;
-  mockupType:
-    | "salud-medica"
-    | "web-app-dashboard"
-    | "web-corporativa"
-    | "servicios-oficios"
-    | "social-creatives";
   accentColor: string;
-  laptopView: {
-    title: string;
-    badge: string;
-    items: { label: string; val: string; status?: string; badgeColor?: string }[];
-    chartValue?: string;
-  };
-  mobileView: {
-    title: string;
-    action: string;
-    status: string;
+  showcase: {
+    kind: "video" | "image";
+    mp4?: string;
+    webm?: string;
+    poster?: string;
+    image?: string;
+    caption: string;
   };
 }
 
@@ -91,257 +63,126 @@ const portfolioProjects: ProjectItem[] = [
     ],
     whatsappMessage:
       "Hola Maxi de Impulsa Tu Negocio, vi el SaaS de Gestión para Electricistas (Instalaciones Eléctricas Pampa) con cálculos AEA, listados con IA y presupuestos PDF con logo propio, y quiero cotizar una Web App similar para mi rubro.",
-    mockupType: "web-app-dashboard",
     accentColor: "#38bdf8",
-    laptopView: {
-      title: "Instalaciones Eléctricas Pampa · v1.14.5",
-      badge: "Admin Propietario",
-      chartValue: "52 Clientes · 23 Presupuestos",
-      items: [
-        {
-          label: "Cálculos AEA Desde Cero",
-          val: "Normativa",
-          status: "Activo",
-          badgeColor: "#a855f7",
-        },
-        {
-          label: "Listado con IA (Pegar Notas)",
-          val: "Autocómputo",
-          status: "En vivo",
-          badgeColor: "#38bdf8",
-        },
-        {
-          label: "Presupuestos PDF con Logo",
-          val: "Personalizado",
-          status: "Listo",
-          badgeColor: "#4ade80",
-        },
-      ],
-    },
-    mobileView: {
-      title: "Instalaciones Pampa",
-      action: "Crear Presupuesto con Logo",
-      status: "Panel IA Activo",
+    showcase: {
+      kind: "video",
+      mp4: "/assets/electricista-saas-demo.mp4",
+      webm: "/assets/electricista-saas-demo.webm",
+      poster: "/assets/electricista-saas-poster.webp",
+      caption:
+        "Recorrido real del sistema de gestión para electricistas: cálculos AEA, listados de materiales con IA y presupuestos en PDF con logo propio.",
     },
   },
   {
-    id: "landing-salud-estetica",
-    category: "salud",
-    categoryLabel: "Salud, Estética & Profesionales",
-    badgeTag: "Landing Page Médica & Salud",
-    title: "Presencia digital para profesionales de la salud y estética.",
-    subtitle: "Convierte visitas y seguidores en pacientes con cita confirmada",
-    description:
-      "Diseño web estratégico para médicos, odontólogos, traumatólogos y centros de estética. Comunica tratamientos con claridad, genera máxima confianza desde el primer contacto y habilita agendamiento directo por WhatsApp.",
-    tags: ["Agenda Online", "Link en Bio Optimizado", "Testimonios Reales", "WhatsApp Directo"],
-    metrics: [
-      { label: "Cierre de turnos", value: "+75%" },
-      { label: "Consultas aclaradas", value: "80%" },
-    ],
-    features: [
-      "Presentación clara de especialidades, matrícula y trayectoria profesional",
-      "Botón destacado para agendar consultas por WhatsApp en un solo toque",
-      "Sección de testimonios reales y opiniones verificadas de pacientes",
-      "Optimización extrema para celulares: el 80% de los pacientes busca desde su móvil",
-    ],
-    whatsappMessage:
-      "Hola Impulsa Tu Negocio, vi el caso de Landing Médica/Salud y quiero consultar para mi consultorio.",
-    mockupType: "salud-medica",
-    accentColor: "#10b981",
-    laptopView: {
-      title: "Dr. Martín Herrera · Traumatología & Ortopedia",
-      badge: "CABA & Turnos Online",
-      chartValue: "★ 5.0 (140+ Pacientes)",
-      items: [
-        {
-          label: "Diagnóstico y Tratamientos",
-          val: "Personalizado",
-          status: "En consultorio",
-          badgeColor: "#10b981",
-        },
-        {
-          label: "Agendar Turno por WhatsApp",
-          val: "Horarios libres",
-          status: "Respuesta rápida",
-          badgeColor: "#d7fe3b",
-        },
-        {
-          label: "Convenios & Obras Sociales",
-          val: "Reintegros",
-          status: "Verificado",
-          badgeColor: "#38bdf8",
-        },
-      ],
-    },
-    mobileView: {
-      title: "Dr. Martín Herrera",
-      action: "Agendar Consulta por WhatsApp",
-      status: "Atención personalizada",
-    },
-  },
-  {
-    id: "web-corporativa-conecta",
+    id: "landing-inmobiliaria-propiedades",
     category: "corporativo",
-    categoryLabel: "Web Corporativa & Empresas",
-    badgeTag: "Sitio Web Corporativo",
-    title: "Web corporativa para marcas y empresas con visión.",
-    subtitle: "Estrategias digitales que conectan marcas con personas y transmiten solidez",
+    categoryLabel: "Inmobiliarias & Propiedades",
+    badgeTag: "Landing Inmobiliaria + CRM de Consultas",
+    title: "Landing inmobiliaria con catálogo de propiedades y reservas.",
+    subtitle: "Catálogo de propiedades, consultas centralizadas y reservas confirmadas online",
     description:
-      "Desarrollo web corporativo pensado para presentar tu propuesta de valor, equipo, casos de éxito y metodología. Diseñado para proyectar autoridad inmediata ante clientes corporativos y licitaciones.",
-    tags: ["Identidad Corporativa", "Diseño Responsive", "+120 Proyectos", "Google & SEO"],
+      "Sitio desarrollado para inmobiliarias y desarrollos de propiedades: catálogo con fotos en alta calidad, fichas de cada unidad, buscador por zona y precio, y un panel donde cada consulta queda registrada para su seguimiento hasta concretar la reserva.",
+    tags: [
+      "Catálogo de Propiedades",
+      "Buscador por Zona y Precio",
+      "Reserva Online",
+      "Panel de Consultas",
+      "WhatsApp Directo",
+    ],
     metrics: [
-      { label: "Satisfacción clientes", value: "98%" },
-      { label: "Velocidad de carga", value: "< 1.1s" },
+      { label: "Consultas mensuales", value: "+5.6k" },
+      { label: "Tasa de conversión", value: "4.53%" },
+      { label: "Reservas concretadas", value: "+22%" },
     ],
     features: [
-      "Estructura modular con pilares de Estrategia, Diseño UX/UI y Desarrollo",
-      "Diseño sobrio y de alto impacto adaptado a la identidad de tu empresa",
-      "Módulo de casos de éxito con métricas de impacto reales",
-      "Formulario de contacto corporativo y enlace directo a gerencia comercial",
+      "Catálogo de propiedades con galería, ficha técnica, ubicación y estado (disponible, reservada, vendida)",
+      "Buscador y filtros por zona, tipo de operación, ambientes y rango de precio",
+      "Formulario de reserva online con confirmación automática y aviso instantáneo al asesor",
+      "Panel de consultas tipo CRM con seguimiento de cada interesado y métricas de rendimiento",
+      "Botón de WhatsApp por propiedad con mensaje precargado del inmueble consultado",
+      "Diseño adaptado a celular y carga optimizada para recorrer decenas de fotos sin demoras",
     ],
     whatsappMessage:
-      "Hola Impulsa Tu Negocio, quiero cotizar un Sitio Web Corporativo para mi empresa.",
-    mockupType: "web-corporativa",
+      "Hola Maxi de Impulsa Tu Negocio, vi la web inmobiliaria con catálogo de propiedades, reservas online y panel de consultas, y quiero cotizar algo similar para mi inmobiliaria.",
     accentColor: "#38bdf8",
-    laptopView: {
-      title: "Conecta. · Estrategias Digitales para Marcas",
-      badge: "Web Oficial 2026",
-      chartValue: "+120 Proyectos Entregados",
-      items: [
-        {
-          label: "Estrategia Digital & Branding",
-          val: "Fase 01",
-          status: "Alineado",
-          badgeColor: "#38bdf8",
-        },
-        {
-          label: "Diseño UX/UI de Alta Conversión",
-          val: "Fase 02",
-          status: "Validado",
-          badgeColor: "#d7fe3b",
-        },
-        {
-          label: "Desarrollo Web & Escalabilidad",
-          val: "Fase 03",
-          status: "Producción",
-          badgeColor: "#22c55e",
-        },
-      ],
-    },
-    mobileView: {
-      title: "Soluciones Digitales",
-      action: "Ver Casos y Contactar",
-      status: "Disponible",
+    showcase: {
+      kind: "video",
+      mp4: "/assets/inmobiliaria-landing.mp4",
+      webm: "/assets/inmobiliaria-landing.webm",
+      poster: "/assets/inmobiliaria-landing-poster.webp",
+      caption:
+        "Web para inmobiliaria: catálogo de propiedades con fotos, buscador por zona y precio, reserva online confirmada y panel de consultas con métricas de ventas.",
     },
   },
   {
-    id: "web-oficios-tecnicos",
-    category: "servicios",
-    categoryLabel: "Servicios Profesionales & Técnicos",
-    badgeTag: "Sitio Completo de Servicios",
-    title: "Presencia online para servicios profesionales y oficios.",
-    subtitle: "Muestra tus trabajos realizados y permite cotizar en un clic por WhatsApp",
+    id: "kamil-ai-gestion-salon",
+    category: "salud",
+    categoryLabel: "Salud, Estética & Bienestar",
+    badgeTag: "Landing + App de Gestión con IA",
+    title: "Kamil.ai: gestión diaria con IA para salones y spas.",
+    subtitle: "Agenda, inventario, finanzas y marketing de un salón o spa, todo en un solo lugar",
     description:
-      "Creamos un espacio digital claro para servicios técnicos, instalaciones eléctricas, sanitarias o talleres, donde los clientes pueden consultar zonas de cobertura, ver la calidad de tus trabajos antes/después y solicitar presupuesto en el día.",
-    tags: ["Presupuesto en 1 Clic", "Galería de Trabajos", "Garantía Escrita", "WhatsApp Directo"],
+      "Presentación de producto y app de gestión para salones de belleza, spas y centros de estética. Automatiza la agenda de turnos, controla el stock de productos, ordena las finanzas del mes y sugiere acciones de marketing, con paneles claros tanto en celular como en computadora.",
+    tags: [
+      "Agenda Automática",
+      "Control de Stock",
+      "Finanzas del Negocio",
+      "Marketing con IA",
+      "App Móvil y Escritorio",
+    ],
     metrics: [
-      { label: "Cierre presupuestos", value: "+45%" },
-      { label: "Tiempo de respuesta", value: "< 3 min" },
+      { label: "Negocios usando el sistema", value: "+500" },
+      { label: "Facturación mensual gestionada", value: "$540k" },
+      { label: "Menos quiebres de stock", value: "-90%" },
     ],
     features: [
-      "Catálogo visual de trabajos anteriores con fotos de calidad y detalles de obra",
-      "Botón flotante a WhatsApp con mensaje automático predefinido según el servicio",
-      "Mapa de zonas de cobertura, formas de pago aceptadas y certificados",
-      "Carga ultrarrápida incluso en conexiones móviles 3G/4G",
+      "Agenda inteligente de turnos con recordatorios automáticos y menos ausencias",
+      "Control de inventario con alertas de productos por agotarse antes de que falten",
+      "Panel financiero con ingresos, gastos y ticket promedio actualizado al día",
+      "Sugerencias de marketing y campañas generadas con Inteligencia Artificial",
+      "Versión móvil y de escritorio con la misma información sincronizada en vivo",
+      "Landing de presentación con prueba gratuita y contacto directo por WhatsApp",
     ],
     whatsappMessage:
-      "Hola Impulsa Tu Negocio, quiero un sitio web para mi negocio de servicios profesionales.",
-    mockupType: "servicios-oficios",
-    accentColor: "#d7fe3b",
-    laptopView: {
-      title: "Servicios Técnicos & Mantenimiento · Web Oficial",
-      badge: "Presupuestos en el día",
-      chartValue: "+60 Consultas / mes",
-      items: [
-        {
-          label: "Instalaciones Certificadas",
-          val: "Garantía 1 año",
-          status: "Verificado",
-          badgeColor: "#22c55e",
-        },
-        {
-          label: "Solicitar Presupuesto Online",
-          val: "WhatsApp Directo",
-          status: "En línea",
-          badgeColor: "#d7fe3b",
-        },
-        {
-          label: "Obras y Trabajos Realizados",
-          val: "24 Casos",
-          status: "Fotos HD",
-          badgeColor: "#38bdf8",
-        },
-      ],
-    },
-    mobileView: {
-      title: "Pedir Presupuesto",
-      action: "Cotizar por WhatsApp",
-      status: "Respuesta inmediata",
-    },
-  },
-  {
-    id: "diseno-digital-graficas-redes",
-    category: "graficas",
-    categoryLabel: "Diseño Digital & Redes",
-    badgeTag: "Diseño Digital & Flyers",
-    title: "Gráficas de alto impacto que captan clientes en 5 segundos.",
-    subtitle: "Piezas para Instagram, flyers promocionales y menús digitales interactivos",
-    description:
-      "El 90% de la decisión visual ocurre en los primeros segundos. Diseñamos piezas para historias, carruseles educativos y cartas digitales con QR pensadas para captar miradas, generar interacción y vender.",
-    tags: ["Carruseles de Instagram", "Flyers Promocionales", "Menús QR", "Identidad Visual"],
-    metrics: [
-      { label: "Atención visual", value: "< 3 seg" },
-      { label: "Interacción en feed", value: "+65%" },
-    ],
-    features: [
-      "Diseño de carruseles de Instagram con ganchos visuales que detienen el scroll",
-      "Flyers de promociones y lanzamientos para historias, estados y anuncios",
-      "Menús digitales y cartas interactivas con QR para locales comerciales",
-      "Entrega en alta resolución listos para publicar en redes y pauta publicitaria",
-    ],
-    whatsappMessage:
-      "Hola Impulsa Tu Negocio, quiero packs de diseño gráfico y piezas para redes sociales.",
-    mockupType: "social-creatives",
+      "Hola Maxi de Impulsa Tu Negocio, vi el sistema Kamil.ai de gestión con IA para salones y spas (agenda, stock, finanzas y marketing) y quiero cotizar algo similar para mi negocio.",
     accentColor: "#a855f7",
-    laptopView: {
-      title: "Pack de Contenido Visual & Redes · Impulsa",
-      badge: "Feed & Stories HD",
-      chartValue: "+3.500 Alcance orgánico",
-      items: [
-        {
-          label: 'Carrusel: "Tu web puede ser linda..."',
-          val: "1080x1350",
-          status: "Viral",
-          badgeColor: "#a855f7",
-        },
-        {
-          label: "Flyer: Hero Section de Alta Conversión",
-          val: "1080x1920",
-          status: "Listo",
-          badgeColor: "#22c55e",
-        },
-        {
-          label: "Story: Automatización de WhatsApp",
-          val: "Interactivo",
-          status: "Publicado",
-          badgeColor: "#d7fe3b",
-        },
-      ],
+    showcase: {
+      kind: "video",
+      mp4: "/assets/video-ia-portfolio.mp4",
+      webm: "/assets/video-ia-portfolio.webm",
+      poster: "/assets/video-ia-portfolio-poster.webp",
+      caption:
+        "Kamil.ai: landing y app de gestión con IA para salones y spas, con agenda de turnos, inventario, finanzas y marketing en celular y computadora.",
     },
-    mobileView: {
-      title: "Promo Semanal",
-      action: "Ver Carrusel Completo",
-      status: "Diseño HD",
+  },
+  {
+    id: "landing-gastronomia-reservas",
+    category: "servicios",
+    categoryLabel: "Gastronomía & Locales",
+    badgeTag: "Landing Gastronómica con Reservas",
+    title: "Landing gastronómica con carta digital y reservas por WhatsApp.",
+    subtitle: "Carta digital, fotos que abren el apetito y reservas en un solo toque",
+    description:
+      "Sitio de una página para restaurantes, bares y cafeterías: presentación de la propuesta gastronómica, carta digital con precios siempre actualizados, galería de platos y reserva directa por WhatsApp sin intermediarios ni comisiones.",
+    tags: ["Carta Digital", "Reservas por WhatsApp", "Galería de Platos", "Código QR en Mesa"],
+    metrics: [
+      { label: "Más reservas directas", value: "+38%" },
+      { label: "Carga de la página", value: "< 1.2s" },
+    ],
+    features: [
+      "Carta digital con precios editables al instante, sin reimprimir menús",
+      "Reserva de mesa por WhatsApp con mensaje precargado de día, horario y cantidad de personas",
+      "Galería de platos en alta calidad optimizada para celulares",
+      "Código QR para las mesas que lleva directo a la carta online",
+    ],
+    whatsappMessage:
+      "Hola Maxi de Impulsa Tu Negocio, quiero una landing gastronómica con carta digital y reservas por WhatsApp para mi local.",
+    accentColor: "#d7fe3b",
+    showcase: {
+      kind: "image",
+      image: "/assets/landing-gastronomia.jpg",
+      caption:
+        "Landing de restaurante: portada con el plato estrella, botón de reserva por WhatsApp y carta digital con precios actualizados.",
     },
   },
 ];
@@ -350,86 +191,24 @@ const categories = [
   { id: "todos", label: "Todos los casos" },
   { id: "apps", label: "SaaS & Web Apps" },
   { id: "salud", label: "Salud & Estética" },
-  { id: "corporativo", label: "Web Corporativa" },
-  { id: "servicios", label: "Servicios & Oficios" },
-  { id: "graficas", label: "Diseño & Redes" },
+  { id: "corporativo", label: "Inmobiliaria & Empresas" },
+  { id: "servicios", label: "Gastronomía & Servicios" },
 ];
 
 /* -------------------------------------------------------------------------- */
-/* Visual Mockup Device Renderers (Fidelity based on Real SaaS & References)  */
+/* Visores de proyecto: video en bucle (pausa y silencio fuera de pantalla)    */
+/* e imagen de vista previa                                                    */
 /* -------------------------------------------------------------------------- */
 
-function MockupSaludView() {
-  return (
-    <div className="neon-mockup-inner neon-mockup-salud">
-      {/* Clinic Header Bar */}
-      <div className="neon-mockup-clinic-header">
-        <div className="neon-mockup-clinic-brand">
-          <div className="neon-clinic-avatar">
-            <HeartPulse size={11} />
-          </div>
-          <div>
-            <strong>Dr. Martín Herrera</strong>
-            <small>Traumatología & Ortopedia</small>
-          </div>
-        </div>
-        <div className="neon-mockup-clinic-badge">
-          <span className="neon-live-green-dot" /> Agenda Abierta
-        </div>
-      </div>
-
-      {/* Hero Body */}
-      <div className="neon-mockup-clinic-hero">
-        <div className="neon-mockup-clinic-headline">
-          <span className="neon-mockup-mini-tag">Salud & Bienestar</span>
-          <h4>Cuidar tu movimiento, es cuidar tu calidad de vida.</h4>
-          <p>Diagnóstico y tratamiento personalizado para volver a tu rutina sin dolor.</p>
-        </div>
-
-        {/* CTA Button */}
-        <div className="neon-mockup-clinic-cta-row">
-          <div className="neon-mockup-clinic-btn">
-            <Calendar size={9} /> Agendar consulta
-          </div>
-          <div className="neon-mockup-clinic-stars">
-            <span>★★★★★</span> <b>5.0</b> (140+ opiniones)
-          </div>
-        </div>
-
-        {/* 4 Feature Chips */}
-        <div className="neon-mockup-clinic-chips">
-          <div className="neon-mockup-clinic-chip">
-            <CheckCircle2 size={8} /> Tratamientos personalizados
-          </div>
-          <div className="neon-mockup-clinic-chip">
-            <ShieldCheck size={8} /> Tecnología de vanguardia
-          </div>
-          <div className="neon-mockup-clinic-chip">
-            <UserCheck size={8} /> Atención cálida y humana
-          </div>
-          <div className="neon-mockup-clinic-chip">
-            <Activity size={8} /> Resultados verificados
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-/* -------------------------------------------------------------------------- */
-/* VIDEO SHOWCASE VIEWER: Video Continuo Infinito Software Electricista       */
-/* -------------------------------------------------------------------------- */
-
-function MockupElectricistaVideoViewer() {
+function ProjectShowcase({ project }: { project: ProjectItem }) {
   const videoRef = useRef<HTMLVideoElement>(null);
-  useAutoPlayOnVisible(videoRef);
+  useAutoPlayOnVisible(videoRef, project.showcase.kind !== "video");
 
   return (
     <div
-      className="neon-mockup-inner neon-mockup-webapp"
+      className="neon-showcase-inner"
       style={{ padding: "0", overflow: "hidden", background: "#020617", display: "block" }}
     >
-      {/* Video Canvas Container (Infinite Continuous Loop) */}
       <div
         style={{
           position: "relative",
@@ -440,181 +219,47 @@ function MockupElectricistaVideoViewer() {
           overflow: "hidden",
         }}
       >
-        <video
-          ref={videoRef}
-          poster="/assets/electricista-saas-poster.webp"
-          muted
-          autoPlay
-          loop
-          playsInline
-          controls={false}
-          preload="auto"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            display: "block",
-          }}
-        >
-          <source src="/assets/electricista-saas-demo.mp4" type="video/mp4" />
-          <source src="/assets/electricista-saas-demo.webm" type="video/webm" />
-        </video>
-      </div>
-    </div>
-  );
-}
-
-function MockupCorporateView() {
-  return (
-    <div className="neon-mockup-inner neon-mockup-corporate">
-      {/* Corporate Nav */}
-      <div className="neon-mockup-corp-nav">
-        <div className="neon-mockup-corp-logo">
-          <Building2 size={12} color="#38bdf8" />
-          <span>Conecta.</span>
-        </div>
-        <div className="neon-mockup-corp-links">
-          <span>Nosotros</span>
-          <span>Servicios</span>
-          <span>Casos</span>
-          <span className="highlight">Contacto</span>
-        </div>
-      </div>
-
-      {/* Corporate Hero */}
-      <div className="neon-mockup-corp-hero">
-        <span className="neon-mockup-mini-tag sky">Presencia Corporativa 2026</span>
-        <h4>Estrategias digitales que conectan marcas con personas.</h4>
-        <p>
-          Impulsamos a empresas con presencia sólida, diseño UX/UI de vanguardia y tecnología
-          escalable.
-        </p>
-
-        {/* 2 Big stats */}
-        <div className="neon-mockup-corp-stats-row">
-          <div className="neon-mockup-corp-stat">
-            <strong>+120</strong>
-            <small>Proyectos entregados</small>
-          </div>
-          <div className="neon-mockup-corp-stat">
-            <strong>98%</strong>
-            <small>Satisfacción de clientes</small>
-          </div>
-          <div className="neon-mockup-corp-btn">
-            <span>Conocé más</span>
-            <ArrowUpRight size={10} />
-          </div>
-        </div>
-
-        {/* 3 Pillars */}
-        <div className="neon-mockup-corp-pillars">
-          <div className="corp-pillar">
-            <b>01 Estrategia</b>
-            <span>Análisis de mercado</span>
-          </div>
-          <div className="corp-pillar">
-            <b>02 Diseño</b>
-            <span>Identidad & UX/UI</span>
-          </div>
-          <div className="corp-pillar">
-            <b>03 Desarrollo</b>
-            <span>Código rápido & SEO</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MockupServicesTradesView() {
-  return (
-    <div className="neon-mockup-inner neon-mockup-trades">
-      {/* Trade Header */}
-      <div className="neon-mockup-trades-header">
-        <div className="neon-mockup-trades-brand">
-          <Wrench size={12} color="#d7fe3b" />
-          <div>
-            <strong>Servicios Técnicos & Obras</strong>
-            <small>Presupuestos en el día por WhatsApp</small>
-          </div>
-        </div>
-        <span className="neon-mockup-badge-yellow">Técnicos Certificados</span>
-      </div>
-
-      {/* Trade Hero */}
-      <div className="neon-mockup-trades-hero">
-        <span className="neon-mockup-mini-tag yellow">Atención en toda la zona</span>
-        <h4>Instalaciones profesionales y mantenimiento con garantía escrita.</h4>
-        <p>Mirá nuestros trabajos antes/después y cotizá en un solo clic.</p>
-
-        {/* Action button */}
-        <div className="neon-mockup-trades-cta-bar">
-          <div className="neon-mockup-trades-wa-btn">
-            <MessageCircle size={10} /> Cotizar por WhatsApp
-          </div>
-          <span className="neon-mockup-trades-time">
-            <Clock size={9} /> Respuesta en &lt; 3 min
-          </span>
-        </div>
-
-        {/* Job previews */}
-        <div className="neon-mockup-trades-cases">
-          <div className="trade-case-card">
-            <span className="case-title">Instalación Eléctrica Trifásica</span>
-            <span className="case-badge">Garantía 1 Año</span>
-          </div>
-          <div className="trade-case-card">
-            <span className="case-title">Mantenimiento Preventivo Edilicio</span>
-            <span className="case-badge">Finalizado</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function MockupSocialCreativesView() {
-  return (
-    <div className="neon-mockup-inner neon-mockup-social">
-      {/* Social header */}
-      <div className="neon-mockup-social-header">
-        <div className="neon-mockup-social-brand">
-          <Share2 size={11} color="#a855f7" />
-          <span>Contenido & Redes de Alto Impacto</span>
-        </div>
-        <span className="neon-mockup-badge-purple">Formato 1080x1350</span>
-      </div>
-
-      {/* Instagram carousel style cards */}
-      <div className="neon-mockup-social-carousel">
-        <div className="neon-mockup-social-card slide-1">
-          <div className="social-card-tag">⚠️ ESTRATEGIA WEB</div>
-          <h4>Tu web puede ser linda... y no vender nada.</h4>
-          <p>
-            Descubrí cómo estructurar una landing page que convierta visitas en clientes reales.
-          </p>
-          <div className="social-card-footer">
-            <span>Deslizá para ver el método ➜</span>
-          </div>
-        </div>
-
-        <div className="neon-mockup-social-card slide-2">
-          <div className="social-card-tag">⏱️ 5 SEGUNDOS CLAVE</div>
-          <h4>Hero Section: El 90% de la decisión pasa ahí.</h4>
-          <p>La primera impresión ya no es cara a cara. Es digital.</p>
-          <div className="social-card-footer">
-            <span>bex / Impulsa Tu Negocio</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Metric badge */}
-      <div className="neon-mockup-social-stat">
-        <Sparkles size={10} color="#d7fe3b" />
-        <span>+65% Interacción orgánica y mensajes directos</span>
+        {project.showcase.kind === "video" ? (
+          <video
+            ref={videoRef}
+            poster={project.showcase.poster}
+            muted
+            autoPlay
+            loop
+            playsInline
+            controls={false}
+            preload="metadata"
+            aria-label={project.title}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          >
+            <source src={project.showcase.mp4} type="video/mp4" />
+            <source src={project.showcase.webm} type="video/webm" />
+          </video>
+        ) : (
+          <img
+            src={project.showcase.image}
+            alt={project.title}
+            loading="lazy"
+            decoding="async"
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              display: "block",
+            }}
+          />
+        )}
       </div>
     </div>
   );
@@ -629,22 +274,6 @@ export function PortfolioSection() {
       ? portfolioProjects
       : portfolioProjects.filter((project) => project.category === activeCategory);
 
-  const renderMockupContent = (mockupType: ProjectItem["mockupType"]) => {
-    switch (mockupType) {
-      case "web-app-dashboard":
-        return <MockupElectricistaVideoViewer />;
-      case "salud-medica":
-        return <MockupSaludView />;
-      case "web-corporativa":
-        return <MockupCorporateView />;
-      case "servicios-oficios":
-        return <MockupServicesTradesView />;
-      case "social-creatives":
-        return <MockupSocialCreativesView />;
-      default:
-        return <MockupElectricistaVideoViewer />;
-    }
-  };
 
   return (
     <section className="neon-portfolio-section">
@@ -699,55 +328,19 @@ export function PortfolioSection() {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.35, delay: idx * 0.05 }}
                 >
-                  {/* Visual Mockup Showcase Header (Laptop + Companion Smartphone) */}
+                  {/* Vista previa del proyecto (pantalla de notebook) */}
                   <div className="neon-mockup-wrapper">
-                    {/* Laptop Mockup Frame */}
                     <div className="neon-laptop-frame">
                       <div className="neon-laptop-camera" />
                       <div className="neon-laptop-screen">
-                        {/* Browser Top bar (hidden on the video showcase card) */}
-                        {project.mockupType !== "web-app-dashboard" && (
-                          <div className="neon-mockup-bar">
-                            <div className="neon-mockup-dots">
-                              <span />
-                              <span />
-                              <span />
-                            </div>
-                            <span className="neon-mockup-url">{project.laptopView.title}</span>
-                            <span className="neon-mockup-badge">{project.laptopView.badge}</span>
-                          </div>
-                        )}
-
-                        {/* Render customized mockup body */}
-                        {renderMockupContent(project.mockupType)}
+                        <ProjectShowcase project={project} />
                       </div>
                       <div className="neon-laptop-base" />
                     </div>
-
-                    {/* Companion Smartphone Mockup Frame (hidden on the video showcase card) */}
-                    {project.mockupType !== "web-app-dashboard" && (
-                      <div className="neon-phone-frame">
-                        <div className="neon-phone-notch" />
-                        <div className="neon-phone-screen">
-                          <div className="neon-phone-header" aria-hidden="true">
-                            <span className="neon-phone-time">11:29</span>
-                            <span className="neon-phone-battery">89%</span>
-                          </div>
-                          <div className="neon-phone-app-content">
-                            <span className="neon-phone-app-title">{project.mobileView.title}</span>
-                            <div className="neon-phone-card-preview">
-                              <div className="neon-phone-status-pill">
-                                <Zap size={10} color="#facc15" /> {project.mobileView.status}
-                              </div>
-                              <div className="neon-phone-btn-action">
-                                <PlusCircle size={10} /> {project.mobileView.action}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    )}
                   </div>
+
+                  {/* Pie descriptivo del proyecto */}
+                  <p className="neon-project-showcase-caption">{project.showcase.caption}</p>
 
                   {/* Project Info Body */}
                   <div className="neon-project-content">
@@ -816,31 +409,6 @@ export function PortfolioSection() {
             })}
           </AnimatePresence>
         </motion.div>
-
-        {/* Bottom Banner inside Portfolio */}
-        <div className="neon-portfolio-cta-box">
-          <div className="neon-portfolio-cta-content">
-            <span className="neon-mono-label neon-accent-label">EL PRÓXIMO PASO</span>
-            <h3 className="neon-portfolio-cta-title">
-              ¿Querés una Web App o Sistema de Gestión a medida de tu negocio?
-            </h3>
-            <p>
-              Diseñamos soluciones potentes que integran cálculo de costos, Inteligencia Artificial,
-              presupuestos en vivo y conexión con WhatsApp para instaladores, técnicos, empresas y
-              profesionales.
-            </p>
-          </div>
-          <a
-            id="portfolio-whatsapp-cta-direct"
-            href="https://wa.me/5492664484918?text=Hola%20Maxi%2C%20vi%20el%20SaaS%20de%20gesti%C3%B3n%20para%20electricistas%20y%20quiero%20cotizar%20un%20sistema%20para%20mi%20negocio"
-            target="_blank"
-            rel="noreferrer"
-            className="neon-portfolio-yellow-button"
-          >
-            <span>Hablemos por WhatsApp</span>
-            <ArrowUpRight size={19} />
-          </a>
-        </div>
       </div>
 
       {/* Project Detail Modal */}

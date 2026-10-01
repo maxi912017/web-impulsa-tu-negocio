@@ -6,6 +6,7 @@ const payloadSchema = z.object({
   email: z.string().trim().email().max(160),
   whatsapp: z.string().trim().min(1).max(40),
   message: z.string().trim().min(1).max(4000),
+  projectType: z.string().trim().max(100).optional(),
 });
 
 const escapeHtml = (value: string) =>
@@ -37,7 +38,7 @@ export const Route = createFileRoute("/api/send-email")({
             { status: 400 },
           );
         }
-        const { name, email, whatsapp, message } = parsed.data;
+        const { name, email, whatsapp, message, projectType } = parsed.data;
 
         const gmailUser = process.env["GMAIL_USER"];
         const gmailAppPassword = process.env["GMAIL_APP_PASSWORD"];
@@ -59,6 +60,10 @@ export const Route = createFileRoute("/api/send-email")({
             </div>
             <div style="padding: 24px 28px;">
               <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+                <tr>
+                  <td style="padding: 8px 0; color: #9fb49a; width: 130px; vertical-align: top;">Qué busca</td>
+                  <td style="padding: 8px 0; font-weight: bold; color: #d7fe3b;">${escapeHtml(projectType || "No especificado")}</td>
+                </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #9fb49a; width: 130px; vertical-align: top;">Nombre</td>
                   <td style="padding: 8px 0; font-weight: bold;">${escapeHtml(name)}</td>
@@ -96,7 +101,7 @@ export const Route = createFileRoute("/api/send-email")({
             from: `"Web Impulsa Tu Negocio" <${gmailUser}>`,
             to: gmailUser,
             replyTo: email,
-            subject: `Nueva cotización: ${name}`,
+            subject: `Nueva cotización [${projectType || "Web"}]: ${name}`,
             html,
           });
 

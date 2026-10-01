@@ -121,19 +121,22 @@
   box-shadow: 0 0 26px rgba(183, 255, 0, 0.45);
 }
 
-.neon-brand-mark img {
+.neon-brand-mark img,
+.neon-brand-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 4px;
   display: block;
   transition:
     filter 200ms ease,
     transform 200ms ease;
 }
 
-.neon-brand:hover .neon-brand-mark img {
-  filter: brightness(1.1) contrast(1.1);
-  transform: scale(1.04);
+.neon-brand:hover .neon-brand-mark img,
+.neon-brand:hover .neon-brand-img {
+  filter: brightness(1.15) contrast(1.05);
+  transform: scale(1.08);
 }
 
 /* Isologo animado (video) del encabezado y el pie */
@@ -537,6 +540,43 @@ a.neon-primary-button:hover svg {
   letter-spacing: 0.08em;
 }
 
+.neon-contact-unified {
+  padding-top: clamp(60px, 8vw, 100px);
+  padding-bottom: clamp(60px, 8vw, 110px);
+}
+
+.neon-contact-unified-header {
+  max-width: 860px;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.neon-contact-unified-title {
+  margin: 14px 0 0;
+  color: #f8fafc;
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(32px, 4.4vw, 56px);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.neon-contact-unified-title span {
+  color: var(--neon-cyan);
+}
+
+.neon-contact-unified-desc {
+  max-width: 740px;
+  margin: 16px 0 0;
+  color: #cbd5e1;
+  font-size: clamp(14.5px, 1.1vw, 16px);
+  line-height: 1.65;
+}
+
+.neon-contact-unified .neon-contact-grid {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
 .neon-contact-grid {
   display: grid;
   grid-template-columns: minmax(0, 0.86fr) minmax(0, 1.14fr);
@@ -735,23 +775,142 @@ a.neon-primary-button:hover svg {
   min-height: 80px;
 }
 
-.neon-footer .neon-brand {
+.neon-footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-top: 48px;
+  padding-bottom: 30px;
+}
+
+.neon-footer-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 32px;
+}
+
+/* Rediseño del logo en el final de página: Texto más grande y al costado del isologo */
+.neon-footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 20px;
+  text-decoration: none;
+  transition: transform 200ms ease;
+}
+
+.neon-footer-brand:hover {
+  transform: translateY(-2px);
+}
+
+.neon-footer-brand-mark {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  flex: 0 0 76px;
+  border-radius: 14px;
+  border: 1.5px solid rgba(215, 254, 59, 0.4);
+  background: radial-gradient(circle at center, #0f170b 0%, #050804 100%);
+  box-shadow:
+    0 0 24px rgba(215, 254, 59, 0.16),
+    inset 0 0 14px rgba(215, 254, 59, 0.08);
+  overflow: hidden;
+  position: relative;
+  transition: all 250ms ease;
+}
+
+.neon-footer-brand:hover .neon-footer-brand-mark {
+  border-color: rgba(215, 254, 59, 0.85);
+  box-shadow:
+    0 0 36px rgba(215, 254, 59, 0.45),
+    inset 0 0 20px rgba(215, 254, 59, 0.15);
+  transform: scale(1.03);
+}
+
+.neon-footer-brand-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 6px;
+  display: block;
+  transition: transform 250ms ease;
+}
+
+.neon-footer-brand:hover .neon-footer-brand-img {
+  transform: scale(1.06);
+}
+
+.neon-footer-brand-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
   min-width: 0;
 }
 
-.neon-footer .neon-brand-mark {
-  width: 48px;
-  height: 48px;
-  border-radius: 7px;
+.neon-footer-brand-title {
+  display: block;
+  color: #ffffff;
+  font-family: "Archivo", sans-serif;
+  font-size: clamp(24px, 3.2vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  white-space: nowrap;
 }
 
-.neon-footer .neon-brand-name {
-  font-size: 17px;
+.neon-footer-brand-dot {
+  color: var(--neon-cyan);
+  text-shadow: 0 0 16px rgba(215, 254, 59, 0.55);
 }
 
-.neon-footer .neon-brand-lockup small {
-  font-size: 11px;
-  color: var(--neon-muted);
+.neon-footer-brand-tagline {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 2px;
+}
+
+.neon-tagline-text {
+  color: #b7ff00;
+  font-family: "DM Mono", monospace;
+  font-size: clamp(8.5px, 1.1vw, 11px);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.neon-tagline-line {
+  height: 1.5px;
+  flex: 1;
+  min-width: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(215, 254, 59, 0.8), transparent);
+  box-shadow: 0 0 8px rgba(215, 254, 59, 0.4);
+}
+
+.neon-tagline-line:first-child {
+  background: linear-gradient(270deg, rgba(215, 254, 59, 0.8), transparent);
+}
+
+.neon-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 12.5px;
+  color: #64748b;
+}
+
+.neon-footer-subcopy {
+  color: #475569;
+  font-size: 12px;
 }
 
 .neon-footer-links {
