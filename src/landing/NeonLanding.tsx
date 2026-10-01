@@ -1,7 +1,7 @@
 import { lazy, Suspense, useState } from "react";
-import { ArrowUpRight, MessageCircle, X, Zap } from "lucide-react";
+import { ArrowUpRight, Check, Code2, LayoutTemplate, MessageCircle, Palette, Rocket, X, Zap } from "lucide-react";
 import { WhatsAppFloatingButton } from "./WhatsAppFloatingButton";
-import { AnimatedLogoMark, HeroLogoGlow } from "./AnimatedLogo";
+import { AnimatedLogoMark } from "./AnimatedLogo";
 import { DeferredSection } from "./DeferredSection";
 import { Button } from "@/components/ui/button";
 import "./neon-critical.css";
@@ -50,6 +50,7 @@ function Header() {
       <div className="neon-container neon-header-inner">
         <Brand idPrefix="header" />
         <nav id="site-nav" className="neon-nav" aria-label="Navegación principal">
+          <a href="#servicios">Servicios</a>
           <a id="nav-item-portafolio" href="#portafolio" className="neon-nav-highlight">
             <span>Portfolio</span>
             <span className="neon-nav-badge">Casos</span>
@@ -84,6 +85,7 @@ function Header() {
       </div>
       {open && (
         <nav id="site-mobile-nav" className="neon-mobile-nav" aria-label="Navegación móvil">
+            <a href="#servicios" onClick={close}>Servicios</a>
           <a href="#portafolio" onClick={close} className="neon-mobile-highlight">
             Portfolio <span className="neon-nav-badge">Casos</span>
           </a>
@@ -105,17 +107,12 @@ function Landing() {
       <Header />
       <main>
         <section className="neon-hero neon-container" id="inicio">
-          <HeroLogoGlow />
           <div className="neon-hero-copy">
-            <span className="neon-mono-label neon-accent-label">
+            <span className="neon-mono-label neon-hero-eyebrow">
               DISEÑO WEB · DESARROLLO · VISIBILIDAD
             </span>
             <h1 className="neon-display">
-              Tu negocio
-              <br />
-              merece una
-              <br />
-              <span>web que trabaje.</span>
+              Tu negocio merece<br className="neon-hero-break" /> una <span>web que trabaje.</span>
             </h1>
             <p className="neon-hero-intro">
               Una presencia digital profesional para que te entiendan rápido, confíen en vos y te
@@ -137,9 +134,65 @@ function Landing() {
                 <span>más confianza</span>
               </div>
               <div>
-                <strong>∞</strong>
-                <span>posibilidades</span>
+                <strong>03</strong>
+                <span>más consultas</span>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="servicios" className="neon-services">
+          <div className="neon-container">
+            <div className="neon-services-heading">
+              <span className="neon-mono-label neon-accent-label">QUÉ HACEMOS</span>
+              <h2>Elegí cómo querés que tu negocio <span>se vea online.</span></h2>
+              <p>Diseñamos y desarrollamos soluciones digitales según lo que necesitás hoy, preparadas para crecer mañana.</p>
+            </div>
+            <div className="neon-services-grid">
+              <article className="neon-service">
+                <span className="neon-service-icon" aria-hidden="true"><LayoutTemplate size={23} /></span>
+                <h3>Landing pages</h3>
+                <strong>Una página, una sola acción: que te escriban.</strong>
+                <p>Ideal para una campaña, un servicio puntual o un lanzamiento. Todo apunta a que la persona consulte por WhatsApp o deje sus datos.</p>
+                <ul>
+                  <li><Check size={17} />Mensaje claro desde el primer vistazo</li>
+                  <li><Check size={17} />Acceso directo a WhatsApp</li>
+                  <li><Check size={17} />Pensada para anuncios y redes</li>
+                </ul>
+              </article>
+              <article className="neon-service neon-service-featured">
+                <span className="neon-service-icon" aria-hidden="true"><Rocket size={23} /></span>
+                <h3>Sitios web completos</h3>
+                <strong>La casa digital de tu negocio.</strong>
+                <p>Varias secciones para contar quién sos, qué hacés y por qué elegirte. Una base para aparecer en Google y crecer con el tiempo.</p>
+                <ul>
+                  <li><Check size={17} />Estructura pensada para buscadores</li>
+                  <li><Check size={17} />Servicios, trabajos y contacto</li>
+                  <li><Check size={17} />Se amplía a medida que crecés</li>
+                </ul>
+              </article>
+              <article className="neon-service">
+                <span className="neon-service-icon" aria-hidden="true"><Code2 size={23} /></span>
+                <h3>Web apps a medida</h3>
+                <strong>Automatizá lo que hoy te roba horas.</strong>
+                <p>Sistemas hechos para tu forma de trabajar: turnos, presupuestos, gestión de clientes o catálogos autogestionables.</p>
+                <ul>
+                  <li><Check size={17} />Herramientas hechas para tu negocio</li>
+                  <li><Check size={17} />Menos tareas repetitivas</li>
+                  <li><Check size={17} />Experiencias fáciles de usar</li>
+                </ul>
+              </article>
+              <article className="neon-service">
+                <span className="neon-service-icon" aria-hidden="true"><Palette size={23} /></span>
+                <h3>Identidad &amp; redes</h3>
+                <strong>Que tu marca se vea como tu trabajo.</strong>
+                <p>Diseño gráfico, piezas para redes y una presencia visual coherente para que te reconozcan y recuerden.</p>
+                <ul>
+                  <li><Check size={17} />Identidad visual consistente</li>
+                  <li><Check size={17} />Contenido para redes</li>
+                  <li><Check size={17} />Diseño enfocado en tu público</li>
+                </ul>
+              </article>
             </div>
           </div>
         </section>
@@ -227,6 +280,7 @@ function Landing() {
           <Brand idPrefix="footer" />
           <div className="neon-footer-links">
             <a href="#inicio">Inicio</a>
+            <a href="#servicios">Servicios</a>
             <a href="#portafolio">Portfolio</a>
             <a href="#testimonios">Reseñas</a>
             <a href="#preguntas">Preguntas</a>

@@ -319,48 +319,6 @@
   padding: 94px 0 94px;
 }
 
-.neon-hero-glow {
-  position: absolute;
-  top: 50%;
-  right: 0%;
-  width: clamp(320px, 36vw, 540px);
-  aspect-ratio: 1;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 1;
-  /* Resplandor radial suave detrás de la flecha verde sin bordes rectangulares */
-  background: radial-gradient(
-    circle at 50% 50%,
-    rgba(215, 254, 59, 0.14) 0%,
-    rgba(215, 254, 59, 0.04) 45%,
-    transparent 70%
-  );
-  /* Máscara radial de desvanecimiento suave para que las esquinas y límites del video se disuelvan 100% en el fondo */
-  mask-image: radial-gradient(
-    circle at 50% 50%,
-    black 44%,
-    rgba(0, 0, 0, 0.8) 58%,
-    transparent 74%
-  );
-  -webkit-mask-image: radial-gradient(
-    circle at 50% 50%,
-    black 44%,
-    rgba(0, 0, 0, 0.8) 58%,
-    transparent 74%
-  );
-}
-
-.neon-hero-glow video,
-.neon-hero-glow img,
-.neon-hero-glow-media {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  mix-blend-mode: screen;
-  filter: brightness(1.12) contrast(1.18) saturate(1.2);
-  display: block;
-}
-
 .neon-mono-label {
   color: #94a3b8;
   font-family: "DM Mono", monospace;

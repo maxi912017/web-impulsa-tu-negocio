@@ -68,7 +68,7 @@ export function useAutoPlayOnVisible(
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           isIntersecting = true;
           playVideo();
         } else {
@@ -142,39 +142,3 @@ export function AnimatedLogoMark({ label, size = 48 }: { label: string; size?: n
   );
 }
 
-export function HeroLogoGlow() {
-  const reducedMotion = usePrefersReducedMotion();
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useAutoPlayOnVisible(videoRef, reducedMotion);
-
-  return (
-    <div className="neon-hero-glow" aria-hidden="true">
-      {reducedMotion ? (
-        <img
-          src={POSTER}
-          alt=""
-          className="neon-hero-glow-media"
-          width="480"
-          height="480"
-          decoding="async"
-        />
-      ) : (
-        <video
-          ref={videoRef}
-          className="neon-hero-glow-media"
-          muted
-          autoPlay
-          loop
-          playsInline
-          controls={false}
-          preload="auto"
-          poster={POSTER}
-        >
-          <source src={MP4} type="video/mp4" />
-          <source src={WEBM} type="video/webm" />
-        </video>
-      )}
-    </div>
-  );
-}
