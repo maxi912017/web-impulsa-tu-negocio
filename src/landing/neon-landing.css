@@ -310,6 +310,112 @@
   display: none;
 }
 
+/* Hero Background Video & Overlay (Contained and centered to respect 9:16 portrait video on all screen sizes) */
+.neon-hero-bg-wrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #050704;
+}
+
+.neon-hero-bg-video {
+  width: min(100vw, 1100px);
+  height: 100vh;
+  height: 100dvh;
+  object-fit: cover;
+  object-position: 50% 36%;
+  filter: brightness(0.52) contrast(1.10);
+  pointer-events: none;
+  display: block;
+}
+
+.neon-hero-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(5, 7, 4, 0.62) 0%, rgba(5, 7, 4, 0.85) 75%, #050704 100%),
+    linear-gradient(180deg, rgba(5, 7, 4, 0.70) 0%, rgba(5, 7, 4, 0.48) 32%, rgba(5, 7, 4, 0.65) 72%, rgba(5, 7, 4, 0.95) 100%);
+}
+
+.neon-hero-section {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  z-index: 1;
+}
+
+.neon-hero-section .neon-hero {
+  width: 100%;
+  z-index: 2;
+  padding: clamp(90px, 12vh, 135px) 0 clamp(54px, 7vh, 80px);
+}
+
+/* Hero Brand Headline Badge */
+.neon-hero-brand-headline {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.neon-hero-brand-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px;
+  border-radius: 100px;
+  background: rgba(215, 254, 59, 0.12);
+  border: 1px solid rgba(215, 254, 59, 0.42);
+  box-shadow: 0 0 24px rgba(215, 254, 59, 0.16);
+  text-decoration: none;
+}
+
+.neon-hero-brand-name {
+  color: #ffffff;
+  font-family: "Archivo", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+}
+
+.neon-hero-brand-dot {
+  color: var(--neon-cyan);
+}
+
+.neon-hero-brand-sep {
+  color: rgba(215, 254, 59, 0.5);
+  font-weight: 700;
+}
+
+.neon-hero-brand-tagline {
+  color: #cbd5e1;
+  font-size: 12.5px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 640px) {
+  .neon-hero-brand-badge {
+    flex-direction: column;
+    gap: 3px;
+    padding: 6px 14px;
+    border-radius: 16px;
+  }
+  .neon-hero-brand-sep {
+    display: none;
+  }
+}
+
 .neon-hero {
   position: relative;
   display: grid;
@@ -358,6 +464,7 @@
   color: #f8fafc;
   font-size: clamp(54px, 7.5vw, 112px);
   line-height: 0.94;
+  text-shadow: 0 4px 28px rgba(0, 0, 0, 0.9), 0 2px 8px rgba(0, 0, 0, 0.95);
 }
 
 .neon-display span {
@@ -1556,6 +1663,36 @@ a.neon-banner-button:visited,
     display: none;
   }
 
+  .neon-hero-section {
+    min-height: auto;
+  }
+
+  .neon-hero-bg-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+    background: #050704;
+  }
+
+  .neon-hero-bg-video {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    object-fit: cover;
+    z-index: 0;
+    pointer-events: none;
+    filter: brightness(0.50) contrast(1.10);
+    display: block;
+  }
+
+  .neon-hero-section .neon-hero {
+    gap: 38px;
+    padding-top: 85px;
+    padding-bottom: 50px;
+  }
+
   .neon-hero {
     gap: 38px;
     padding-top: 55px;
@@ -1790,10 +1927,11 @@ a.neon-banner-button:visited,
 }
 
 /* Navigation Badges */
+.neon-nav a.neon-nav-highlight,
 .neon-nav-highlight {
-  display: inline-flex;
+  display: inline-flex !important;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
 }
 
 .neon-nav-badge {
@@ -1850,17 +1988,10 @@ a.neon-banner-button:visited,
 .neon-portfolio-section {
   padding: 110px 0;
   position: relative;
-  background:
-    radial-gradient(circle at 85% 15%, rgba(215, 254, 59, 0.05), transparent 30rem),
-    radial-gradient(circle at 10% 85%, rgba(37, 211, 102, 0.04), transparent 28rem),
-    linear-gradient(
-      180deg,
-      rgba(11, 13, 10, 0.8) 0%,
-      rgba(14, 18, 13, 0.95) 50%,
-      rgba(11, 13, 10, 0.8) 100%
-    );
+  background: #0b0e0a;
   border-top: 1px solid var(--neon-line);
   border-bottom: 1px solid var(--neon-line);
+  z-index: 2;
 }
 
 .neon-portfolio-header {
@@ -1960,11 +2091,13 @@ a.neon-banner-button:visited,
 }
 
 .neon-project-card {
+  opacity: 1 !important;
+  visibility: visible !important;
   display: flex;
   flex-direction: column;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(145deg, rgba(20, 24, 18, 0.85) 0%, rgba(13, 16, 11, 0.95) 100%);
+  background: linear-gradient(145deg, rgba(20, 24, 18, 0.92) 0%, rgba(13, 16, 11, 0.96) 100%);
   overflow: hidden;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.45);
   transition: all 240ms ease;
@@ -4388,14 +4521,16 @@ a.neon-whatsapp-hero-cta {
 .neon-modal-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.82);
+  background: rgba(0, 0, 0, 0.88);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  z-index: 200;
+  z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 24px;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .neon-modal-content {
@@ -4404,12 +4539,14 @@ a.neon-whatsapp-hero-cta {
   max-height: 90vh;
   overflow-y: auto;
   border-radius: 20px;
-  background: linear-gradient(145deg, #151a13 0%, #0e120c 100%);
-  border: 1px solid rgba(215, 254, 59, 0.35);
+  background: #0e120c;
+  border: 1px solid rgba(215, 254, 59, 0.45);
   box-shadow:
-    0 30px 80px rgba(0, 0, 0, 0.8),
-    0 0 40px rgba(215, 254, 59, 0.1);
+    0 30px 80px rgba(0, 0, 0, 0.9),
+    0 0 50px rgba(215, 254, 59, 0.15);
   padding: 36px 32px;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .neon-modal-close {
@@ -4939,12 +5076,18 @@ a.neon-whatsapp-hero-cta {
 .neon-reviews-section {
   padding-top: 60px;
   padding-bottom: 60px;
+  position: relative;
+  z-index: 2;
 }
 
 .neon-reviews-header {
   text-align: center;
   max-width: 700px;
   margin: 0 auto 40px;
+  position: relative;
+  z-index: 2;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .neon-reviews-intro {
@@ -4957,6 +5100,10 @@ a.neon-whatsapp-hero-cta {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
+  position: relative;
+  z-index: 2;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .neon-review-card {
@@ -4964,16 +5111,18 @@ a.neon-whatsapp-hero-cta {
   flex-direction: column;
   padding: 24px;
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(160deg, rgba(20, 24, 18, 0.8), rgba(12, 15, 11, 0.95));
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #131711;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.65);
   transition:
     transform 200ms ease,
     border-color 200ms ease;
+  opacity: 1 !important;
+  visibility: visible !important;
 }
 
 .neon-review-card:hover {
-  border-color: rgba(215, 254, 59, 0.35);
+  border-color: rgba(215, 254, 59, 0.4);
   transform: translateY(-3px);
 }
 

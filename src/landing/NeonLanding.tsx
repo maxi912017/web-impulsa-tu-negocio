@@ -1,22 +1,12 @@
-import { lazy, Suspense, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowUpRight, Check, Code2, LayoutTemplate, Palette, Rocket, X, Zap } from "lucide-react";
 import { WhatsAppFloatingButton } from "./WhatsAppFloatingButton";
-import { DeferredSection } from "./DeferredSection";
 import { Button } from "@/components/ui/button";
+import { PortfolioSection } from "./PortfolioSection";
+import { TestimonialsSection } from "./TestimonialsSection";
+import { ContactForm, FAQ } from "./ContactSection";
 import "./neon-critical.css";
-
-const PortfolioSection = lazy(() =>
-  import("./PortfolioSection").then((m) => ({ default: m.PortfolioSection })),
-);
-const TestimonialsSection = lazy(() =>
-  import("./TestimonialsSection").then((m) => ({ default: m.TestimonialsSection })),
-);
-const ContactForm = lazy(() =>
-  import("./ContactSection").then((m) => ({ default: m.ContactForm })),
-);
-const FAQ = lazy(() =>
-  import("./ContactSection").then((m) => ({ default: m.FAQ })),
-);
+import "./neon-landing.css";
 
 const WHATSAPP_LINK =
   "https://wa.me/5492664484918?text=Hola%20Impulsa%20Tu%20Negocio%2C%20quiero%20contarles%20mi%20idea";
@@ -142,40 +132,87 @@ function Header() {
 }
 
 function Landing() {
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    video.muted = true;
+    video.defaultMuted = true;
+    video.play().catch(() => {});
+  }, []);
+
   return (
     <div className="neon-landing">
+      {/* Video de fondo global fijo y proporcionado para multipantalla */}
+      <div className="neon-hero-bg-wrapper" aria-hidden="true">
+        <video
+          ref={heroVideoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          className="neon-hero-bg-video"
+        >
+          <source src="/hero-animation.webm" type="video/webm" />
+          <source src="/hero%20animation.webm" type="video/webm" />
+          Tu navegador no soporta video HTML5.
+        </video>
+
+        {/* Capa de opacidad y contraste global fija */}
+        <div className="neon-hero-overlay" />
+      </div>
+
       <Header />
       <main>
-        <section className="neon-hero neon-container" id="inicio">
-          <div className="neon-hero-copy">
-            <span className="neon-mono-label neon-hero-eyebrow">
-              DISEÑO WEB · DESARROLLO · VISIBILIDAD
-            </span>
-            <h1 className="neon-display">
-              Tu negocio merece<br className="neon-hero-break" /> una <span>web que trabaje.</span>
-            </h1>
-            <p className="neon-hero-intro">
-              Una presencia digital profesional para que te entiendan rápido, confíen en vos y te
-              encuentren cuando te buscan.
-            </p>
-            <div id="hero-actions" className="neon-hero-actions">
-              <a id="hero-primary-cta" className="neon-primary-button" href="#contacto">
-                <span>Pedir presupuesto</span>
-                <ArrowUpRight size={17} />
-              </a>
-            </div>
-            <div className="neon-proof-stats" aria-label="Lo que puede hacer una web profesional">
-              <div>
-                <strong>01</strong>
-                <span>mensaje claro</span>
+        <section id="inicio" className="neon-hero-section">
+          {/* Contenido principal del Hero */}
+          <div className="neon-container neon-hero">
+            <div className="neon-hero-copy">
+              <div className="neon-hero-brand-headline">
+                <span className="neon-hero-brand-badge">
+                  <span className="neon-hero-brand-name">
+                    impulsa tu negocio<span className="neon-brand-dot">.dev</span>
+                  </span>
+                  <span className="neon-hero-brand-sep">·</span>
+                  <span className="neon-hero-brand-tagline">Estudio digital · Webs que crecen</span>
+                </span>
               </div>
-              <div>
-                <strong>02</strong>
-                <span>más confianza</span>
+              <div className="neon-hero-main-title">
+                <span className="neon-hero-title-brand">
+                  impulsa tu negocio<span className="neon-brand-dot">.dev</span>
+                </span>
               </div>
-              <div>
-                <strong>03</strong>
-                <span>más consultas</span>
+              <span className="neon-mono-label neon-hero-eyebrow">
+                DISEÑO WEB · DESARROLLO · VISIBILIDAD
+              </span>
+              <h1 className="neon-display">
+                Tu negocio merece<br className="neon-hero-break" /> una <span>web que trabaje.</span>
+              </h1>
+              <p className="neon-hero-intro">
+                Una presencia digital profesional para que te entiendan rápido, confíen en vos y te
+                encuentren cuando te buscan.
+              </p>
+              <div id="hero-actions" className="neon-hero-actions">
+                <a id="hero-primary-cta" className="neon-primary-button" href="#contacto">
+                  <span>Pedir presupuesto</span>
+                  <ArrowUpRight size={17} />
+                </a>
+              </div>
+              <div className="neon-proof-stats" aria-label="Lo que puede hacer una web profesional">
+                <div>
+                  <strong>01</strong>
+                  <span>mensaje claro</span>
+                </div>
+                <div>
+                  <strong>02</strong>
+                  <span>más confianza</span>
+                </div>
+                <div>
+                  <strong>03</strong>
+                  <span>más consultas</span>
+                </div>
               </div>
             </div>
           </div>
@@ -248,23 +285,12 @@ function Landing() {
           </div>
         </div>
 
-        <DeferredSection id="portafolio">
-          <Suspense fallback={<div className="neon-deferred-section" aria-hidden="true" />}>
-            <PortfolioSection />
-          </Suspense>
-        </DeferredSection>
-        <DeferredSection compact id="testimonios">
-          <Suspense
-            fallback={
-              <div
-                className="neon-deferred-section neon-deferred-section--compact"
-                aria-hidden="true"
-              />
-            }
-          >
-            <TestimonialsSection />
-          </Suspense>
-        </DeferredSection>
+        <div id="portafolio">
+          <PortfolioSection />
+        </div>
+        <div id="testimonios">
+          <TestimonialsSection />
+        </div>
 
         <div id="contacto" className="neon-contact-anchor" aria-hidden="true" />
         <section id="contacto-seccion" className="neon-contact-unified neon-container">
@@ -293,24 +319,9 @@ function Landing() {
                 Una primera conversación también sirve para ordenar. No necesitás llegar con todo
                 resuelto.
               </p>
-              <DeferredSection compact>
-                <Suspense fallback={null}>
-                  <FAQ />
-                </Suspense>
-              </DeferredSection>
+              <FAQ />
             </div>
-            <DeferredSection compact>
-              <Suspense
-                fallback={
-                  <div
-                    className="neon-deferred-section neon-deferred-section--compact"
-                    aria-hidden="true"
-                  />
-                }
-              >
-                <ContactForm />
-              </Suspense>
-            </DeferredSection>
+            <ContactForm />
           </div>
         </section>
       </main>

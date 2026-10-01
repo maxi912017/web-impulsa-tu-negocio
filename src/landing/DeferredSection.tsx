@@ -23,7 +23,7 @@ export function DeferredSection({ children, compact = false, id }: DeferredSecti
         setIsReady(true);
         observer.disconnect();
       },
-      { rootMargin: "0px" },
+      { rootMargin: "350px 0px" },
     );
 
     observer.observe(element);

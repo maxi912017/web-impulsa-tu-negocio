@@ -1,4 +1,5 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAutoPlayOnVisible } from "./AnimatedLogo";
 import { CheckCircle2, ArrowUpRight, Sparkles, MessageCircle, X } from "lucide-react";
@@ -269,6 +270,17 @@ export function PortfolioSection() {
   const [activeCategory, setActiveCategory] = useState("todos");
   const [selectedProject, setSelectedProject] = useState<ProjectItem | null>(null);
 
+  useEffect(() => {
+    if (selectedProject) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [selectedProject]);
+
   const filteredProjects =
     activeCategory === "todos"
       ? portfolioProjects
@@ -312,9 +324,9 @@ export function PortfolioSection() {
         </div>
 
         {/* Projects Grid */}
-        <motion.div layout className="neon-portfolio-grid">
-          <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, idx) => {
+        <div className="neon-portfolio-grid">
+          <AnimatePresence mode="popLayout" initial={false}>
+            {filteredProjects.map((project) => {
               const waUrl = `https://wa.me/5492664484918?text=${encodeURIComponent(project.whatsappMessage)}`;
 
               return (
@@ -323,10 +335,10 @@ export function PortfolioSection() {
                   key={project.id}
                   id={`project-card-${project.id}`}
                   className="neon-project-card"
-                  initial={{ opacity: 0, y: 20 }}
+                  initial={false}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: idx * 0.05 }}
+                  transition={{ duration: 0.2 }}
                 >
                   {/* Vista previa del proyecto (pantalla de notebook) */}
                   <div className="neon-mockup-wrapper">
@@ -408,22 +420,24 @@ export function PortfolioSection() {
               );
             })}
           </AnimatePresence>
-        </motion.div>
+        </div>
       </div>
 
-      {/* Project Detail Modal */}
-      <AnimatePresence>
-        {selectedProject && (
-          <div className="neon-modal-backdrop" onClick={() => setSelectedProject(null)}>
-            <motion.div
+      {/* Project Detail Modal portaled to document.body */}
+      {selectedProject &&
+        typeof document !== "undefined" &&
+        createPortal(
+          <div
+            className="neon-modal-backdrop"
+            onClick={() => setSelectedProject(null)}
+            role="presentation"
+          >
+            <div
               className="neon-modal-content"
               role="dialog"
               aria-modal="true"
               aria-labelledby="project-modal-title"
               onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.94, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 20 }}
             >
               <button
                 type="button"
@@ -489,10 +503,10 @@ export function PortfolioSection() {
                   <span>Pedir presupuesto para mi proyecto por WhatsApp</span>
                 </a>
               </div>
-            </motion.div>
-          </div>
+            </div>
+          </div>,
+          document.body,
         )}
-      </AnimatePresence>
     </section>
   );
 }

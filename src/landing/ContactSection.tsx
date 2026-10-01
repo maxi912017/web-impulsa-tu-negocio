@@ -243,9 +243,9 @@ export function ContactForm() {
   return (
     <motion.div
       className="neon-form-column"
-      initial={{ opacity: 0, y: 20 }}
+      initial={false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.14 }}
+      transition={{ duration: 0.2 }}
     >
       <div className="neon-form-card">
         <span className="neon-form-glow" aria-hidden="true" />
