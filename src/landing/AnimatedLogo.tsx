@@ -68,7 +68,7 @@ export function useAutoPlayOnVisible(
     const observer = new IntersectionObserver(
       (entries) => {
         const [entry] = entries;
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           isIntersecting = true;
           playVideo();
         } else {
