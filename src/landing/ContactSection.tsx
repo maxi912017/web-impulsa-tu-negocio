@@ -13,7 +13,7 @@ const faqs = [
   {
     question: "¿Cómo funciona la integración con WhatsApp?",
     answer:
-      "Conectamos los botones y formularios para que las solicitudes, reservas o consultas lleguen directamente a tu chat de WhatsApp con un mensaje prearmado y ordenado, sin intermediarios ni demoras.",
+      "Los botones de WhatsApp abren una conversación con un mensaje preparado. Si completás el formulario de cotización, la consulta llega por correo electrónico; podés abrir WhatsApp después para hablar con nosotros directamente.",
   },
   {
     question: "¿Qué necesito para arrancar?",

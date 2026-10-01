@@ -10,3 +10,6 @@
 > the editor, so keep the branch in a working state.
 
 <!-- LOVABLE:END -->
+
+Keep the landing hero free of decorative logo video; retain the short animated logo only inside the header/footer brand lockup, so the headline remains legible and fast to render.
+Keep the four service offerings in a lightweight first-page section before the deferred portfolio, so visitors can see what the studio does before browsing work.
