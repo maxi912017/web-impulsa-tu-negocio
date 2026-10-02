@@ -1048,41 +1048,47 @@ a.neon-banner-button:visited,
   box-shadow: 0 0 0 1px var(--neon-cyan);
 }
 
-/* Primary Submit Button: Solicitar cotización */
-.neon-submit,
-.neon-submit span {
-  display: inline-flex;
+/* Primary Submit Button: Solicitar cotización (compact & refined) */
+.neon-submit {
+  display: flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   width: 100%;
-  min-height: 52px;
-  margin-top: 24px;
+  max-width: 340px;
+  min-height: 42px;
+  margin: 20px auto 0;
+  padding: 0 18px;
   border: 1px solid rgba(215, 254, 59, 0.45);
-  border-radius: 12px;
+  border-radius: 10px;
   background: var(--neon-cyan);
   color: #070d02 !important;
   -webkit-text-fill-color: #070d02 !important;
   font-family: "Archivo", sans-serif;
-  font-size: 14px;
-  font-weight: 800;
+  font-size: 13px;
+  font-weight: 700;
   letter-spacing: 0.01em;
   cursor: pointer;
   box-shadow:
-    0 4px 22px rgba(215, 254, 59, 0.28),
-    inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    0 3px 14px rgba(215, 254, 59, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
   transition:
     transform 180ms ease,
     box-shadow 180ms ease,
     filter 180ms ease;
 }
 
-.neon-submit:hover:not(:disabled),
-.neon-submit:hover:not(:disabled) span {
+.neon-submit span {
+  display: inline;
+  color: inherit;
+  font: inherit;
+}
+
+.neon-submit:hover:not(:disabled) {
   filter: brightness(1.06);
   box-shadow:
-    0 8px 32px rgba(215, 254, 59, 0.42),
-    inset 0 1px 0 rgba(255, 255, 255, 0.55);
+    0 6px 20px rgba(215, 254, 59, 0.36),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
   transform: translateY(-2px);
   color: #000000 !important;
   -webkit-text-fill-color: #000000 !important;
@@ -1091,6 +1097,7 @@ a.neon-banner-button:visited,
 .neon-submit svg {
   color: #070d02 !important;
   stroke: #070d02 !important;
+  flex-shrink: 0;
   transition:
     transform 180ms ease,
     color 180ms ease,
@@ -5503,10 +5510,16 @@ a.neon-whatsapp-hero-cta {
   textarea {
     font-size: 16px !important; /* Crucial: Prevents iOS auto-zoom */
   }
-  .neon-submit,
+  .neon-submit {
+    font-size: 12.5px !important;
+    min-height: 40px;
+    max-width: 100%;
+    margin-top: 16px;
+    padding: 0 14px;
+  }
   .neon-direct-link-btn {
-    font-size: 14px !important;
-    min-height: 48px;
+    font-size: 12px !important;
+    min-height: 38px;
   }
 
   /* Labels and details */

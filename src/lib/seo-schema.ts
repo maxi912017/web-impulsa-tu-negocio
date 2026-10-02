@@ -4,6 +4,45 @@
  */
 export const SITE_URL = "https://web-impulsa-tu-negocio.vercel.app";
 
+/**
+ * Esquema de datos estructurados enfocado en desarrollo de software y servicios profesionales en San Luis.
+ */
+export const professionalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Estudio Digital Impulsa Tu Negocio.DEV",
+  "url": "https://impulsatunegocio.dev",
+  "description": "Servicios profesionales de desarrollo web, diseño de aplicaciones móviles y soluciones digitales a medida en San Luis, Argentina.",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "San Luis",
+    "addressRegion": "San Luis",
+    "addressCountry": "AR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "-33.30805",
+    "longitude": "-66.357584"
+  },
+  "areaServed": [
+    {
+      "@type": "AdministrativeArea",
+      "name": "San Luis"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "Juana Koslay"
+    },
+    {
+      "@type": "AdministrativeArea",
+      "name": "La Punta"
+    }
+  ],
+  "sameAs": [
+    "https://instagram.com"
+  ]
+};
+
 export const siteStructuredData = {
   "@context": "https://schema.org",
   "@graph": [
