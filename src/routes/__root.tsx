@@ -13,6 +13,7 @@ import { Toaster } from "sonner";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { siteStructuredData, SITE_URL } from "../lib/seo-schema";
 
 function NotFoundComponent() {
   return (
@@ -79,25 +80,48 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Impulsa Tu Negocio | Webs que hacen crecer negocios" },
+      { title: "Impulsa Tu Negocio | Webs y Apps que hacen crecer negocios" },
       {
         name: "description",
         content:
-          "Diseñamos sitios web y landing pages para que tu negocio se vea profesional, genere confianza y atraiga más clientes.",
+          "Estudio digital de diseño y desarrollo web de alto impacto, landing pages de alta conversión, web apps y sistemas de gestión con IA a medida en Argentina.",
+      },
+      {
+        name: "robots",
+        content:
+          "index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1",
+      },
+      {
+        name: "googlebot",
+        content:
+          "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+      {
+        name: "bingbot",
+        content:
+          "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      },
+      {
+        name: "keywords",
+        content:
+          "desarrollo web argentina, diseño web profesional, landing pages alta conversión, software a medida, web apps para profesionales, sistemas de presupuestos con IA, impulsa tu negocio dev",
       },
       { name: "author", content: "Impulsa Tu Negocio" },
       {
         property: "og:title",
-        content: "Impulsa Tu Negocio | Webs que hacen crecer negocios",
+        content: "Impulsa Tu Negocio | Webs y Apps que hacen crecer negocios",
       },
       {
         property: "og:description",
         content:
-          "Sitios web y landing pages para verte profesional, generar confianza y atraer más clientes.",
+          "Sitios web, landing pages y web apps a medida para verte profesional, generar confianza y atraer más clientes.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "https://web-impulsa-tu-negocio.vercel.app/og-image.png" },
-      { property: "og:image:secure_url", content: "https://web-impulsa-tu-negocio.vercel.app/og-image.png" },
+      { property: "og:url", content: `${SITE_URL}/` },
+      { property: "og:site_name", content: "Impulsa Tu Negocio" },
+      { property: "og:locale", content: "es_AR" },
+      { property: "og:image", content: `${SITE_URL}/og-image.png` },
+      { property: "og:image:secure_url", content: `${SITE_URL}/og-image.png` },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       {
@@ -105,9 +129,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Impulsa Tu Negocio - Webs y Apps que hacen crecer negocios",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "https://web-impulsa-tu-negocio.vercel.app/og-image.png" },
+      { name: "twitter:image", content: `${SITE_URL}/og-image.png` },
+      {
+        name: "twitter:title",
+        content: "Impulsa Tu Negocio | Webs y Apps que hacen crecer negocios",
+      },
+      {
+        name: "twitter:description",
+        content:
+          "Sitios web, landing pages y web apps a medida para verte profesional, generar confianza y atraer más clientes.",
+      },
     ],
     links: [
+      { rel: "canonical", href: `${SITE_URL}/` },
+      { rel: "sitemap", type: "application/xml", href: "/sitemap.xml" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -147,6 +182,10 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="es">
       <head>
         <HeadContent />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteStructuredData) }}
+        />
       </head>
       <body>
         {children}

@@ -246,7 +246,7 @@ function ProjectShowcase({ project }: { project: ProjectItem }) {
         ) : (
           <img
             src={project.showcase.image}
-            alt={project.title}
+            alt={`Captura interactiva del desarrollo web: ${project.title} - ${project.subtitle}`}
             loading="lazy"
             decoding="async"
             style={{
@@ -329,7 +329,7 @@ export function PortfolioSection() {
               const waUrl = `https://wa.me/5492664484918?text=${encodeURIComponent(project.whatsappMessage)}`;
 
               return (
-                <motion.div
+                <motion.article
                   layout
                   key={project.id}
                   id={`project-card-${project.id}`}
@@ -338,7 +338,16 @@ export function PortfolioSection() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.2 }}
+                  itemScope
+                  itemType="https://schema.org/SoftwareApplication"
+                  data-ai-chunk="case-study"
                 >
+                  <meta itemProp="operatingSystem" content="Web" />
+                  <meta
+                    itemProp="applicationCategory"
+                    content={project.category === "apps" ? "BusinessApplication" : "WebApplication"}
+                  />
+
                   {/* Vista previa del proyecto (pantalla de notebook) */}
                   <div className="neon-mockup-wrapper">
                     <div className="neon-laptop-frame">
@@ -368,8 +377,8 @@ export function PortfolioSection() {
                       </div>
                     </div>
 
-                    <h3 className="neon-project-title">{project.title}</h3>
-                    <p className="neon-project-description">{project.description}</p>
+                    <h3 className="neon-project-title" itemProp="name">{project.title}</h3>
+                    <p className="neon-project-description" itemProp="description">{project.description}</p>
 
                     {/* Features list */}
                     <ul className="neon-project-features">
@@ -415,7 +424,7 @@ export function PortfolioSection() {
                       </button>
                     </div>
                   </div>
-                </motion.div>
+                </motion.article>
               );
             })}
           </AnimatePresence>

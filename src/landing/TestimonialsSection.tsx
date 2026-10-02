@@ -44,22 +44,57 @@ export function TestimonialsSection() {
 
       <div className="neon-reviews-grid">
         {reviews.map((rev, idx) => (
-          <div key={idx} className="neon-review-card">
-            <div className="neon-review-stars">
+          <article
+            key={idx}
+            className="neon-review-card"
+            itemScope
+            itemType="https://schema.org/Review"
+            data-ai-chunk="client-testimonial"
+          >
+            <div
+              className="neon-review-stars"
+              aria-label={`Calificación: ${rev.stars} de 5 estrellas`}
+            >
               {Array.from({ length: rev.stars }).map((_, i) => (
-                <Star key={i} size={15} fill="#d7fe3b" color="#d7fe3b" />
+                <Star
+                  key={i}
+                  size={15}
+                  fill="#d7fe3b"
+                  color="#d7fe3b"
+                  aria-hidden="true"
+                />
               ))}
             </div>
+            <div
+              itemProp="reviewRating"
+              itemScope
+              itemType="https://schema.org/Rating"
+              style={{ display: "none" }}
+            >
+              <meta itemProp="ratingValue" content={String(rev.stars)} />
+              <meta itemProp="bestRating" content="5" />
+            </div>
             <strong className="neon-review-highlight">"{rev.highlight}"</strong>
-            <p className="neon-review-comment">{rev.comment}</p>
-            <div className="neon-review-author">
-              <div className="neon-review-author-avatar">{rev.name.charAt(0)}</div>
+            <p className="neon-review-comment" itemProp="reviewBody">
+              {rev.comment}
+            </p>
+            <div
+              className="neon-review-author"
+              itemProp="author"
+              itemScope
+              itemType="https://schema.org/Person"
+            >
+              <div className="neon-review-author-avatar" aria-hidden="true">
+                {rev.name.charAt(0)}
+              </div>
               <div>
-                <span className="neon-review-name">{rev.name}</span>
+                <span className="neon-review-name" itemProp="name">
+                  {rev.name}
+                </span>
                 <span className="neon-review-role">{rev.role}</span>
               </div>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>

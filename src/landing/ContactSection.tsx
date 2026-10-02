@@ -542,37 +542,53 @@ export function FAQ() {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <div className="neon-faq">
+    <div className="neon-faq" itemScope itemType="https://schema.org/FAQPage">
       <span className="neon-mono-label">ANTES DE ESCRIBIR · RESPUESTAS RÁPIDAS</span>
       <div className="neon-faq-list">
         {faqs.map((faq, index) => {
           const isOpen = open === index;
           return (
-            <div className="neon-faq-item" key={faq.question}>
+            <div
+              className="neon-faq-item"
+              key={faq.question}
+              itemScope
+              itemProp="mainEntity"
+              itemType="https://schema.org/Question"
+            >
               <button
                 type="button"
+                id={`faq-question-${index}`}
+                aria-controls={`faq-answer-${index}`}
                 className="neon-faq-question"
                 onClick={() => setOpen(isOpen ? null : index)}
                 aria-expanded={isOpen}
               >
-                <span>{faq.question}</span>
+                <span itemProp="name">{faq.question}</span>
                 <ChevronDown
                   className={isOpen ? "neon-faq-chevron open" : "neon-faq-chevron"}
                   size={16}
+                  aria-hidden="true"
                 />
               </button>
-              <AnimatePresence initial={false}>
-                {isOpen && (
-                  <motion.div
-                    className="neon-faq-answer"
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                  >
-                    <p>{faq.answer}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <motion.div
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
+                className="neon-faq-answer"
+                initial={false}
+                animate={{
+                  height: isOpen ? "auto" : 0,
+                  opacity: isOpen ? 1 : 0,
+                }}
+                transition={{ duration: 0.25, ease: "easeInOut" }}
+                style={{
+                  overflow: "hidden",
+                }}
+              >
+                <div itemScope itemProp="acceptedAnswer" itemType="https://schema.org/Answer">
+                  <p itemProp="text">{faq.answer}</p>
+                </div>
+              </motion.div>
             </div>
           );
         })}

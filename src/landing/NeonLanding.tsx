@@ -23,7 +23,7 @@ function HeaderBrand() {
       <span id="header-brand-mark" className="neon-brand-mark">
         <img
           src="/assets/brand-isologo-dark.png"
-          alt="Isologo de Impulsa Tu Negocio"
+          alt="Isologo de Impulsa Tu Negocio - Estudio digital de desarrollo web y software a medida"
           width={44}
           height={44}
           className="neon-brand-img"
@@ -50,7 +50,7 @@ function FooterBrand() {
       <div className="neon-footer-brand-mark">
         <img
           src="/assets/brand-isologo-dark.png"
-          alt="Isologo de Impulsa Tu Negocio"
+          alt="Isologo de Impulsa Tu Negocio - Webs y Apps que hacen crecer negocios en Argentina"
           width={76}
           height={76}
           className="neon-footer-brand-img"
@@ -226,50 +226,100 @@ function Landing() {
               <p>Diseñamos y desarrollamos soluciones digitales según lo que necesitás hoy, preparadas para crecer mañana.</p>
             </div>
             <div className="neon-services-grid">
-              <article className="neon-service">
+              <article className="neon-service" itemScope itemType="https://schema.org/Service">
                 <span className="neon-service-icon" aria-hidden="true"><LayoutTemplate size={23} /></span>
-                <h3>Landing pages</h3>
+                <h3 itemProp="name">Landing pages</h3>
                 <strong>Una página, una sola acción: que te escriban.</strong>
-                <p>Ideal para una campaña, un servicio puntual o un lanzamiento. Todo apunta a que la persona consulte por WhatsApp o deje sus datos.</p>
+                <p itemProp="description">Ideal para una campaña, un servicio puntual o un lanzamiento. Todo apunta a que la persona consulte por WhatsApp o deje sus datos.</p>
                 <ul>
                   <li><Check size={17} />Mensaje claro desde el primer vistazo</li>
                   <li><Check size={17} />Acceso directo a WhatsApp</li>
                   <li><Check size={17} />Pensada para anuncios y redes</li>
                 </ul>
               </article>
-              <article className="neon-service neon-service-featured">
+              <article className="neon-service neon-service-featured" itemScope itemType="https://schema.org/Service">
                 <span className="neon-service-icon" aria-hidden="true"><Rocket size={23} /></span>
-                <h3>Sitios web completos</h3>
+                <h3 itemProp="name">Sitios web completos</h3>
                 <strong>La casa digital de tu negocio.</strong>
-                <p>Varias secciones para contar quién sos, qué hacés y por qué elegirte. Una base para aparecer en Google y crecer con el tiempo.</p>
+                <p itemProp="description">Varias secciones para contar quién sos, qué hacés y por qué elegirte. Una base para aparecer en Google y crecer con el tiempo.</p>
                 <ul>
                   <li><Check size={17} />Estructura pensada para buscadores</li>
                   <li><Check size={17} />Servicios, trabajos y contacto</li>
                   <li><Check size={17} />Se amplía a medida que crecés</li>
                 </ul>
               </article>
-              <article className="neon-service">
+              <article className="neon-service" itemScope itemType="https://schema.org/Service">
                 <span className="neon-service-icon" aria-hidden="true"><Code2 size={23} /></span>
-                <h3>Web apps a medida</h3>
+                <h3 itemProp="name">Web apps a medida</h3>
                 <strong>Automatizá lo que hoy te roba horas.</strong>
-                <p>Sistemas hechos para tu forma de trabajar: turnos, presupuestos, gestión de clientes o catálogos autogestionables.</p>
+                <p itemProp="description">Sistemas hechos para tu forma de trabajar: turnos, presupuestos, gestión de clientes o catálogos autogestionables.</p>
                 <ul>
                   <li><Check size={17} />Herramientas hechas para tu negocio</li>
                   <li><Check size={17} />Menos tareas repetitivas</li>
                   <li><Check size={17} />Experiencias fáciles de usar</li>
                 </ul>
               </article>
-              <article className="neon-service">
+              <article className="neon-service" itemScope itemType="https://schema.org/Service">
                 <span className="neon-service-icon" aria-hidden="true"><Palette size={23} /></span>
-                <h3>Identidad &amp; redes</h3>
+                <h3 itemProp="name">Identidad &amp; redes</h3>
                 <strong>Que tu marca se vea como tu trabajo.</strong>
-                <p>Diseño gráfico, piezas para redes y una presencia visual coherente para que te reconozcan y recuerden.</p>
+                <p itemProp="description">Diseño gráfico, piezas para redes y una presencia visual coherente para que te reconozcan y recuerden.</p>
                 <ul>
                   <li><Check size={17} />Identidad visual consistente</li>
                   <li><Check size={17} />Contenido para redes</li>
                   <li><Check size={17} />Diseño enfocado en tu público</li>
                 </ul>
               </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="comparativa" className="neon-solutions-matrix-section" aria-label="Comparativa de soluciones de desarrollo web">
+          <div className="neon-container">
+            <div className="neon-matrix-header">
+              <span className="neon-mono-label neon-accent-label">GUÍA RÁPIDA · CHUNKING RAG</span>
+              <h2 className="neon-section-title">
+                Comparativa de soluciones: <span>elegí según tu objetivo.</span>
+              </h2>
+              <p className="neon-portfolio-intro">
+                Estructura de referencia para entender alcances, plazos y objetivos de cada tipo de desarrollo digital.
+              </p>
+            </div>
+            <div className="neon-matrix-table-wrapper" tabIndex={0} role="region" aria-label="Tabla comparativa de servicios">
+              <table className="neon-matrix-table">
+                <thead>
+                  <tr>
+                    <th scope="col">Solución</th>
+                    <th scope="col">Objetivo principal</th>
+                    <th scope="col">Funcionalidades clave</th>
+                    <th scope="col">Plazo estimado</th>
+                    <th scope="col">Canal directo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Landing Page</strong></td>
+                    <td>Conversión directa y captación de leads en campañas o anuncios</td>
+                    <td>Estructura persuasiva, carga ultrarrápida, botón directo a WhatsApp</td>
+                    <td>3 a 5 días</td>
+                    <td>WhatsApp / Formulario</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Sitio Web Completo</strong></td>
+                    <td>Presencia corporativa oficial, catálogo de servicios y SEO en Google</td>
+                    <td>Múltiples secciones, optimización en buscadores, formulario de cotización</td>
+                    <td>1 a 2 semanas</td>
+                    <td>Email & WhatsApp</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Web App &amp; SaaS a Medida</strong></td>
+                    <td>Automatización de presupuestos, cobros, turnos y operativa diaria</td>
+                    <td>Cálculos con IA, generación de PDFs con logo propio, panel de clientes</td>
+                    <td>2 a 4 semanas</td>
+                    <td>Asesoramiento directo</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -285,12 +335,12 @@ function Landing() {
           </div>
         </div>
 
-        <div id="portafolio">
+        <section id="portafolio" aria-label="Casos de éxito y portafolio">
           <PortfolioSection />
-        </div>
-        <div id="testimonios">
+        </section>
+        <section id="testimonios" aria-label="Opiniones y testimonios de clientes">
           <TestimonialsSection />
-        </div>
+        </section>
 
         <div id="contacto" className="neon-contact-anchor" aria-hidden="true" />
         <section id="contacto-seccion" className="neon-contact-unified neon-container">

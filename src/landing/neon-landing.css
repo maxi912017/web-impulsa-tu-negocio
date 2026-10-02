@@ -5534,3 +5534,78 @@ a.neon-whatsapp-hero-cta {
   border-left: 2px solid rgba(215, 254, 59, 0.55);
   padding-left: 0.7rem;
 }
+
+/* RAG Native Matrix Table for AI & Comparison */
+.neon-solutions-matrix-section {
+  padding: 60px 0 80px;
+  position: relative;
+  z-index: 2;
+}
+
+.neon-matrix-header {
+  margin-bottom: 28px;
+}
+
+.neon-matrix-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(14, 18, 12, 0.85);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  -webkit-overflow-scrolling: touch;
+}
+
+.neon-matrix-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  text-align: left;
+  font-family: "Archivo", sans-serif;
+  font-size: 13.5px;
+}
+
+.neon-matrix-table th {
+  padding: 16px 20px;
+  background: rgba(215, 254, 59, 0.08);
+  border-bottom: 1px solid rgba(215, 254, 59, 0.25);
+  color: var(--neon-cyan);
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.neon-matrix-table td {
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  color: #cbd5e1;
+  line-height: 1.55;
+}
+
+.neon-matrix-table tr:last-child td {
+  border-bottom: none;
+}
+
+.neon-matrix-table td strong {
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.neon-matrix-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+@media (max-width: 640px) {
+  .neon-solutions-matrix-section {
+    padding: 40px 0 55px;
+  }
+  .neon-matrix-table {
+    font-size: 12.5px;
+  }
+  .neon-matrix-table th,
+  .neon-matrix-table td {
+    padding: 12px 14px;
+  }
+}
