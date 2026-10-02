@@ -96,7 +96,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
           "Sitios web y landing pages para verte profesional, generar confianza y atraer más clientes.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:image", content: "/og-image.png" },
+      { property: "og:image", content: "https://web-impulsa-tu-negocio.vercel.app/og-image.png" },
+      { property: "og:image:secure_url", content: "https://web-impulsa-tu-negocio.vercel.app/og-image.png" },
       { property: "og:image:width", content: "1200" },
       { property: "og:image:height", content: "630" },
       {
@@ -104,7 +105,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content: "Impulsa Tu Negocio - Webs y Apps que hacen crecer negocios",
       },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:image", content: "/og-image.png" },
+      { name: "twitter:image", content: "https://web-impulsa-tu-negocio.vercel.app/og-image.png" },
     ],
     links: [
       {
@@ -130,7 +131,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         media: "print",
         href: "https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap",
       },
-      { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+      { rel: "icon", href: "/favicon.png", type: "image/png" },
+      { rel: "shortcut icon", href: "/favicon.png", type: "image/png" },
+      { rel: "apple-touch-icon", href: "/favicon.png" },
+      { rel: "icon", href: "/favicon.ico", sizes: "any" },
     ],
   }),
   shellComponent: RootShell,
