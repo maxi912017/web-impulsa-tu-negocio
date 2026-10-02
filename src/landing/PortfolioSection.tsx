@@ -225,11 +225,10 @@ function ProjectShowcase({ project }: { project: ProjectItem }) {
             ref={videoRef}
             poster={project.showcase.poster}
             muted
-            autoPlay
             loop
             playsInline
             controls={false}
-            preload="metadata"
+            preload="none"
             aria-label={project.title}
             style={{
               position: "absolute",
