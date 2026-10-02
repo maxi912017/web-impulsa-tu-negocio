@@ -460,36 +460,6 @@ export function ContactForm() {
                   : `Recibimos tu solicitud para ${projectType}. Te contactaremos a tu WhatsApp (${form.whatsapp}) y a tu correo (${form.email}) a la brevedad.`}
               </p>
 
-              <div
-                style={{
-                  marginTop: "20px",
-                  display: "flex",
-                  flexDirection: "column",
-                  gap: "10px",
-                  width: "100%",
-                  maxWidth: "340px",
-                }}
-              >
-                <a
-                  href={`https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(
-                    buildWhatsAppMessage({
-                      projectType,
-                      name: form.name,
-                      whatsapp: form.whatsapp,
-                      email: form.email,
-                      message: form.message,
-                    })
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="neon-submit"
-                  style={{ textDecoration: "none", margin: 0 }}
-                >
-                  <MessageCircle size={18} />
-                  <span>Abrir WhatsApp con mi cotización</span>
-                </a>
-              </div>
-
               <button
                 className="neon-reset"
                 type="button"
