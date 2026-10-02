@@ -2,7 +2,7 @@
  * Esquema de datos estructurados Schema.org (JSON-LD) optimizado para AI SEO,
  * motores de búsqueda generativa (Perplexity, ChatGPT, Claude, Gemini) y Google Rich Results.
  */
-export const SITE_URL = "https://web-impulsa-tu-negocio.vercel.app";
+export const SITE_URL = "https://impulsa-tu-negociodev.vercel.app";
 
 /**
  * Esquema de datos estructurados enfocado en desarrollo de software y servicios profesionales en San Luis.
@@ -11,7 +11,7 @@ export const professionalServiceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Estudio Digital Impulsa Tu Negocio.DEV",
-  "url": "https://impulsatunegocio.dev",
+  "url": "https://impulsa-tu-negociodev.vercel.app",
   "description": "Servicios profesionales de desarrollo web, diseño de aplicaciones móviles y soluciones digitales a medida en San Luis, Argentina.",
   "address": {
     "@type": "PostalAddress",
