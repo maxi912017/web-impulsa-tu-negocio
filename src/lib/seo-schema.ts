@@ -39,7 +39,7 @@ export const professionalServiceSchema = {
     }
   ],
   "sameAs": [
-    "https://instagram.com"
+    "https://www.instagram.com/impulsatunegocio.dev?stkn=MTFyczcxbGM2cGY0Mg%3D%3D"
   ]
 };
 
@@ -91,7 +91,7 @@ export const siteStructuredData = {
         }
       ],
       "sameAs": [
-        "https://instagram.com/impulsatunegocio.dev",
+        "https://www.instagram.com/impulsatunegocio.dev?stkn=MTFyczcxbGM2cGY0Mg%3D%3D",
         "https://wa.me/5492664484918"
       ],
       "knowsAbout": [

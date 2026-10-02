@@ -10,7 +10,8 @@ import "./neon-landing.css";
 
 const WHATSAPP_LINK =
   "https://wa.me/5492664484918?text=Hola%20Impulsa%20Tu%20Negocio%2C%20quiero%20contarles%20mi%20idea";
-const INSTAGRAM_LINK = "https://www.instagram.com/impulsatunegocio.dev/";
+const INSTAGRAM_LINK =
+  "https://www.instagram.com/impulsatunegocio.dev?stkn=MTFyczcxbGM2cGY0Mg%3D%3D";
 
 function HeaderBrand() {
   return (
