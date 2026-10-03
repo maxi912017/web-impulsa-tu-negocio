@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useAutoPlayOnVisible } from "./AnimatedLogo";
 import { CheckCircle2, ArrowUpRight, Sparkles, MessageCircle, X } from "lucide-react";
 import "./neon-landing.css";
+import { trackPortfolioFilter, trackProjectModalView, trackWhatsAppClick } from "../lib/analytics";
 
 interface ProjectItem {
   id: string;
@@ -340,7 +341,10 @@ export function PortfolioSection() {
               role="tab"
               aria-selected={activeCategory === cat.id}
               className={`neon-portfolio-tab ${activeCategory === cat.id ? "active" : ""}`}
-              onClick={() => setActiveCategory(cat.id)}
+              onClick={() => {
+                setActiveCategory(cat.id);
+                trackPortfolioFilter(cat.id);
+              }}
             >
               {cat.label}
             </button>
@@ -432,6 +436,7 @@ export function PortfolioSection() {
                         target="_blank"
                         rel="noreferrer"
                         className="neon-whatsapp-project-btn"
+                        onClick={() => trackWhatsAppClick("portfolio_card", project.title)}
                       >
                         <span className="neon-whatsapp-pulse-ring" />
                         <MessageCircle size={17} />
@@ -441,7 +446,10 @@ export function PortfolioSection() {
                       <button
                         type="button"
                         className="neon-project-detail-btn"
-                        onClick={() => setSelectedProject(project)}
+                        onClick={() => {
+                          setSelectedProject(project);
+                          trackProjectModalView(project.id, project.title);
+                        }}
                         aria-label={`Ver detalles de ${project.title}`}
                       >
                         <span>Ver funciones y flujo</span>
@@ -530,6 +538,7 @@ export function PortfolioSection() {
                   target="_blank"
                   rel="noreferrer"
                   className="neon-whatsapp-hero-cta"
+                  onClick={() => trackWhatsAppClick("portfolio_modal", selectedProject.title)}
                 >
                   <span className="neon-whatsapp-pulse-ring" />
                   <MessageCircle size={18} />

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { PortfolioSection } from "./PortfolioSection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { ContactForm, FAQ } from "./ContactSection";
+import { trackWhatsAppClick } from "../lib/analytics";
 import "./neon-critical.css";
 import "./neon-landing.css";
 
@@ -398,7 +399,12 @@ function Landing() {
               <a href={INSTAGRAM_LINK} target="_blank" rel="noreferrer">
                 Instagram
               </a>
-              <a href={WHATSAPP_LINK} target="_blank" rel="noreferrer">
+              <a
+                href={WHATSAPP_LINK}
+                target="_blank"
+                rel="noreferrer"
+                onClick={() => trackWhatsAppClick("footer_nav")}
+              >
                 WhatsApp
               </a>
             </nav>

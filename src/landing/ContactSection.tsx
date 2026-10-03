@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import "./neon-landing.css";
+import { trackQuoteRequest, trackWhatsAppClick, trackEvent } from "../lib/analytics";
 
 const WHATSAPP_PHONE = "5492664484918";
 
@@ -158,6 +159,8 @@ export function ContactForm() {
     setValidationAlert(null);
     setLastSubmittedChannel(channel);
 
+    trackQuoteRequest(projectType, channel, "form_submit");
+
     const waText = buildWhatsAppMessage({
       projectType,
       name: form.name,
@@ -227,6 +230,7 @@ export function ContactForm() {
 
   // Acción: Contacto directo por WhatsApp SIN necesidad de completar el formulario
   const handleDirectWhatsApp = () => {
+    trackWhatsAppClick("contact_section_direct_button", projectType);
     const waText = buildWhatsAppMessage({
       projectType,
       name: form.name,
@@ -291,7 +295,10 @@ export function ContactForm() {
                       role="radio"
                       aria-checked={isSelected}
                       className={`neon-topic ${isSelected ? "active" : ""}`}
-                      onClick={() => setProjectType(type)}
+                      onClick={() => {
+                        setProjectType(type);
+                        trackEvent("select_project_type", { project_type: type });
+                      }}
                     >
                       {type}
                     </button>

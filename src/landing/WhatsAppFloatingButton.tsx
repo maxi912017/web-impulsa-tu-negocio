@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { MessageCircle, X } from "lucide-react";
+import { trackWhatsAppClick } from "../lib/analytics";
 
 interface WhatsAppFloatingButtonProps {
   phoneNumber?: string;
@@ -78,6 +79,7 @@ export function WhatsAppFloatingButton({
             target="_blank"
             rel="noreferrer"
             className="neon-whatsapp-tooltip-btn"
+            onClick={() => trackWhatsAppClick("floating_tooltip")}
           >
             Abrir chat directo
           </a>
@@ -91,6 +93,7 @@ export function WhatsAppFloatingButton({
         rel="noreferrer"
         className={`neon-whatsapp-fab ${isScrolled ? "visible" : ""}`}
         aria-label="Chatear por WhatsApp con Impulsa Tu Negocio"
+        onClick={() => trackWhatsAppClick("floating_fab")}
       >
         <span className="neon-whatsapp-radar" aria-hidden="true" />
         <span className="neon-whatsapp-radar-secondary" aria-hidden="true" />
