@@ -163,7 +163,7 @@ function Landing() {
           muted
           loop
           playsInline
-          preload="auto"
+          preload="metadata"
           className="neon-hero-bg-video"
         >
           <source src="/hero-animation.webm" type="video/webm" />

@@ -21,8 +21,13 @@ export const GA_MEASUREMENT_ID = GA_MEASUREMENT_IDS[0] || "";
  * Registra un evento personalizado en Google Analytics 4 (GA4).
  */
 export function trackEvent(action: string, params: Record<string, unknown> = {}) {
-  if (typeof window !== "undefined" && typeof window.gtag === "function" && GA_MEASUREMENT_IDS.length > 0) {
-    window.gtag("event", action, params);
+  if (typeof window !== "undefined") {
+    if (typeof (window as unknown as { _loadGa?: () => void })._loadGa === "function") {
+      (window as unknown as { _loadGa: () => void })._loadGa();
+    }
+    if (typeof window.gtag === "function" && GA_MEASUREMENT_IDS.length > 0) {
+      window.gtag("event", action, params);
+    }
   }
 }
 
