@@ -7,7 +7,6 @@ declare global {
 
 export const GA_MEASUREMENT_IDS: string[] = Array.from(
   new Set([
-    "G-1GSNZRHS56",
     "G-843YMNDMLS",
     ...(typeof import.meta !== "undefined" && import.meta.env?.VITE_GA_MEASUREMENT_ID
       ? [import.meta.env.VITE_GA_MEASUREMENT_ID]

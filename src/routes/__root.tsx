@@ -206,7 +206,7 @@ function RootShell({ children }: { children: ReactNode }) {
         {primaryGaId ? (
           <script
             dangerouslySetInnerHTML={{
-              __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());${gaConfigSnippets}window._loadGa = function(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${primaryGaId}';document.head.appendChild(s);};if('requestIdleCallback' in window){requestIdleCallback(function(){setTimeout(window._loadGa,1200);});}else{window.addEventListener('load',function(){setTimeout(window._loadGa,1200);});}['scroll','touchstart','pointerdown','click','mousemove'].forEach(function(e){window.addEventListener(e,window._loadGa,{once:true,passive:true});});`,
+              __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());${gaConfigSnippets}window._loadGa = function(){if(window._gaLoaded)return;window._gaLoaded=true;var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${primaryGaId}';document.head.appendChild(s);};var _evs=['scroll','touchstart','pointerdown','click','keydown'];function _trigGa(){_evs.forEach(function(e){window.removeEventListener(e,_trigGa);});window._loadGa();}_evs.forEach(function(e){window.addEventListener(e,_trigGa,{once:true,passive:true});});if('requestIdleCallback' in window){requestIdleCallback(function(){setTimeout(window._loadGa,4500);});}else{window.addEventListener('load',function(){setTimeout(window._loadGa,4500);});}`,
             }}
           />
         ) : null}

@@ -150,7 +150,10 @@ function Landing() {
     if (!video) return;
     video.muted = true;
     video.defaultMuted = true;
-    video.play().catch(() => {});
+    const timer = setTimeout(() => {
+      video.play().catch(() => {});
+    }, 1200);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
@@ -159,15 +162,13 @@ function Landing() {
       <div className="neon-hero-bg-wrapper" aria-hidden="true">
         <video
           ref={heroVideoRef}
-          autoPlay
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="none"
           className="neon-hero-bg-video"
         >
           <source src="/hero-animation.webm" type="video/webm" />
-          <source src="/hero%20animation.webm" type="video/webm" />
           Tu navegador no soporta video HTML5.
         </video>
 
