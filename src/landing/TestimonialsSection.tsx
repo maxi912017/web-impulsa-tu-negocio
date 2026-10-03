@@ -53,6 +53,7 @@ export function TestimonialsSection() {
           >
             <div
               className="neon-review-stars"
+              role="img"
               aria-label={`Calificación: ${rev.stars} de 5 estrellas`}
             >
               {Array.from({ length: rev.stars }).map((_, i) => (

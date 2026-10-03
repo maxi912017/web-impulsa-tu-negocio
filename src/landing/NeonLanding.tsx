@@ -22,13 +22,18 @@ function HeaderBrand() {
       aria-label="Impulsa Tu Negocio, inicio"
     >
       <span id="header-brand-mark" className="neon-brand-mark">
-        <img
-          src="/assets/brand-isologo-dark.png"
-          alt="Isologo de Impulsa Tu Negocio - Estudio digital de desarrollo web y software a medida"
-          width={44}
-          height={44}
-          className="neon-brand-img"
-        />
+        <picture>
+          <source srcSet="/assets/brand-isologo-dark.webp" type="image/webp" />
+          <img
+            src="/assets/brand-isologo-dark.png"
+            alt="Isologo de Impulsa Tu Negocio - Estudio digital de desarrollo web y software a medida"
+            width={44}
+            height={44}
+            className="neon-brand-img"
+            fetchPriority="high"
+            decoding="async"
+          />
+        </picture>
       </span>
       <span className="neon-brand-lockup">
         <span id="header-brand-name" className="neon-brand-name">
@@ -49,14 +54,18 @@ function FooterBrand() {
       aria-label="Impulsa Tu Negocio, volver al inicio"
     >
       <div className="neon-footer-brand-mark">
-        <img
-          src="/assets/brand-isologo-dark.png"
-          alt="Isologo de Impulsa Tu Negocio - Webs y Apps que hacen crecer negocios en Argentina"
-          width={76}
-          height={76}
-          className="neon-footer-brand-img"
-          loading="lazy"
-        />
+        <picture>
+          <source srcSet="/assets/brand-isologo-dark.webp" type="image/webp" />
+          <img
+            src="/assets/brand-isologo-dark.png"
+            alt="Isologo de Impulsa Tu Negocio - Webs y Apps que hacen crecer negocios en Argentina"
+            width={76}
+            height={76}
+            className="neon-footer-brand-img"
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
       </div>
       <div className="neon-footer-brand-copy">
         <span className="neon-footer-brand-title">
@@ -201,7 +210,7 @@ function Landing() {
                   <ArrowUpRight size={17} />
                 </a>
               </div>
-              <div className="neon-proof-stats" aria-label="Lo que puede hacer una web profesional">
+              <div className="neon-proof-stats" role="group" aria-label="Lo que puede hacer una web profesional">
                 <div>
                   <strong>01</strong>
                   <span>mensaje claro</span>
@@ -325,7 +334,7 @@ function Landing() {
           </div>
         </section>
 
-        <div className="neon-marquee" aria-label="Beneficios de una web profesional">
+        <div className="neon-marquee" role="region" aria-label="Beneficios de una web profesional">
           <div className="neon-marquee-track">
             {Array.from({ length: 2 }).map((_, index) => (
               <span key={index}>

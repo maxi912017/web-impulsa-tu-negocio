@@ -139,6 +139,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         content:
           "Sitios web, landing pages y web apps a medida para verte profesional, generar confianza y atraer más clientes.",
       },
+      { name: "referrer", content: "strict-origin-when-cross-origin" },
     ],
     links: [
       { rel: "canonical", href: `${SITE_URL}/` },
@@ -152,6 +153,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         rel: "preconnect",
         href: "https://fonts.gstatic.com",
         crossOrigin: "anonymous",
+      },
+      {
+        rel: "preload",
+        as: "image",
+        type: "image/webp",
+        href: "/assets/brand-isologo-dark.webp",
       },
       {
         rel: "preload",
