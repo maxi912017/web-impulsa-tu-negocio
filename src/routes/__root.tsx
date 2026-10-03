@@ -14,7 +14,7 @@ import { Toaster } from "sonner";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { siteStructuredData, professionalServiceSchema, SITE_URL } from "../lib/seo-schema";
-import { GA_MEASUREMENT_ID } from "../lib/analytics";
+import { GA_MEASUREMENT_IDS } from "../lib/analytics";
 
 function NotFoundComponent() {
   return (
@@ -186,19 +186,24 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const primaryGaId = GA_MEASUREMENT_IDS[0];
+  const gaConfigSnippets = GA_MEASUREMENT_IDS.map(
+    (id) => `gtag('config', '${id}', { send_page_view: true });`,
+  ).join("");
+
   return (
     <html lang="es">
       <head>
-        {GA_MEASUREMENT_ID ? (
+        {primaryGaId ? (
           <>
             <script
               dangerouslySetInnerHTML={{
-                __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', '${GA_MEASUREMENT_ID}', { send_page_view: true });`,
+                __html: `window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());${gaConfigSnippets}`,
               }}
             />
             <script
               async
-              src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+              src={`https://www.googletagmanager.com/gtag/js?id=${primaryGaId}`}
             />
           </>
         ) : null}

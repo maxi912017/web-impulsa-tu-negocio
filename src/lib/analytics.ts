@@ -5,15 +5,23 @@ declare global {
   }
 }
 
-export const GA_MEASUREMENT_ID =
-  (typeof import.meta !== "undefined" && import.meta.env?.VITE_GA_MEASUREMENT_ID) ||
-  "G-843YMNDMLS";
+export const GA_MEASUREMENT_IDS: string[] = Array.from(
+  new Set([
+    "G-1GSNZRHS56",
+    "G-843YMNDMLS",
+    ...(typeof import.meta !== "undefined" && import.meta.env?.VITE_GA_MEASUREMENT_ID
+      ? [import.meta.env.VITE_GA_MEASUREMENT_ID]
+      : []),
+  ].filter(Boolean)),
+);
+
+export const GA_MEASUREMENT_ID = GA_MEASUREMENT_IDS[0] || "";
 
 /**
  * Registra un evento personalizado en Google Analytics 4 (GA4).
  */
 export function trackEvent(action: string, params: Record<string, unknown> = {}) {
-  if (typeof window !== "undefined" && typeof window.gtag === "function" && GA_MEASUREMENT_ID) {
+  if (typeof window !== "undefined" && typeof window.gtag === "function" && GA_MEASUREMENT_IDS.length > 0) {
     window.gtag("event", action, params);
   }
 }
