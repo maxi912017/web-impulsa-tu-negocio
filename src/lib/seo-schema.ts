@@ -32,6 +32,14 @@ export const professionalServiceSchema = {
     "latitude": "-33.30805",
     "longitude": "-66.357584"
   },
+  "priceRange": "$$",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5.0",
+    "reviewCount": "3",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
   "areaServed": [
     {
       "@type": "AdministrativeArea",
@@ -93,6 +101,13 @@ export const siteStructuredData = {
       "priceRange": "$$",
       "currenciesAccepted": "ARS, USD",
       "paymentAccepted": "Transferencia bancaria, Mercado Pago, Efectivo",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5.0",
+        "reviewCount": "3",
+        "bestRating": "5",
+        "worstRating": "1"
+      },
       "address": {
         "@type": "PostalAddress",
         "addressCountry": "AR"

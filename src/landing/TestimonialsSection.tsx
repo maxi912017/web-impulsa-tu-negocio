@@ -74,6 +74,23 @@ export function TestimonialsSection() {
               <meta itemProp="ratingValue" content={String(rev.stars)} />
               <meta itemProp="bestRating" content="5" />
             </div>
+            <div
+              itemProp="itemReviewed"
+              itemScope
+              itemType="https://schema.org/ProfessionalService"
+              style={{ display: "none" }}
+            >
+              <meta itemProp="name" content="Estudio Digital Impulsa Tu Negocio" />
+              <meta itemProp="url" content="https://www.impulsatunegocio.digital/" />
+              <meta itemProp="image" content="https://www.impulsatunegocio.digital/favicon.png" />
+              <meta itemProp="telephone" content="+5492664484918" />
+              <meta itemProp="priceRange" content="$$" />
+              <div itemProp="address" itemScope itemType="https://schema.org/PostalAddress">
+                <meta itemProp="addressLocality" content="San Luis" />
+                <meta itemProp="addressRegion" content="San Luis" />
+                <meta itemProp="addressCountry" content="AR" />
+              </div>
+            </div>
             <strong className="neon-review-highlight">"{rev.highlight}"</strong>
             <p className="neon-review-comment" itemProp="reviewBody">
               {rev.comment}
