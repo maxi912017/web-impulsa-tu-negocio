@@ -10,8 +10,21 @@ export function WhatsAppFloatingButton({
   phoneNumber = "5492664484918",
   defaultMessage = "Hola Impulsa Tu Negocio, quiero consultar por una web o app para mi negocio",
 }: WhatsAppFloatingButtonProps) {
-  const [showTooltip, setShowTooltip] = useState(true);
+  const [showTooltip, setShowTooltip] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    // Show tooltip only on desktop after initial page interaction
+    if (typeof window === "undefined" || window.innerWidth < 768) {
+      return undefined;
+    }
+    const timer = window.setTimeout(() => {
+      setShowTooltip(true);
+    }, 3000);
+    return () => {
+      window.clearTimeout(timer);
+    };
+  }, []);
 
   useEffect(() => {
     let frameId: number | null = null;
@@ -24,7 +37,8 @@ export function WhatsAppFloatingButton({
         frameId = null;
       });
     };
-    handleScroll();
+
+    // Attach scroll listener passively without forced synchronous reflow on mount
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleScroll);

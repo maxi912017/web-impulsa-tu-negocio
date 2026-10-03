@@ -202,11 +202,36 @@ const categories = [
 /* -------------------------------------------------------------------------- */
 
 function ProjectShowcase({ project }: { project: ProjectItem }) {
+  const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  useAutoPlayOnVisible(videoRef, project.showcase.kind !== "video");
+  const [isNearScreen, setIsNearScreen] = useState(false);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setIsNearScreen(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0]?.isIntersecting) {
+          setIsNearScreen(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "350px 0px" }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useAutoPlayOnVisible(videoRef, project.showcase.kind !== "video" || !isNearScreen);
 
   return (
     <div
+      ref={containerRef}
       className="neon-showcase-inner"
       style={{ padding: "0", overflow: "hidden", background: "#020617", display: "block" }}
     >
@@ -223,7 +248,7 @@ function ProjectShowcase({ project }: { project: ProjectItem }) {
         {project.showcase.kind === "video" ? (
           <video
             ref={videoRef}
-            poster={project.showcase.poster}
+            poster={isNearScreen ? project.showcase.poster : undefined}
             muted
             loop
             playsInline

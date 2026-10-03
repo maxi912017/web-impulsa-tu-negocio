@@ -4741,6 +4741,12 @@ a.neon-whatsapp-hero-cta {
   animation: fadeInTooltip 0.3s ease-out;
 }
 
+@media (max-width: 768px) {
+  .neon-whatsapp-tooltip {
+    display: none !important;
+  }
+}
+
 @keyframes fadeInTooltip {
   from {
     opacity: 0;
@@ -5293,39 +5299,43 @@ a.neon-whatsapp-hero-cta {
   .neon-landing strong,
   .neon-landing small,
   .neon-landing li {
-    overflow-wrap: anywhere;
-    word-break: normal;
-    hyphens: auto;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    hyphens: manual;
   }
 
   /* Hero Typography & Hierarchy */
   .neon-hero-brand-headline {
     margin-bottom: 10px;
+    max-width: 100%;
   }
   .neon-hero-brand-badge {
-    padding: 5px 12px;
+    padding: 6px 14px;
     gap: 6px;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .neon-hero-brand-name {
-    font-size: 12.5px;
+    font-size: 12px;
   }
   .neon-hero-brand-tagline {
-    font-size: 11px;
+    font-size: 10.5px;
   }
   .neon-hero-main-title {
-    margin-bottom: 8px;
-  }
-  .neon-hero-title-brand {
-    font-size: clamp(20px, 5.5vw, 26px) !important;
-    letter-spacing: -0.02em;
-    line-height: 1.15;
+    display: none;
   }
 
   .neon-display {
-    font-size: clamp(26px, 7.5vw, 34px) !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.025em;
+    font-size: clamp(21px, 5.8vw, 27px) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em;
     margin-top: 14px !important;
+    text-wrap: balance !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .neon-hero-break {
@@ -5371,9 +5381,12 @@ a.neon-whatsapp-hero-cta {
   .neon-contact-unified-title,
   .neon-contact-banner h2,
   #banner-title {
-    font-size: clamp(22px, 6.2vw, 28px) !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.02em;
+    font-size: clamp(19px, 5vw, 24px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.015em;
+    text-wrap: balance !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
 
   .neon-portfolio-intro,
@@ -5392,13 +5405,17 @@ a.neon-whatsapp-hero-cta {
     padding: 20px 18px;
   }
   .neon-service h3 {
-    font-size: 18px !important;
+    font-size: clamp(15px, 4.5vw, 17px) !important;
     line-height: 1.25 !important;
     margin-bottom: 6px;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
   .neon-service strong {
-    font-size: 13.5px !important;
+    font-size: 13px !important;
     line-height: 1.4 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
   .neon-service p,
   .neon-service ul li {
@@ -5411,9 +5428,11 @@ a.neon-whatsapp-hero-cta {
     border-radius: 14px;
   }
   .neon-project-title {
-    font-size: 18px !important;
-    line-height: 1.25 !important;
+    font-size: clamp(15px, 4.2vw, 17px) !important;
+    line-height: 1.3 !important;
     margin-bottom: 6px;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
   .neon-project-showcase-caption {
     font-size: 12px;
@@ -5440,8 +5459,10 @@ a.neon-whatsapp-hero-cta {
 
   /* Modal Details */
   .neon-modal-header h2 {
-    font-size: clamp(20px, 5.5vw, 24px) !important;
-    line-height: 1.2 !important;
+    font-size: clamp(17px, 4.8vw, 20px) !important;
+    line-height: 1.25 !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
   }
   .neon-modal-subtitle {
     font-size: 13px !important;

@@ -1347,14 +1347,16 @@ a.neon-primary-button:hover svg {
   .neon-hero-brand-badge { padding: 5px 12px; gap: 6px; }
   .neon-hero-brand-name { font-size: 12.5px; }
   .neon-hero-brand-tagline { font-size: 11px; }
-  .neon-hero-main-title { margin-bottom: 8px; }
-  .neon-hero-title-brand { font-size: clamp(20px, 5.5vw, 26px) !important; letter-spacing: -0.02em; }
-  .neon-landing .neon-hero-eyebrow { font-size: 9.5px; letter-spacing: 0.09em; margin-bottom: 6px; }
+  .neon-hero-main-title { display: none; }
+  .neon-landing .neon-hero-eyebrow { font-size: 9.5px; letter-spacing: 0.08em; margin-bottom: 6px; }
   .neon-landing .neon-display, .neon-display {
     margin-top: 14px !important;
-    font-size: clamp(26px, 7.5vw, 34px) !important;
-    line-height: 1.15 !important;
-    letter-spacing: -0.025em !important;
+    font-size: clamp(21px, 5.8vw, 27px) !important;
+    line-height: 1.2 !important;
+    letter-spacing: -0.02em !important;
+    text-wrap: balance !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
   }
   .neon-hero-break { display: none; }
   .neon-landing .neon-hero-intro, .neon-hero-intro {
@@ -1373,18 +1375,33 @@ a.neon-primary-button:hover svg {
   .neon-landing .neon-proof-stats span { font-size: 10px; letter-spacing: 0; line-height: 1.25; }
   .neon-landing .neon-services { padding: 48px 0 60px; scroll-margin-top: 66px; }
   .neon-landing .neon-services-heading { margin-bottom: 24px; }
-  .neon-landing .neon-services-heading h2 { font-size: clamp(22px, 6.2vw, 28px) !important; line-height: 1.2 !important; }
+  .neon-landing .neon-services-heading h2 {
+    font-size: clamp(19px, 5vw, 24px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.015em !important;
+    text-wrap: balance !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
   .neon-landing .neon-services-heading p { font-size: 14px !important; line-height: 1.55 !important; }
   .neon-landing .neon-service { padding: 20px 18px; }
-  .neon-landing .neon-service h3 { font-size: 18px !important; line-height: 1.25 !important; }
-  .neon-landing .neon-service strong { font-size: 13.5px !important; line-height: 1.4 !important; }
+  .neon-landing .neon-service h3 {
+    font-size: clamp(15px, 4.5vw, 17px) !important;
+    line-height: 1.25 !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
+  }
+  .neon-landing .neon-service strong { font-size: 13px !important; line-height: 1.4 !important; }
   .neon-landing .neon-service p, .neon-landing .neon-service ul li { font-size: 13px !important; line-height: 1.5 !important; }
   .neon-section-title,
   .neon-contact-unified-title,
   #banner-title {
-    font-size: clamp(22px, 6.2vw, 28px) !important;
-    line-height: 1.2 !important;
-    letter-spacing: -0.02em !important;
+    font-size: clamp(19px, 5vw, 24px) !important;
+    line-height: 1.25 !important;
+    letter-spacing: -0.015em !important;
+    text-wrap: balance !important;
+    overflow-wrap: break-word !important;
+    word-break: break-word !important;
   }
   .neon-contact-unified-desc,
   .neon-portfolio-intro,
