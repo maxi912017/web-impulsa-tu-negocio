@@ -7,7 +7,7 @@ declare global {
 
 export const GA_MEASUREMENT_ID =
   (typeof import.meta !== "undefined" && import.meta.env?.VITE_GA_MEASUREMENT_ID) ||
-  "G-843YMNDML5";
+  "G-843YMNDMLS";
 
 /**
  * Registra un evento personalizado en Google Analytics 4 (GA4).
