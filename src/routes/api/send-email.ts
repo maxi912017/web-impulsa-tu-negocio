@@ -85,7 +85,10 @@ export const Route = createFileRoute("/api/send-email")({
                 <p style="margin: 0 0 8px; color: #9fb49a; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Solicitud de cotización</p>
                 <p style="margin: 0; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(message)}</p>
               </div>
-              <p style="margin: 18px 0 0; font-size: 12px; color: #6f826b;">Respondé directo a este correo: va con reply-to al cliente.</p>
+              <p style="margin: 18px 0 0; font-size: 12px; color: #6f826b;">
+                Respondé directo a este correo: va con reply-to al cliente (${escapeHtml(email)}).<br/>
+                Notificación enviada a: contacto@impulsatunegocio.digital y estudiodigital.dev@gmail.com
+              </p>
             </div>
           </div>
         `;
@@ -97,9 +100,16 @@ export const Route = createFileRoute("/api/send-email")({
             auth: { user: gmailUser, pass: gmailAppPassword },
           });
 
+          // Notificar tanto al correo oficial del dominio como al de respaldo y al remitente
+          const primaryRecipient = "contacto@impulsatunegocio.digital";
+          const backupRecipient = "estudiodigital.dev@gmail.com";
+          const recipients = Array.from(
+            new Set([primaryRecipient, backupRecipient, gmailUser]),
+          ).filter(Boolean) as string[];
+
           await transporter.sendMail({
-            from: `"Web Impulsa Tu Negocio" <${gmailUser}>`,
-            to: gmailUser,
+            from: `"Estudio Digital Impulsa Tu Negocio" <${gmailUser}>`,
+            to: recipients.join(", "),
             replyTo: email,
             subject: `Nueva cotización [${projectType || "Web"}]: ${name}`,
             html,

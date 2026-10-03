@@ -1,7 +1,7 @@
 # Reporte Final de Optimización AI SEO y GEO (Generative Engine Optimization)
 
 **Proyecto:** Impulsa Tu Negocio (`impulsa tu negocio.dev`)  
-**URL de Producción:** https://impulsa-tu-negociodev.vercel.app  
+**URL de Producción:** https://www.impulsatunegocio.digital  
 **Fecha:** 2 de Octubre de 2026  
 **Objetivo:** Maximizar la indexabilidad, rastreabilidad, comprensión semántica y citabilidad por motores de búsqueda tradicionales y modelos de IA generativa (ChatGPT/GPTBot, ClaudeBot, PerplexityBot, Google Gemini/Googlebot, Apple Intelligence).
 
@@ -18,7 +18,7 @@
 ### Cambios Aplicados:
 1. **Permisos explícitos a bots de Inteligencia Artificial:**
    - Se agregaron directivas `Allow: /` dedicadas para: `GPTBot`, `ChatGPT-User`, `ClaudeBot`, `PerplexityBot`, `Applebot-Extended`, `Google-Extended`, `CCBot`, `cohere-ai`, `Bingbot`, `Googlebot`, `Twitterbot`, `facebookexternalhit` y comodín `*`.
-   - Se declaró la ubicación canónica del sitemap: `Sitemap: https://impulsa-tu-negociodev.vercel.app/sitemap.xml`.
+   - Se declaró la ubicación canónica del sitemap: `Sitemap: https://www.impulsatunegocio.digital/sitemap.xml`.
 2. **Generación del Mapa del Sitio (`sitemap.xml`):**
    - Creado bajo el estándar XML 0.9 con prioridades y frecuencias de actualización (`changefreq: weekly` / `monthly`, `priority: 1.0` y `0.9` para secciones clave `#servicios`, `#portafolio`, `#testimonios`, `#preguntas`, `#contacto`).
 3. **Metadatos de Indexación Permisiva:**
@@ -28,7 +28,7 @@
      <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
      <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
      <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
-     <link rel="canonical" href="https://impulsa-tu-negociodev.vercel.app/" />
+     <link rel="canonical" href="https://www.impulsatunegocio.digital/" />
      <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
      ```
 

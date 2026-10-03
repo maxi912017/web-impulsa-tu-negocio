@@ -85,7 +85,7 @@ ${data.message || "Por favor, contáctame para coordinar una propuesta."}
 
 ¡Saludos!`;
 
-  return `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  return `mailto:contacto@impulsatunegocio.digital?cc=estudiodigital.dev@gmail.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 }
 
 export function ContactForm() {

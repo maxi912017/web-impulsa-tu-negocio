@@ -2,7 +2,8 @@
  * Esquema de datos estructurados Schema.org (JSON-LD) optimizado para AI SEO,
  * motores de búsqueda generativa (Perplexity, ChatGPT, Claude, Gemini) y Google Rich Results.
  */
-export const SITE_URL = "https://impulsa-tu-negociodev.vercel.app";
+export const SITE_URL = "https://www.impulsatunegocio.digital";
+export const SITE_EMAIL = "contacto@impulsatunegocio.digital";
 
 /**
  * Esquema de datos estructurados enfocado en desarrollo de software y servicios profesionales en San Luis.
@@ -10,8 +11,15 @@ export const SITE_URL = "https://impulsa-tu-negociodev.vercel.app";
 export const professionalServiceSchema = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "Estudio Digital Impulsa Tu Negocio.DEV",
-  "url": "https://impulsa-tu-negociodev.vercel.app",
+  "name": "Estudio Digital Impulsa Tu Negocio",
+  "alternateName": [
+    "Estudio Digital Impulsa Tu Negocio.DEV",
+    "Impulsa Tu Negocio",
+    "impulsa tu negocio.dev",
+    "impulsatunegocio.digital"
+  ],
+  "url": "https://www.impulsatunegocio.digital",
+  "email": "contacto@impulsatunegocio.digital",
   "description": "Servicios profesionales de desarrollo web, diseño de aplicaciones móviles y soluciones digitales a medida en San Luis, Argentina.",
   "address": {
     "@type": "PostalAddress",
@@ -39,7 +47,10 @@ export const professionalServiceSchema = {
     }
   ],
   "sameAs": [
-    "https://www.instagram.com/impulsatunegocio.dev?stkn=MTFyczcxbGM2cGY0Mg%3D%3D"
+    "https://www.instagram.com/impulsatunegocio.dev?stkn=MTFyczcxbGM2cGY0Mg%3D%3D",
+    "https://wa.me/5492664484918",
+    "https://impulsatunegocio.digital",
+    "https://impulsa-tu-negociodev.vercel.app"
   ]
 };
 
@@ -52,7 +63,9 @@ export const siteStructuredData = {
       "url": `${SITE_URL}/`,
       "name": "Impulsa Tu Negocio",
       "alternateName": [
+        "Estudio Digital Impulsa Tu Negocio",
         "impulsa tu negocio.dev",
+        "impulsatunegocio.digital",
         "ImpulsaTuNegocio",
         "Impulsa Tu Negocio Estudio Digital"
       ],
@@ -67,12 +80,16 @@ export const siteStructuredData = {
       "@type": ["ProfessionalService", "Organization", "LocalBusiness"],
       "@id": `${SITE_URL}/#organization`,
       "name": "Impulsa Tu Negocio",
-      "alternateName": "impulsa tu negocio.dev",
+      "alternateName": [
+        "Estudio Digital Impulsa Tu Negocio",
+        "impulsa tu negocio.dev",
+        "impulsatunegocio.digital"
+      ],
       "url": `${SITE_URL}/`,
       "logo": `${SITE_URL}/favicon.png`,
       "image": `${SITE_URL}/og-image.png`,
       "telephone": "+5492664484918",
-      "email": "maxi.91.2017@gmail.com",
+      "email": "contacto@impulsatunegocio.digital",
       "priceRange": "$$",
       "currenciesAccepted": "ARS, USD",
       "paymentAccepted": "Transferencia bancaria, Mercado Pago, Efectivo",
@@ -92,7 +109,9 @@ export const siteStructuredData = {
       ],
       "sameAs": [
         "https://www.instagram.com/impulsatunegocio.dev?stkn=MTFyczcxbGM2cGY0Mg%3D%3D",
-        "https://wa.me/5492664484918"
+        "https://wa.me/5492664484918",
+        "https://impulsatunegocio.digital",
+        "https://impulsa-tu-negociodev.vercel.app"
       ],
       "knowsAbout": [
         "Desarrollo Web Fullstack",
