@@ -7,6 +7,7 @@ const payloadSchema = z.object({
   whatsapp: z.string().trim().min(1).max(40),
   message: z.string().trim().min(1).max(4000),
   projectType: z.string().trim().max(100).optional(),
+  website: z.string().optional(), // Campo Honeypot trampa
 });
 
 const escapeHtml = (value: string) =>
@@ -38,7 +39,27 @@ export const Route = createFileRoute("/api/send-email")({
             { status: 400 },
           );
         }
-        const { name, email, whatsapp, message, projectType } = parsed.data;
+        const { name, email, whatsapp, message, projectType, website } = parsed.data;
+
+        // 1. Verificación Honeypot: si el campo trampa invisible contiene texto, es un bot automatizado
+        if (website && website.trim().length > 0) {
+          console.warn("[Anti-Spam Server] Bot bloqueado por Honeypot:", { email, website });
+          // Respondemos 200 fingido para no alertar al bot de la trampa
+          return Response.json({ ok: true, spamFiltered: true });
+        }
+
+        // 2. Sanitización estricta de todos los campos
+        const rawCleanName = name.replace(/<[^>]*>/g, "").trim().slice(0, 100);
+        const rawCleanEmail = email.trim().toLowerCase().slice(0, 140);
+        const rawCleanWhatsapp = whatsapp.replace(/[^\d+ ()-]/g, "").trim().slice(0, 30);
+        const rawCleanMessage = message.replace(/<[^>]*>/g, "").trim().slice(0, 3000);
+        const rawCleanProjectType = (projectType || "Web").replace(/<[^>]*>/g, "").trim().slice(0, 80);
+
+        const cleanName = escapeHtml(rawCleanName);
+        const cleanEmail = escapeHtml(rawCleanEmail);
+        const cleanWhatsapp = escapeHtml(rawCleanWhatsapp);
+        const cleanMessage = escapeHtml(rawCleanMessage);
+        const cleanProjectType = escapeHtml(rawCleanProjectType);
 
         const gmailUser = process.env["GMAIL_USER"];
         const gmailAppPassword = process.env["GMAIL_APP_PASSWORD"];
@@ -50,7 +71,7 @@ export const Route = createFileRoute("/api/send-email")({
           );
         }
 
-        const waNumber = waDigits(whatsapp);
+        const waNumber = waDigits(rawCleanWhatsapp);
         const waLink = waNumber ? `https://wa.me/${waNumber}` : null;
 
         const html = `
@@ -62,31 +83,31 @@ export const Route = createFileRoute("/api/send-email")({
               <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
                 <tr>
                   <td style="padding: 8px 0; color: #9fb49a; width: 130px; vertical-align: top;">Qué busca</td>
-                  <td style="padding: 8px 0; font-weight: bold; color: #d7fe3b;">${escapeHtml(projectType || "No especificado")}</td>
+                  <td style="padding: 8px 0; font-weight: bold; color: #d7fe3b;">${cleanProjectType}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #9fb49a; width: 130px; vertical-align: top;">Nombre</td>
-                  <td style="padding: 8px 0; font-weight: bold;">${escapeHtml(name)}</td>
+                  <td style="padding: 8px 0; font-weight: bold;">${cleanName}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #9fb49a; vertical-align: top;">Correo</td>
-                  <td style="padding: 8px 0;"><a href="mailto:${escapeHtml(email)}" style="color: #d7fe3b;">${escapeHtml(email)}</a></td>
+                  <td style="padding: 8px 0;"><a href="mailto:${cleanEmail}" style="color: #d7fe3b;">${cleanEmail}</a></td>
                 </tr>
                 <tr>
                   <td style="padding: 8px 0; color: #9fb49a; vertical-align: top;">WhatsApp</td>
                   <td style="padding: 8px 0;">${
                     waLink
-                      ? `<a href="${waLink}" style="color: #d7fe3b; font-weight: bold;">${escapeHtml(whatsapp)} · Abrir chat</a>`
-                      : escapeHtml(whatsapp)
+                      ? `<a href="${waLink}" style="color: #d7fe3b; font-weight: bold;">${cleanWhatsapp} · Abrir chat</a>`
+                      : cleanWhatsapp
                   }</td>
                 </tr>
               </table>
               <div style="margin-top: 18px; padding: 16px; background: #131a12; border: 1px solid #243020; border-radius: 10px;">
                 <p style="margin: 0 0 8px; color: #9fb49a; font-size: 12px; letter-spacing: 1px; text-transform: uppercase;">Solicitud de cotización</p>
-                <p style="margin: 0; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(message)}</p>
+                <p style="margin: 0; line-height: 1.6; white-space: pre-wrap;">${cleanMessage}</p>
               </div>
               <p style="margin: 18px 0 0; font-size: 12px; color: #6f826b;">
-                Respondé directo a este correo: va con reply-to al cliente (${escapeHtml(email)}).<br/>
+                Respondé directo a este correo: va con reply-to al cliente (${cleanEmail}).<br/>
                 Notificación enviada a: contacto@impulsatunegocio.digital y estudiodigital.dev@gmail.com
               </p>
             </div>
@@ -110,8 +131,8 @@ export const Route = createFileRoute("/api/send-email")({
           await transporter.sendMail({
             from: `"Estudio Digital Impulsa Tu Negocio" <${gmailUser}>`,
             to: recipients.join(", "),
-            replyTo: email,
-            subject: `Nueva cotización [${projectType || "Web"}]: ${name}`,
+            replyTo: rawCleanEmail,
+            subject: `Nueva cotización [${rawCleanProjectType}]: ${rawCleanName}`,
             html,
           });
 

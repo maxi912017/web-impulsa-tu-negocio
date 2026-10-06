@@ -25,6 +25,53 @@ export const PROJECT_TYPES = [
 export type ProjectType = (typeof PROJECT_TYPES)[number];
 export type ContactChannel = "whatsapp" | "email";
 
+/**
+ * Sanitiza texto general: elimina tags HTML, caracteres de control invisibles y recorta longitud.
+ */
+export function sanitizeText(value: string, maxLength = 120): string {
+  if (!value) return "";
+  return value
+    .replace(/<[^>]*>/g, "")
+    .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
+    .trim()
+    .slice(0, maxLength);
+}
+
+/**
+ * Sanitiza número de teléfono o WhatsApp: conserva únicamente números y el prefijo '+'.
+ */
+export function sanitizePhone(value: string): string {
+  if (!value) return "";
+  const trimmed = value.trim();
+  const hasPlus = trimmed.startsWith("+");
+  const digits = trimmed.replace(/\D/g, "");
+  return hasPlus ? `+${digits.slice(0, 16)}` : digits.slice(0, 16);
+}
+
+/**
+ * Sanitiza email: pasa a minúsculas, recorta y filtra caracteres anómalos.
+ */
+export function sanitizeEmail(value: string): string {
+  if (!value) return "";
+  return value
+    .replace(/[^\w.@+-]/g, "")
+    .trim()
+    .toLowerCase()
+    .slice(0, 160);
+}
+
+/**
+ * Sanitiza mensaje multilínea: elimina scripts/tags y caracteres de control pero preserva saltos de línea.
+ */
+export function sanitizeMessage(value: string, maxLength = 3000): string {
+  if (!value) return "";
+  return value
+    .replace(/<[^>]*>/g, "")
+    .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F-\u009F]/g, "")
+    .trim()
+    .slice(0, maxLength);
+}
+
 export function buildWhatsAppMessage(data: {
   projectType: string;
   name?: string;
@@ -34,22 +81,27 @@ export function buildWhatsAppMessage(data: {
   isDirect?: boolean;
 }) {
   const parts: string[] = [];
+  const cleanName = sanitizeText(data.name || "");
+  const cleanProjectType = sanitizeText(data.projectType || "Web");
+  const cleanPhone = sanitizePhone(data.whatsapp || "");
+  const cleanEmail = sanitizeEmail(data.email || "");
+  const cleanMsg = sanitizeMessage(data.message || "");
 
   parts.push("¡Hola Maxi de Impulsa Tu Negocio! 👋");
 
-  if (data.name?.trim()) {
-    parts.push(`Mi nombre es *${data.name.trim()}*.`);
+  if (cleanName) {
+    parts.push(`Mi nombre es *${cleanName}*.`);
   }
 
-  parts.push(`🚀 *Proyecto de interés:* ${data.projectType}`);
+  parts.push(`🚀 *Proyecto de interés:* ${cleanProjectType}`);
 
-  if (data.message?.trim()) {
-    parts.push(`📝 *Detalle del objetivo o funciones que necesito:*\n"${data.message.trim()}"`);
+  if (cleanMsg) {
+    parts.push(`📝 *Detalle del objetivo o funciones que necesito:*\n"${cleanMsg}"`);
   }
 
   const contacts: string[] = [];
-  if (data.whatsapp?.trim()) contacts.push(`WhatsApp: ${data.whatsapp.trim()}`);
-  if (data.email?.trim()) contacts.push(`Email: ${data.email.trim()}`);
+  if (cleanPhone) contacts.push(`WhatsApp: ${cleanPhone}`);
+  if (cleanEmail) contacts.push(`Email: ${cleanEmail}`);
 
   if (contacts.length > 0) {
     parts.push(`📌 *Mis datos de contacto:*\n${contacts.join("\n")}`);
@@ -71,18 +123,24 @@ export function buildEmailMailto(data: {
   email?: string;
   message?: string;
 }) {
-  const subject = `Solicitud de cotización: ${data.projectType}${data.name ? ` - ${data.name}` : ""}`;
+  const cleanName = sanitizeText(data.name || "");
+  const cleanProjectType = sanitizeText(data.projectType || "Web");
+  const cleanPhone = sanitizePhone(data.whatsapp || "");
+  const cleanEmail = sanitizeEmail(data.email || "");
+  const cleanMsg = sanitizeMessage(data.message || "");
+
+  const subject = `Solicitud de cotización: ${cleanProjectType}${cleanName ? ` - ${cleanName}` : ""}`;
   const body = `¡Hola Maxi de Impulsa Tu Negocio!
 
 Me pongo en contacto para solicitar una cotización:
 
-- Proyecto: ${data.projectType}
-- Nombre: ${data.name || "No especificado"}
-- WhatsApp: ${data.whatsapp || "No especificado"}
-- Email: ${data.email || "No especificado"}
+- Proyecto: ${cleanProjectType}
+- Nombre: ${cleanName || "No especificado"}
+- WhatsApp: ${cleanPhone || "No especificado"}
+- Email: ${cleanEmail || "No especificado"}
 
 Detalle del objetivo o funciones que necesito:
-${data.message || "Por favor, contáctame para coordinar una propuesta."}
+${cleanMsg || "Por favor, contáctame para coordinar una propuesta."}
 
 ¡Saludos!`;
 
@@ -92,7 +150,14 @@ ${data.message || "Por favor, contáctame para coordinar una propuesta."}
 export function ContactForm() {
   const [projectType, setProjectType] = useState<ProjectType>("Web Institucional");
   const [channel, setChannel] = useState<ContactChannel>("whatsapp");
-  const [form, setForm] = useState({ name: "", email: "", whatsapp: "", message: "" });
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    whatsapp: "",
+    message: "",
+    website: "", // Campo Honeypot trampa para bots
+  });
+  const [formMountedAt] = useState<number>(() => Date.now());
   const [fieldErrors, setFieldErrors] = useState<{
     name?: boolean;
     whatsapp?: boolean;
@@ -106,29 +171,33 @@ export function ContactForm() {
 
   // Validación de datos completos para solicitar cotización formal
   const validateForm = () => {
+    const cleanName = sanitizeText(form.name);
+    const phoneDigits = form.whatsapp.replace(/\D/g, "");
+    const cleanEmail = sanitizeEmail(form.email);
+    const cleanMsg = sanitizeMessage(form.message);
+
     const errors: { name?: boolean; whatsapp?: boolean; email?: boolean; message?: boolean } = {};
     let missingInfo = false;
 
-    if (!form.name.trim()) {
+    if (!cleanName || cleanName.length < 2) {
       errors.name = true;
       missingInfo = true;
     }
 
-    // Número de teléfono / WhatsApp requerido
-    const phoneClean = form.whatsapp.replace(/\D/g, "");
-    if (!form.whatsapp.trim() || phoneClean.length < 6) {
+    // Número de teléfono / WhatsApp requerido (entre 6 y 16 dígitos)
+    if (!phoneDigits || phoneDigits.length < 6 || phoneDigits.length > 16) {
       errors.whatsapp = true;
       missingInfo = true;
     }
 
-    // Correo requerido con formato básico
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!form.email.trim() || !emailRegex.test(form.email.trim())) {
+    // Correo requerido con formato básico válido
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!cleanEmail || !emailRegex.test(cleanEmail)) {
       errors.email = true;
       missingInfo = true;
     }
 
-    if (!form.message.trim()) {
+    if (!cleanMsg || cleanMsg.length < 4) {
       errors.message = true;
       missingInfo = true;
     }
@@ -151,6 +220,26 @@ export function ContactForm() {
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+    // 1. FILTRO ANTI-SPAM: Honeypot y detección de envíos instantáneos automáticos
+    const isHoneypotTriggered = Boolean(form.website && form.website.trim().length > 0);
+    const isInstantBot = Date.now() - formMountedAt < 750; // Envío sobrehumano menor a 750ms
+
+    if (isHoneypotTriggered || isInstantBot) {
+      console.warn("[Anti-Spam] Bot neutralizado por Honeypot.");
+      setSending(true);
+      // Fingimos éxito visual para engañar al bot sin ejecutar llamadas reales ni abrir enlaces
+      setTimeout(() => {
+        setSending(false);
+        setSent(true);
+        if (channel === "whatsapp") {
+          toast.success("¡Datos verificados! Redirigiendo a WhatsApp...");
+        } else {
+          toast.success("¡Tu solicitud de cotización fue enviada por correo con éxito!");
+        }
+      }, 650);
+      return;
+    }
+
     if (!validateForm() || sending) {
       return;
     }
@@ -159,14 +248,20 @@ export function ContactForm() {
     setValidationAlert(null);
     setLastSubmittedChannel(channel);
 
+    // Sanitización estricta de todos los campos reales
+    const cleanName = sanitizeText(form.name);
+    const cleanPhone = sanitizePhone(form.whatsapp);
+    const cleanEmail = sanitizeEmail(form.email);
+    const cleanMsg = sanitizeMessage(form.message);
+
     trackQuoteRequest(projectType, channel, "form_submit");
 
     const waText = buildWhatsAppMessage({
       projectType,
-      name: form.name,
-      whatsapp: form.whatsapp,
-      email: form.email,
-      message: form.message,
+      name: cleanName,
+      whatsapp: cleanPhone,
+      email: cleanEmail,
+      message: cleanMsg,
     });
     const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(waText)}`;
 
@@ -175,7 +270,14 @@ export function ContactForm() {
       const response = await fetch("/api/send-email", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, projectType }),
+        body: JSON.stringify({
+          name: cleanName,
+          whatsapp: cleanPhone,
+          email: cleanEmail,
+          message: cleanMsg,
+          projectType,
+          website: form.website, // Se envía el honeypot (vacío para humanos)
+        }),
       });
 
       const resData = await response.json().catch(() => null);
@@ -189,19 +291,18 @@ export function ContactForm() {
           toast.success("¡Tu solicitud de cotización fue enviada por correo con éxito!");
         }
       } else {
-        // Si el backend no tiene configuradas aún las credenciales de Nodemailer (GMAIL_USER / GMAIL_APP_PASSWORD):
+        // Fallback para correo o si Nodemailer no está configurado aún en Vercel
         if (channel === "whatsapp") {
           setSent(true);
           toast.success("¡Datos listos! Redirigiendo a WhatsApp...");
           window.open(waUrl, "_blank");
         } else {
-          // Fallback para correo: abre el cliente de correo del usuario con el mensaje redactado
           const mailtoUrl = buildEmailMailto({
             projectType,
-            name: form.name,
-            whatsapp: form.whatsapp,
-            email: form.email,
-            message: form.message,
+            name: cleanName,
+            whatsapp: cleanPhone,
+            email: cleanEmail,
+            message: cleanMsg,
           });
           setSent(true);
           toast.info("Abriendo tu correo para enviar la consulta...");
@@ -216,10 +317,10 @@ export function ContactForm() {
       } else {
         const mailtoUrl = buildEmailMailto({
           projectType,
-          name: form.name,
-          whatsapp: form.whatsapp,
-          email: form.email,
-          message: form.message,
+          name: cleanName,
+          whatsapp: cleanPhone,
+          email: cleanEmail,
+          message: cleanMsg,
         });
         window.location.href = mailtoUrl;
       }
@@ -233,10 +334,10 @@ export function ContactForm() {
     trackWhatsAppClick("contact_section_direct_button", projectType);
     const waText = buildWhatsAppMessage({
       projectType,
-      name: form.name,
-      whatsapp: form.whatsapp,
-      email: form.email,
-      message: form.message,
+      name: sanitizeText(form.name),
+      whatsapp: sanitizePhone(form.whatsapp),
+      email: sanitizeEmail(form.email),
+      message: sanitizeMessage(form.message),
       isDirect: true,
     });
     const waUrl = `https://wa.me/${WHATSAPP_PHONE}?text=${encodeURIComponent(waText)}`;
@@ -304,6 +405,33 @@ export function ContactForm() {
                     </button>
                   );
                 })}
+              </div>
+
+              {/* Campo trampa Honeypot: invisible para humanos y lectores de pantalla, pero visible para bots */}
+              <div
+                style={{
+                  position: "absolute",
+                  left: "-9999px",
+                  top: "-9999px",
+                  width: "1px",
+                  height: "1px",
+                  opacity: 0,
+                  pointerEvents: "none",
+                  overflow: "hidden",
+                }}
+                aria-hidden="true"
+                tabIndex={-1}
+              >
+                <label htmlFor="form_website_hp">Website (no completar si eres humano)</label>
+                <input
+                  id="form_website_hp"
+                  type="text"
+                  name="website"
+                  autoComplete="off"
+                  tabIndex={-1}
+                  value={form.website}
+                  onChange={(event) => setForm((prev) => ({ ...prev, website: event.target.value }))}
+                />
               </div>
 
               {/* Campos en dos columnas: Nombre y WhatsApp/Teléfono */}
@@ -472,7 +600,7 @@ export function ContactForm() {
                 type="button"
                 onClick={() => {
                   setSent(false);
-                  setForm({ name: "", email: "", whatsapp: "", message: "" });
+                  setForm({ name: "", email: "", whatsapp: "", message: "", website: "" });
                   setFieldErrors({});
                   setValidationAlert(null);
                 }}
