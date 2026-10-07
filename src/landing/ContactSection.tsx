@@ -25,52 +25,22 @@ export const PROJECT_TYPES = [
 export type ProjectType = (typeof PROJECT_TYPES)[number];
 export type ContactChannel = "whatsapp" | "email";
 
-/**
- * Sanitiza texto general: elimina tags HTML, caracteres de control invisibles y recorta longitud.
- */
-export function sanitizeText(value: string, maxLength = 120): string {
-  if (!value) return "";
-  return value
-    .replace(/<[^>]*>/g, "")
-    .replace(/[\u0000-\u001F\u007F-\u009F]/g, "")
-    .trim()
-    .slice(0, maxLength);
-}
-
-/**
- * Sanitiza número de teléfono o WhatsApp: conserva únicamente números y el prefijo '+'.
- */
-export function sanitizePhone(value: string): string {
-  if (!value) return "";
-  const trimmed = value.trim();
-  const hasPlus = trimmed.startsWith("+");
-  const digits = trimmed.replace(/\D/g, "");
-  return hasPlus ? `+${digits.slice(0, 16)}` : digits.slice(0, 16);
-}
-
-/**
- * Sanitiza email: pasa a minúsculas, recorta y filtra caracteres anómalos.
- */
-export function sanitizeEmail(value: string): string {
-  if (!value) return "";
-  return value
-    .replace(/[^\w.@+-]/g, "")
-    .trim()
-    .toLowerCase()
-    .slice(0, 160);
-}
-
-/**
- * Sanitiza mensaje multilínea: elimina scripts/tags y caracteres de control pero preserva saltos de línea.
- */
-export function sanitizeMessage(value: string, maxLength = 3000): string {
-  if (!value) return "";
-  return value
-    .replace(/<[^>]*>/g, "")
-    .replace(/[\u0000-\u0008\u000B-\u000C\u000E-\u001F\u007F-\u009F]/g, "")
-    .trim()
-    .slice(0, maxLength);
-}
+export {
+  sanitizeText,
+  sanitizePhone,
+  sanitizeEmail,
+  sanitizeMessage,
+  isValidPhone,
+  isValidName,
+} from "../lib/validation";
+import {
+  sanitizeText,
+  sanitizePhone,
+  sanitizeEmail,
+  sanitizeMessage,
+  isValidPhone,
+  isValidName,
+} from "../lib/validation";
 
 export function buildWhatsAppMessage(data: {
   projectType: string;
@@ -159,54 +129,77 @@ export function ContactForm() {
   });
   const [formMountedAt] = useState<number>(() => Date.now());
   const [fieldErrors, setFieldErrors] = useState<{
-    name?: boolean;
-    whatsapp?: boolean;
-    email?: boolean;
-    message?: boolean;
+    name?: string;
+    whatsapp?: string;
+    email?: string;
+    message?: string;
   }>({});
   const [validationAlert, setValidationAlert] = useState<string | null>(null);
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
   const [lastSubmittedChannel, setLastSubmittedChannel] = useState<ContactChannel>("whatsapp");
 
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    let val = event.target.value;
+    // Solo permitir números, espacios, guiones, paréntesis y '+'
+    val = val.replace(/[^0-9+\s\-()]/g, "");
+    if (val.includes("+")) {
+      val = (val.startsWith("+") ? "+" : "") + val.slice(1).replace(/\+/g, "");
+    }
+    setForm((prev) => ({ ...prev, whatsapp: val }));
+    if (fieldErrors.whatsapp) {
+      setFieldErrors((prev) => ({ ...prev, whatsapp: undefined }));
+    }
+  };
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const val = event.target.value;
+    setForm((prev) => ({ ...prev, name: val }));
+    if (fieldErrors.name) {
+      setFieldErrors((prev) => ({ ...prev, name: undefined }));
+    }
+  };
+
   // Validación de datos completos para solicitar cotización formal
   const validateForm = () => {
     const cleanName = sanitizeText(form.name);
-    const phoneDigits = form.whatsapp.replace(/\D/g, "");
     const cleanEmail = sanitizeEmail(form.email);
     const cleanMsg = sanitizeMessage(form.message);
 
-    const errors: { name?: boolean; whatsapp?: boolean; email?: boolean; message?: boolean } = {};
-    let missingInfo = false;
+    const errors: {
+      name?: string;
+      whatsapp?: string;
+      email?: string;
+      message?: string;
+    } = {};
 
-    if (!cleanName || cleanName.length < 2) {
-      errors.name = true;
-      missingInfo = true;
+    const nameCheck = isValidName(cleanName);
+    if (!nameCheck.valid) {
+      errors.name = nameCheck.error || "Ingresá un nombre válido";
     }
 
-    // Número de teléfono / WhatsApp requerido (entre 6 y 16 dígitos)
-    if (!phoneDigits || phoneDigits.length < 6 || phoneDigits.length > 16) {
-      errors.whatsapp = true;
-      missingInfo = true;
+    const phoneCheck = isValidPhone(form.whatsapp);
+    if (!phoneCheck.valid) {
+      errors.whatsapp = phoneCheck.error || "Ingresá un teléfono válido";
     }
 
     // Correo requerido con formato básico válido
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    if (!cleanEmail || !emailRegex.test(cleanEmail)) {
-      errors.email = true;
-      missingInfo = true;
+    if (!cleanEmail) {
+      errors.email = "Ingresá tu correo electrónico";
+    } else if (!emailRegex.test(cleanEmail)) {
+      errors.email = "Ingresá un correo electrónico válido";
     }
 
-    if (!cleanMsg || cleanMsg.length < 4) {
-      errors.message = true;
-      missingInfo = true;
+    if (!cleanMsg || cleanMsg.length < 5) {
+      errors.message = "Describí brevemente qué necesitás (mínimo 5 letras)";
     }
 
     setFieldErrors(errors);
 
-    if (missingInfo) {
-      const msg =
-        "Por favor completá tus datos y tu número de teléfono para solicitar la cotización.";
+    const errorValues = Object.values(errors).filter(Boolean);
+    if (errorValues.length > 0) {
+      const msg = errorValues[0] || "Por favor revisá los datos ingresados.";
       setValidationAlert(msg);
       toast.error(msg);
       return false;
@@ -442,13 +435,10 @@ export function ContactForm() {
                     placeholder="Tu nombre completo *"
                     aria-label="Tu nombre completo"
                     value={form.name}
-                    onChange={(event) => {
-                      setForm({ ...form, name: event.target.value });
-                      if (fieldErrors.name) setFieldErrors({ ...fieldErrors, name: false });
-                    }}
+                    onChange={handleNameChange}
                   />
                   {fieldErrors.name && (
-                    <span className="neon-field-error-msg">Ingresá tu nombre</span>
+                    <span className="neon-field-error-msg">{fieldErrors.name}</span>
                   )}
                 </div>
 
@@ -456,17 +446,13 @@ export function ContactForm() {
                   <input
                     className={`neon-input ${fieldErrors.whatsapp ? "neon-input-error" : ""}`}
                     type="tel"
-                    placeholder="Número de WhatsApp o teléfono *"
+                    placeholder="WhatsApp o celular (ej: 266 448-4918 o +54 9...)"
                     aria-label="Número de WhatsApp o teléfono"
                     value={form.whatsapp}
-                    onChange={(event) => {
-                      setForm({ ...form, whatsapp: event.target.value });
-                      if (fieldErrors.whatsapp)
-                        setFieldErrors({ ...fieldErrors, whatsapp: false });
-                    }}
+                    onChange={handlePhoneChange}
                   />
                   {fieldErrors.whatsapp && (
-                    <span className="neon-field-error-msg">Ingresá tu teléfono</span>
+                    <span className="neon-field-error-msg">{fieldErrors.whatsapp}</span>
                   )}
                 </div>
               </div>
@@ -481,11 +467,11 @@ export function ContactForm() {
                   value={form.email}
                   onChange={(event) => {
                     setForm({ ...form, email: event.target.value });
-                    if (fieldErrors.email) setFieldErrors({ ...fieldErrors, email: false });
+                    if (fieldErrors.email) setFieldErrors((prev) => ({ ...prev, email: undefined }));
                   }}
                 />
                 {fieldErrors.email && (
-                  <span className="neon-field-error-msg">Ingresá un correo válido</span>
+                  <span className="neon-field-error-msg">{fieldErrors.email}</span>
                 )}
               </div>
 
@@ -500,13 +486,11 @@ export function ContactForm() {
                   onChange={(event) => {
                     setForm({ ...form, message: event.target.value });
                     if (fieldErrors.message)
-                      setFieldErrors({ ...fieldErrors, message: false });
+                      setFieldErrors((prev) => ({ ...prev, message: undefined }));
                   }}
                 />
                 {fieldErrors.message && (
-                  <span className="neon-field-error-msg">
-                    Describí brevemente qué necesitás
-                  </span>
+                  <span className="neon-field-error-msg">{fieldErrors.message}</span>
                 )}
               </div>
 
@@ -588,11 +572,11 @@ export function ContactForm() {
                 <CheckCircle2 size={32} />
               </span>
               <span className="neon-mono-label">SOLICITUD REGISTRADA</span>
-              <h3>¡Excelente, {form.name.split(" ")[0]}!</h3>
+              <h3>¡Excelente, {sanitizeText(form.name).split(" ")[0] || "gracias"}!</h3>
               <p>
                 {lastSubmittedChannel === "whatsapp"
                   ? `Preparamos tu consulta para ${projectType} en WhatsApp con todos los datos que ingresaste para que puedas enviarla en un toque.`
-                  : `Recibimos tu solicitud para ${projectType}. Te contactaremos a tu WhatsApp (${form.whatsapp}) y a tu correo (${form.email}) a la brevedad.`}
+                  : `Recibimos tu solicitud para ${projectType}. Te contactaremos a tu WhatsApp (${sanitizePhone(form.whatsapp)}) y a tu correo (${sanitizeEmail(form.email)}) a la brevedad.`}
               </p>
 
               <button

@@ -1,10 +1,25 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import { isValidName, isValidPhone } from "../../lib/validation";
 
 const payloadSchema = z.object({
-  name: z.string().trim().min(1).max(120),
+  name: z
+    .string()
+    .trim()
+    .min(1)
+    .max(120)
+    .refine((val) => isValidName(val).valid, {
+      message: "Nombre inválido",
+    }),
   email: z.string().trim().email().max(160),
-  whatsapp: z.string().trim().min(1).max(40),
+  whatsapp: z
+    .string()
+    .trim()
+    .min(1)
+    .max(40)
+    .refine((val) => isValidPhone(val).valid, {
+      message: "Número de WhatsApp o teléfono inválido",
+    }),
   message: z.string().trim().min(1).max(4000),
   projectType: z.string().trim().max(100).optional(),
   website: z.string().optional(), // Campo Honeypot trampa
@@ -34,8 +49,9 @@ export const Route = createFileRoute("/api/send-email")({
 
         const parsed = payloadSchema.safeParse(body);
         if (!parsed.success) {
+          const firstErr = parsed.error.issues[0]?.message || "Datos incompletos o inválidos";
           return Response.json(
-            { ok: false, error: "Datos incompletos o inválidos" },
+            { ok: false, error: firstErr },
             { status: 400 },
           );
         }
