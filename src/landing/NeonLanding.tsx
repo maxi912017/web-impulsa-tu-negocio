@@ -413,12 +413,12 @@ function Landing() {
         <section id="comparativa" className="neon-solutions-matrix-section" aria-label="Comparativa de soluciones de desarrollo web">
           <div className="neon-container">
             <div className="neon-matrix-header">
-              <span className="neon-mono-label neon-accent-label">GUÍA RÁPIDA · CHUNKING RAG</span>
+              <span className="neon-mono-label neon-accent-label">GUÍA RÁPIDA · QUÉ TE CONVIENE</span>
               <h2 className="neon-section-title">
                 Comparativa de soluciones: <span>elegí según tu objetivo.</span>
               </h2>
               <p className="neon-portfolio-intro">
-                Estructura de referencia para entender alcances, plazos y objetivos de cada tipo de desarrollo digital.
+                Para entender qué incluye cada uno, cuánto lleva y para qué sirve.
               </p>
             </div>
             <div className="neon-matrix-table-wrapper" tabIndex={0} role="region" aria-label="Tabla comparativa de servicios">
