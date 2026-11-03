@@ -1,18 +1,109 @@
 import { useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Check, Code2, LayoutTemplate, Palette, Rocket, X, Zap } from "lucide-react";
+import { ArrowUpRight, Check, Code2, LayoutTemplate, Mail, Palette, Rocket, X, Zap } from "lucide-react";
 import { WhatsAppFloatingButton } from "./WhatsAppFloatingButton";
 import { Button } from "@/components/ui/button";
 import { PortfolioSection } from "./PortfolioSection";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { ContactForm, FAQ } from "./ContactSection";
-import { trackWhatsAppClick } from "../lib/analytics";
+import { trackQuoteRequest, trackWhatsAppClick } from "../lib/analytics";
 import "./neon-critical.css";
 import "./neon-landing.css";
+
+const WHATSAPP_NUMBER = "5492664484918";
+const CONTACT_EMAIL = "contacto@impulsatunegocio.digital";
 
 const WHATSAPP_LINK =
   "https://wa.me/5492664484918?text=Hola%20Impulsa%20Tu%20Negocio%2C%20quiero%20contarles%20mi%20idea";
 const INSTAGRAM_LINK =
   "https://www.instagram.com/impulsatunegocio.dev?stkn=MTFyczcxbGM2cGY0Mg%3D%3D";
+
+function whatsappHref(message: string) {
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+function emailHref(subject: string, body: string) {
+  return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+function ServiceOffer({
+  price,
+  priceCaption,
+  includes,
+  optional,
+  note,
+  ctaLabel,
+  projectType,
+  withEmail = true,
+}: {
+  price?: string;
+  priceCaption?: string;
+  includes?: string[];
+  optional?: string;
+  note?: string;
+  ctaLabel: string;
+  projectType: string;
+  withEmail?: boolean;
+}) {
+  const message = price
+    ? `Hola Impulsa Tu Negocio, me interesa ${projectType} (${price}, ${priceCaption}). Mi negocio es:`
+    : `Hola Impulsa Tu Negocio, quiero consultar por ${projectType.toLowerCase()}. Lo que necesito es:`;
+
+  return (
+    <div className="neon-service-offer">
+      {price && (
+        <div className="neon-service-price">
+          <span className="neon-service-price-amount">{price}</span>
+          <span className="neon-service-price-caption">{priceCaption}</span>
+        </div>
+      )}
+      {(includes || optional) && (
+        <ul className="neon-service-includes">
+          {includes?.map((item) => (
+            <li key={item}>
+              <Check size={15} />
+              {item}
+            </li>
+          ))}
+          {optional && (
+            <li className="neon-service-optional">
+              <Check size={15} />
+              {optional}
+            </li>
+          )}
+        </ul>
+      )}
+      {note && <div className="neon-service-note">{note}</div>}
+      <div className="neon-service-actions">
+        <a
+          className="neon-service-cta"
+          href={whatsappHref(message)}
+          target="_blank"
+          rel="noreferrer"
+          onClick={() => {
+            trackWhatsAppClick(`service_${projectType}`, ctaLabel);
+            trackQuoteRequest(projectType, "whatsapp", "service_card");
+          }}
+        >
+          <span>{ctaLabel}</span>
+          <ArrowUpRight size={16} />
+        </a>
+        {withEmail && (
+          <a
+            className="neon-service-cta-alt"
+            href={emailHref(
+              `Consulta: ${projectType}`,
+              price ? `Hola, me interesa ${projectType} (${price}). Mi negocio es:` : "Hola, quiero consultar por esto. Lo que necesito es:",
+            )}
+            onClick={() => trackQuoteRequest(projectType, "email", "service_card")}
+          >
+            <Mail size={16} />
+            <span>Por email</span>
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
 
 function HeaderBrand() {
   return (
@@ -248,6 +339,15 @@ function Landing() {
                   <li><Check size={17} />Acceso directo a WhatsApp</li>
                   <li><Check size={17} />Pensada para anuncios y redes</li>
                 </ul>
+                <ServiceOffer
+                  projectType="Landing page"
+                  price="$200.000"
+                  priceCaption="pago único en pesos"
+                  includes={["Dominio propio gratis por 1 año (.com, .com.ar u otro)"]}
+                  optional="Mantenimiento opcional $35.000 por mes: editamos o cargamos datos nuevos (hasta 3 hs por mes)"
+                  note="Empezá con la landing y, cuando tu negocio lo pida, pasá a la web completa."
+                  ctaLabel="Quiero esto"
+                />
               </article>
               <article className="neon-service neon-service-featured" itemScope itemType="https://schema.org/Service">
                 <span className="neon-service-icon" aria-hidden="true"><Rocket size={23} /></span>
@@ -259,6 +359,18 @@ function Landing() {
                   <li><Check size={17} />Servicios, trabajos y contacto</li>
                   <li><Check size={17} />Se amplía a medida que crecés</li>
                 </ul>
+                <ServiceOffer
+                  projectType="Sitio web completo"
+                  price="$400.000"
+                  priceCaption="pago único en pesos"
+                  includes={[
+                    "Todo lo de la landing, dominio gratis por 1 año incluido",
+                    "Perfil de Google armado para que te dejen reseñas en Maps",
+                    "Optimización para que te encuentren en Google en tu zona",
+                  ]}
+                  optional="Mantenimiento opcional $35.000 por mes: 3 hs de edición y carga de material nuevo, y más seguridad para la web y tus clientes"
+                  ctaLabel="Quiero esto"
+                />
               </article>
               <article className="neon-service" itemScope itemType="https://schema.org/Service">
                 <span className="neon-service-icon" aria-hidden="true"><Code2 size={23} /></span>
@@ -270,6 +382,12 @@ function Landing() {
                   <li><Check size={17} />Menos tareas repetitivas</li>
                   <li><Check size={17} />Experiencias fáciles de usar</li>
                 </ul>
+                <ServiceOffer
+                  projectType="Web app a medida"
+                  note="Se cotiza según lo que haya que automatizar. Contanos tu caso y te pasamos un presupuesto."
+                  ctaLabel="Consultar por esto"
+                  withEmail={false}
+                />
               </article>
               <article className="neon-service" itemScope itemType="https://schema.org/Service">
                 <span className="neon-service-icon" aria-hidden="true"><Palette size={23} /></span>
@@ -281,6 +399,12 @@ function Landing() {
                   <li><Check size={17} />Contenido para redes</li>
                   <li><Check size={17} />Diseño enfocado en tu público</li>
                 </ul>
+                <ServiceOffer
+                  projectType="Identidad y redes"
+                  note="Se cotiza según lo que necesites: la identidad, piezas sueltas o un trabajo continuo."
+                  ctaLabel="Consultar por esto"
+                  withEmail={false}
+                />
               </article>
             </div>
           </div>
